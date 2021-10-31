@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import { post } from '../../API/request';
 import AvatarUser from './components/AvatarUser';
 import ImageSlider from './components/ImageSlider';
@@ -19,15 +20,24 @@ function ListPost(): JSX.Element {
     return <p>Error..</p>;
   }
   if (data.length === 0) return <p>No post</p>;
-
   return (
     <div className="w-full h-full lg:w-7/12 lg:mx-auto">
-      {data.map((item) => {
+      {data?.map((item) => {
         return (
-          <div className="my-10 border-b border-pink pb-10" key={item.id}>
-            <AvatarUser user={item.user} />
-            {item.imageUrl.length !== 0 && <ImageSlider item={item} />}
-            <TextPost item={item} />
+          <div className="my-12" key={item.id}>
+            <div className="border-b border-pink">
+              <AvatarUser user={item.user} />
+              {item.imageUrl.length !== 0 && <ImageSlider item={item} />}
+              <TextPost item={item} />
+            </div>
+            <Link to={`/comments/${item.id}`}>
+              <button
+                className="text-sm mx-3 transform -translate-y-3 underline cursor-pointer"
+                type="button"
+              >
+                see {item.comments.length} comments{' '}
+              </button>
+            </Link>
           </div>
         );
       })}

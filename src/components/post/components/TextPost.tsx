@@ -20,7 +20,7 @@ function TextPost({ item }: IProps): JSX.Element {
         </div>
       </div>
       <p className="text-xs mt-3">
-        Publier le : {new Date(item.createdAt).toLocaleDateString('fr-FR')}
+        posted : {new Date(item.createdAt).toLocaleDateString('fr-FR')}
       </p>
       <p
         className={`text-sm mt-1 font-thin leading-7 lg:leading-loose ${

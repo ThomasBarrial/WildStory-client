@@ -18,7 +18,7 @@ interface IUserPost {
 
 interface IComments {
   text: string;
-  userId: string;
+  user: IUserPost;
   postId: string;
 }
 
@@ -36,7 +36,7 @@ interface IUser {
   createdAt: Date;
   updatedAt: Date;
   userSkills: IUserSkills[];
-  comments: Icomment[];
+  comments: IComments[];
 }
 
 interface IUserSkills {
@@ -44,15 +44,6 @@ interface IUserSkills {
   userId: string;
   skillId: string;
   note: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-interface Icomment {
-  id: string;
-  text: string;
-  userId: string;
-  postId: string;
   createdAt: Date;
   updatedAt: Date;
 }
