@@ -71,5 +71,6 @@ module.exports = {
       { namedComponents: 'function-declaration' },
     ],
     'react/prop-types': 1,
+    'import/no-unresolved': [2, { commonjs: true, amd: true }],
   },
 };
