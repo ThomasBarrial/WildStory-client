@@ -1,0 +1,44 @@
+[
+  {
+    "id": "094cf4ae-4648-4a76-a745-d7d7412537da",
+    "username": "Cristofer Kenter",
+    "email": "CristoferKenter@gmail.com",
+    "city": "Pau",
+    "birthDate": "25/05/2000",
+    "avatarUrl": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80",
+    "landimageUrl": "https://images.unsplash.com/photo-1495216875107-c6c043eb703f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80",
+    "formation": {
+      "formationName": "Developper Web"
+    },
+    "createdAt": "2021-10-26T21:03:31.633Z",
+    "updatedAt": "2021-10-26T21:03:31.633Z"
+  },
+  {
+    "id": "bcccb48c-bab4-4204-a05f-cbac6d789c28",
+    "username": "Mike Harmone",
+    "email": "mikeharmone@gmail.com",
+    "city": "Lyon",
+    "birthDate": "25/05/2000",
+    "avatarUrl": "https://images.unsplash.com/photo-1488161628813-04466f872be2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=928&q=80",
+    "landimageUrl": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1244&q=80",
+    "formation": {
+      "formationName": "Développement Web"
+    },
+    "createdAt": "2021-10-26T21:01:33.457Z",
+    "updatedAt": "2021-10-26T21:01:33.457Z"
+  },
+  {
+    "id": "a135d42e-43f8-4f25-a607-f1d7bf3b5947",
+    "username": "Lisa Turtle",
+    "email": "lisaturtle@gmail.com",
+    "city": "Madrid",
+    "birthDate": "25/05/2000",
+    "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80",
+    "landimageUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+    "formation": {
+      "formationName": "Développement Web Remote"
+    },
+    "createdAt": "2021-10-26T21:04:58.776Z",
+    "updatedAt": "2021-10-26T21:04:58.776Z"
+  }
+]
