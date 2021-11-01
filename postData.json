@@ -1,0 +1,101 @@
+[
+  {
+    "id": "3cff7b3f-d912-4556-84ef-22a00e22cc33",
+    "title": "Title Post name2",
+    "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. Duis feugiat urna est.",
+    "likes": null,
+    "imageUrl": [
+      "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1160&q=80",
+      "https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=742&q=80",
+      "https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+    ],
+    "user": {
+      "username": "Lisa Turtle",
+      "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80"
+    },
+    "userId": "a135d42e-43f8-4f25-a607-f1d7bf3b5947",
+    "comments": [],
+    "createdAt": "2021-10-31T13:39:45.257Z",
+    "updatedAt": "2021-10-31T13:39:45.257Z"
+  },
+  {
+    "id": "4cd15393-ec24-4843-94e4-ec9690758a6b",
+    "title": "Title Post name3",
+    "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. Duis feugiat urna est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. Duis feugiat urna est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. Duis feugiat urna est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. Duis feugiat urna est.",
+    "likes": null,
+    "imageUrl": [
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+    ],
+    "user": {
+      "username": "Mike Harmone",
+      "avatarUrl": "https://images.unsplash.com/photo-1488161628813-04466f872be2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=928&q=80"
+    },
+    "userId": "bcccb48c-bab4-4204-a05f-cbac6d789c28",
+    "comments": [],
+    "createdAt": "2021-10-31T13:41:16.833Z",
+    "updatedAt": "2021-10-31T13:41:16.833Z"
+  },
+  {
+    "id": "229bda87-d288-4d2f-8147-79901cc3c4a9",
+    "title": "Title Post name4",
+    "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. Duis feugiat urna est.",
+    "likes": null,
+    "imageUrl": [],
+    "user": {
+      "username": "Mike Harmone",
+      "avatarUrl": "https://images.unsplash.com/photo-1488161628813-04466f872be2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=928&q=80"
+    },
+    "userId": "bcccb48c-bab4-4204-a05f-cbac6d789c28",
+    "comments": [],
+    "createdAt": "2021-10-31T13:41:33.860Z",
+    "updatedAt": "2021-10-31T13:41:33.860Z"
+  },
+  {
+    "id": "510b6246-19d4-44e0-b845-ba5b7b2ec7f7",
+    "title": "Title Post name5",
+    "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. Duis feugiat urna est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. In sed velit tristique nulla euismod auctor.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. ",
+    "likes": null,
+    "imageUrl": [],
+    "user": {
+      "username": "Cristofer Kenter",
+      "avatarUrl": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80"
+    },
+    "userId": "094cf4ae-4648-4a76-a745-d7d7412537da",
+    "comments": [],
+    "createdAt": "2021-10-31T13:42:34.399Z",
+    "updatedAt": "2021-10-31T13:42:34.398Z"
+  },
+  {
+    "id": "58ba36a6-6947-4b68-9241-e3b8729a3641",
+    "title": "Title Post name6",
+    "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. Duis feugiat urna est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. In sed velit tristique nulla euismod auctor. ",
+    "likes": null,
+    "imageUrl": [],
+    "user": {
+      "username": "Lisa Turtle",
+      "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80"
+    },
+    "userId": "a135d42e-43f8-4f25-a607-f1d7bf3b5947",
+    "comments": [],
+    "createdAt": "2021-10-31T13:42:50.370Z",
+    "updatedAt": "2021-10-31T13:42:50.370Z"
+  },
+  {
+    "id": "57fac5f8-0ec6-4c7c-ba01-694a3e8012ea",
+    "title": "Title Post name7",
+    "text": " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. Duis feugiat urna est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat arcu ac quam malesuada sagittis. Duis feugiat urna est. In sed velit tristique nulla euismod auctor. ",
+    "likes": null,
+    "imageUrl": [
+      "https://images.unsplash.com/photo-1599725055007-b33b6755ef6f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1029&q=80",
+      "https://images.unsplash.com/photo-1604537466158-719b1972feb8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80"
+    ],
+    "user": {
+      "username": "Cristofer Kenter",
+      "avatarUrl": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80"
+    },
+    "userId": "094cf4ae-4648-4a76-a745-d7d7412537da",
+    "comments": [],
+    "createdAt": "2021-10-31T13:37:05.717Z",
+    "updatedAt": "2021-10-31T13:37:05.717Z"
+  }
+]

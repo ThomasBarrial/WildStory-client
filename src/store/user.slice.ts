@@ -3,13 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '.';
 
 export interface UserState {
-  id?: string;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  role?: 'USER' | 'ADMIN' | 'SUPERADMIN' | null;
-  companyId?: string;
-  jobId?: string;
+  id: string;
 }
 
 interface UserStateWithLogged extends UserState {
@@ -33,6 +27,7 @@ interface ReturnUseUserFromStore {
 }
 
 const initialState: UserStateWithLogged = {
+  id: '094cf4ae-4648-4a76-a745-d7d7412537da',
   logged: false,
 };
 

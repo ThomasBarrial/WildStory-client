@@ -12,6 +12,10 @@ module.exports = {
         black: '#181818',
         lightblack: '#323232',
       },
+      height: {
+        image: '30rem',
+        comment: '34rem',
+      },
     },
   },
   variants: {
