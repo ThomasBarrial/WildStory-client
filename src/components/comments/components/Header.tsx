@@ -5,7 +5,7 @@ import back from '../../../assets/icons/back.svg';
 
 function Header(): JSX.Element {
   return (
-    <div className="flex rounded-full w-full justify-between items-end h-20 pb-2 px-4 fixed bg-black">
+    <div className="flex rounded-xl lg:rounded-r-xl lg:rounded-l-none w-full lg:w-6/12 justify-between items-end h-20 pb-5 px-4 fixed bg-black">
       <Link to="/">
         <img src={back} alt="GoBack" />
       </Link>

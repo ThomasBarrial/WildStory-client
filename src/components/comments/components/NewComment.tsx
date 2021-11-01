@@ -1,42 +1,74 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { comment } from '../../../API/request';
+import down from '../../../assets/icons/down.svg';
+import { useUserFromStore } from '../../../store/user.slice';
 
-export default function NewComment(): JSX.Element {
+interface IProps {
+  idPost: string | undefined;
+}
+
+export default function NewComment({ idPost }: IProps): JSX.Element {
   const [isNewComment, setIsNewComment] = useState(false);
   const { register, handleSubmit } = useForm();
+  const queryclient = useQueryClient();
+  const { user } = useUserFromStore();
 
-  //   const { mutate: postComment, error: postError } = useMutation(comment.post);
+  const { mutate: postComment } = useMutation(comment.post, {
+    onSuccess: () => {
+      queryclient.refetchQueries(['getComments']);
+    },
+  });
 
-  //   const commentData;
+  const onSubmit = (formData: { text: string }) => {
+    let postId = '';
+    if (idPost !== undefined) {
+      postId = idPost;
+    }
 
-  //   const onSubmit = (commentData) => {};
+    const commentData = {
+      text: formData.text,
+      // UserId come from Redux Store
+      userId: user.id,
+      postId,
+    };
+    return postComment({ commentData });
+  };
   return (
-    <div className="bg-pink absolute px-4 w-full rounded-t-xl bottom-3">
-      <button
-        onClick={() => setIsNewComment(true)}
-        className="text-lg mb-2 font-bold text-black"
-        type="button"
-      >
-        New Comment...
-      </button>
-      <div className="w-full">
-        <form onSubmit={handleSubmit(onSubmit)} action="postComment">
-          <textarea
-            className="bg-black w-full rounded-xl h-24 px-3 py-3 text-lg"
-            id="text"
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...register('text')}
-          />
-          <button
-            className="text-lg rounded-xl mt-5 mb-2 bg-black w-full py-2"
-            type="submit"
-          >
-            Comment
+    <div className=" lg:pb-3 px-4 w-full">
+      <div className="w-full flex items-start justify-between">
+        <button
+          onClick={() => setIsNewComment(true)}
+          className="text-lg mb-2 font-bold text-white"
+          type="button"
+        >
+          Comment this post...
+        </button>
+        {isNewComment && (
+          <button onClick={() => setIsNewComment(false)} type="button">
+            <img src={down} alt="down" />
           </button>
-        </form>
+        )}
       </div>
+      {isNewComment && (
+        <div className="w-full">
+          <form onSubmit={handleSubmit(onSubmit)} action="postComment">
+            <textarea
+              className="bg-black text-white border border-pink w-full focus:outline-none rounded-xl h-24 px-3 py-3 text-lg"
+              id="text"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...register('text')}
+            />
+            <button
+              className="text-lg rounded-xl mb-5 border text-pink border-pink w-6/12 py-1"
+              type="submit"
+            >
+              Comment
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }

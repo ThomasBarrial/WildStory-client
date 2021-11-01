@@ -17,8 +17,16 @@ interface IUserPost {
 }
 
 interface IComments {
+  id: string;
   text: string;
   user: IUserPost;
+  userId: string;
+  postId: string;
+}
+
+interface PostComment {
+  text: string;
+  userId: string;
   postId: string;
 }
 

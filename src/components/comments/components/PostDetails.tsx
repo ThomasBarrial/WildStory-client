@@ -2,19 +2,25 @@ import React from 'react';
 import AvatarUser from '../../post/components/AvatarUser';
 
 interface IProps {
-  data: IPost;
+  postData: IPost | undefined;
 }
 
-function PostDetails({ data }: IProps): JSX.Element {
+function PostDetails({ postData }: IProps): JSX.Element {
+  // const { data: userData } = useQuery<IUser, AxiosError>('userPost', () =>
+  //   user.getOne(postData?.userId)
+  // );
+
   return (
-    <div className="mt-5 border-b border-pink pb-5">
-      <AvatarUser user={data.user} />
-      <p className="text-sm font-normal mx-3">{data.text}</p>
-      <div className="flex mx-3 mt-3 items-center justify-between">
-        <p className="text-xs">
-          posted : {new Date(data.createdAt).toLocaleDateString('fr-FR')}
-        </p>
-      </div>
+    <div className="mt-20  pb-5">
+      <AvatarUser user={postData?.user} />
+      <p className="text-sm font-normal mx-3">{postData?.text}</p>
+      {postData?.createdAt !== undefined && (
+        <div className="flex mx-3 mt-3 items-center justify-between">
+          <p className="text-xs">
+            posted : {new Date(postData.createdAt).toLocaleDateString('fr-FR')}
+          </p>
+        </div>
+      )}
     </div>
   );
 }

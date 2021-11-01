@@ -14,6 +14,7 @@ module.exports = {
       },
       height: {
         image: '30rem',
+        comment: '34rem',
       },
     },
   },
