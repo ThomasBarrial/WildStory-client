@@ -32,7 +32,7 @@ function ListPost(): JSX.Element {
             </div>
             <Link to={`/comments/${item.id}`}>
               <button
-                className="text-sm mx-3 transform -translate-y-3 underline cursor-pointer"
+                className="text-sm mx-3 transform underline cursor-pointer mt-5"
                 type="button"
               >
                 see {item.comments.length} comments{' '}

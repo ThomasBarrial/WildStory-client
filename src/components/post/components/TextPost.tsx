@@ -9,7 +9,7 @@ function TextPost({ item }: IProps): JSX.Element {
   const [istext, setIsText] = useState(true);
 
   return (
-    <div className="mx-4">
+    <div className="mx-4 pb-5">
       <div className="flex justify-between">
         <h3 className="text-lg">{item.title}</h3>
         <div className="flex">
@@ -33,7 +33,7 @@ function TextPost({ item }: IProps): JSX.Element {
       <button
         onClick={() => setIsText((c) => !c)}
         type="button"
-        className="text-sm underline transform -translate-y-2"
+        className="text-sm underline"
       >
         {istext ? 'Plus..' : 'moins'}
       </button>
