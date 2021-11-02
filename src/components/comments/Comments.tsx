@@ -16,7 +16,7 @@ function Comments(): JSX.Element {
   const { user } = useUserFromStore();
   const idUser = user.id;
   const { isLoading, error, data } = useQuery<IComments[], AxiosError>(
-    'getComments',
+    ['getComments', id],
     () => post.getComments(id),
     {
       onSuccess: (commentRes) => {
@@ -31,7 +31,8 @@ function Comments(): JSX.Element {
       },
     }
   );
-  const { data: postData } = useQuery<IPost, AxiosError>('post', () =>
+
+  const { data: postData } = useQuery<IPost, AxiosError>(['post', id], () =>
     post.getOne(id)
   );
 
@@ -41,32 +42,24 @@ function Comments(): JSX.Element {
   if (error || !data) {
     return <p>Error..</p>;
   }
-  const tab = data;
-  const revtab = [...tab].reverse();
 
   return (
-    <div className="flex justify-center w-full">
-      {postData?.imageUrl.length !== 0 && (
-        <div className="hidden lg:flex  lg:w-6/12 pt-16 px-5">
-          <ImageSlider item={postData} />
-        </div>
-      )}
-      <div className="lg:w-6/12  lg:mr-5">
-        <Header />
-        <div className="h-comment overflow-y-scroll">
-          <PostDetails postData={postData} />
-          {!isComment && idUser !== postData?.userId && (
-            <NewComment idPost={id} />
-          )}
-          <div className="border-t border-pink pt-2 mx-3">
-            {revtab.map((item) => {
-              return (
-                <div key={item.id}>
-                  <Comment item={item} />
-                </div>
-              );
-            })}
-          </div>
+    <div className="flex lg:w-6/12 mx-auto  w-full">
+      <Header />
+      <div className="py-20">
+        {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />}
+        <PostDetails postData={postData} />
+        {!isComment && idUser !== postData?.userId && (
+          <NewComment idPost={id} />
+        )}
+        <div className="border-t border-pink pt-2 mx-3">
+          {data.map((item) => {
+            return (
+              <div key={item.id}>
+                <Comment item={item} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
