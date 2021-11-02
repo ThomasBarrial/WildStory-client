@@ -25,11 +25,11 @@ function ImageSlider({ item }: IProps): JSX.Element {
   };
 
   return (
-    <div className="flex flex-col overflow-x-scroll lg:w-full lg:h-full">
+    <div className="flex flex-col overflow-x-scroll lg:w-full mb-5">
       <button
         type="button"
         onClick={handleClick}
-        className="w-screen h-72 lg:h-image lg:w-full border-t border-b lg:rounded-xl lg:border-r lg:border-l border-pink"
+        className="w-screen h-72 lg:h-image lg:w-full border-t border-b lg:rounded-lg lg:border-r lg:border-l border-pink"
         style={{
           backgroundImage: `url(${item?.imageUrl[imageIndex]})`,
           backgroundPosition: 'center',

@@ -9,7 +9,7 @@ function TextPost({ item }: IProps): JSX.Element {
   const [istext, setIsText] = useState(true);
 
   return (
-    <div className="mx-4 mt-5">
+    <div className="mx-4">
       <div className="flex justify-between">
         <h3 className="text-lg">{item.title}</h3>
         <div className="flex">

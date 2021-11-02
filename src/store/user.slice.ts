@@ -27,7 +27,7 @@ interface ReturnUseUserFromStore {
 }
 
 const initialState: UserStateWithLogged = {
-  id: '094cf4ae-4648-4a76-a745-d7d7412537da',
+  id: 'bcccb48c-bab4-4204-a05f-cbac6d789c28',
   logged: false,
 };
 
