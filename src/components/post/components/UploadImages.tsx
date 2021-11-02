@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import AlerteMessage from '../../Forms/AlerteMessage';
+import trash from '../../../assets/icons/trash.svg';
 
 interface IProps {
   setUploadImages: Dispatch<SetStateAction<string[]>>;
@@ -10,54 +11,39 @@ interface IProps {
 function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
   const [imageUrl, setImageUrl] = useState('');
   const [isPosted, setIsPosted] = useState(false);
-  const [isArray, setIsArray] = useState(true);
 
   const handleDeleteImage = (image: string) => {
-    for (let i = 0; i < uploadImages.length; i += 1) {
-      if (uploadImages[i] === image) {
-        uploadImages.splice(i, 1);
-      }
-    }
+    setUploadImages(uploadImages.filter((item) => item !== image));
   };
-
-  useEffect(() => {
-    if (isArray === false) {
-      setIsArray(true);
-    }
-  }, [uploadImages]);
 
   return (
     <div>
       <div className="flex flex-wrap mt-10">
-        {isArray && (
-          <div>
-            {uploadImages.map((image) => {
-              return (
-                <div
-                  key={image}
-                  className="h-20 w-20 my-2 lg:h-32 lg:w-32 mx-2 border border-pink rounded-lg"
-                  style={{
-                    backgroundImage: `url(${image})`,
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                  }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsArray(false);
-                      handleDeleteImage(image);
-                    }}
-                  >
-                    delete
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        )}
+        {uploadImages.map((image) => {
+          return (
+            <div
+              key={image}
+              className="h-20 w-20 my-2 p-2 lg:h-32 lg:w-32 mx-2 border border-pink rounded-lg"
+              style={{
+                backgroundImage: `url(${image})`,
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  handleDeleteImage(image);
+                }}
+              >
+                <img className="" src={trash} alt="delete" />
+              </button>
+            </div>
+          );
+        })}
       </div>
+
       <form className="mt-10 flex flex-col" action="UploadImages">
         <label>Upload your images</label>
         <input
