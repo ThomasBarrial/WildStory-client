@@ -14,14 +14,14 @@ function Comments(): JSX.Element {
   const [isComment, setIsComment] = useState(false);
   const { id } = useParams<{ id: string }>();
   const { user } = useUserFromStore();
-  const idUser = user.id;
+  const IdUserFormStore = user.id;
   const { isLoading, error, data } = useQuery<IComments[], AxiosError>(
     ['getComments', id],
     () => post.getComments(id),
     {
       onSuccess: (commentRes) => {
         const checkComments = commentRes.filter((com) =>
-          com.userId.includes(idUser)
+          com.userId.includes(IdUserFormStore)
         );
         if (checkComments.length !== 0) {
           setIsComment(true);
@@ -49,7 +49,7 @@ function Comments(): JSX.Element {
       <div className="py-20">
         {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />}
         <PostDetails postData={postData} />
-        {!isComment && idUser !== postData?.userId && (
+        {!isComment && IdUserFormStore !== postData?.userId && (
           <NewComment idPost={id} />
         )}
         <div className="border-t border-pink pt-2 mx-3">

@@ -20,9 +20,11 @@ function ListPost(): JSX.Element {
     return <p>Error..</p>;
   }
   if (data.length === 0) return <p>No post</p>;
+
+  const reverseData = [...data].reverse();
   return (
     <div className="w-full h-full lg:w-7/12 lg:mx-auto">
-      {data?.map((item) => {
+      {reverseData?.map((item) => {
         return (
           <div className="my-12" key={item.id}>
             <div className="border-b border-pink">

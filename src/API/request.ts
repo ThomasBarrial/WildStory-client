@@ -6,6 +6,8 @@ export const post = {
     AXIOS.get(`/post/${id}`).then((res) => res.data),
   getComments: (id: string): Promise<IComments[]> =>
     AXIOS.get(`/post/${id}/comments`).then((res) => res.data),
+  post: ({ createData }: { createData: IPostData }): Promise<IPost> =>
+    AXIOS.post('/post', createData).then((res) => res.data),
 };
 
 export const user = {

@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import AlerteMessage from '../../Forms/AlerteMessage';
-import trash from '../../../assets/icons/trash.svg';
 
 interface IProps {
   setUploadImages: Dispatch<SetStateAction<string[]>>;
@@ -21,33 +20,35 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
       <div className="flex flex-wrap mt-10">
         {uploadImages.map((image) => {
           return (
-            <div
-              key={image}
-              className="h-20 w-20 my-2 p-2 lg:h-32 lg:w-32 mx-2 border border-pink rounded-lg"
-              style={{
-                backgroundImage: `url(${image})`,
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-              }}
-            >
+            <div className="">
+              <div
+                key={image}
+                className="h-20 overflow-hidden w-20 my-2 lg:h-32 lg:w-48 mx-2 border border-pink rounded-sm"
+              >
+                <img
+                  className="h-full w-full flex items-center justify-center"
+                  src={image}
+                  alt="Wrong Url..."
+                />
+              </div>
               <button
+                className="h-full font-thin text-xs flex m-1"
                 type="button"
                 onClick={() => {
                   handleDeleteImage(image);
                 }}
               >
-                <img className="" src={trash} alt="delete" />
+                Delete
               </button>
             </div>
           );
         })}
       </div>
 
-      <form className="mt-10 flex flex-col" action="UploadImages">
-        <label>Upload your images</label>
+      <form className="mt-2 flex flex-col" action="UploadImages">
+        <label className="font-bold">Upload your images</label>
         <input
-          className="bg-black mt-3 border focus:outline-none p-2 border-pink"
+          className="bg-black mt-2 border focus:outline-none p-2 border-pink"
           type="text"
           onChange={(e) => {
             setImageUrl(e.target.value);
