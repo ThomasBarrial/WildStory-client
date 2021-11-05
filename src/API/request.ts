@@ -6,8 +6,18 @@ export const post = {
     AXIOS.get(`/post/${id}`).then((res) => res.data),
   getComments: (id: string): Promise<IComments[]> =>
     AXIOS.get(`/post/${id}/comments`).then((res) => res.data),
-  post: ({ createData }: { createData: IPostData }): Promise<IPost> =>
-    AXIOS.post('/post', createData).then((res) => res.data),
+  post: ({ postData }: { postData: IPostData }): Promise<IPostData> =>
+    AXIOS.post('/post', postData).then((res) => res.data),
+  put: ({
+    id,
+    postData,
+  }: {
+    id: string;
+    postData: IPostData;
+  }): Promise<IPost> =>
+    AXIOS.put(`/post/${id}`, postData).then((res) => res.data),
+  delete: (id: string): Promise<IPost> =>
+    AXIOS.delete(`/post/${id}`).then((res) => res.data),
 };
 
 export const user = {

@@ -12,19 +12,26 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
   const [isPosted, setIsPosted] = useState(false);
 
   const handleDeleteImage = (image: string) => {
-    setUploadImages(uploadImages.filter((item) => item !== image));
+    setUploadImages(uploadImages?.filter((item) => item !== image));
   };
 
+  const handleImageSubmit = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (uploadImages?.filter((image) => image.includes(imageUrl)).length > 0) {
+      setIsPosted(true);
+    } else {
+      setUploadImages([...uploadImages, imageUrl]);
+    }
+  };
   return (
     <div>
       <div className="flex flex-wrap mt-10">
-        {uploadImages.map((image) => {
+        {uploadImages?.map((image) => {
           return (
-            <div className="">
-              <div
-                key={image}
-                className="h-20 overflow-hidden w-20 my-2 lg:h-32 lg:w-48 mx-2 border border-pink rounded-sm"
-              >
+            <div key={image} className="">
+              <div className="h-20 overflow-hidden w-20 my-2 lg:h-32 lg:w-48 mx-2 border border-pink rounded-sm">
                 <img
                   className="h-full w-full flex items-center justify-center"
                   src={image}
@@ -59,22 +66,12 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
         {isPosted && (
           <AlerteMessage>You already upload this image !!</AlerteMessage>
         )}
-        {uploadImages.length >= 10 ? (
+        {uploadImages?.length >= 10 ? (
           <AlerteMessage>You can not upload more then 10 images</AlerteMessage>
         ) : (
           <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              if (
-                uploadImages.filter((image) => image.includes(imageUrl))
-                  .length > 0
-              ) {
-                setIsPosted(true);
-              } else {
-                setUploadImages([...uploadImages, imageUrl]);
-              }
-            }}
+            type="submit"
+            onClick={(e) => handleImageSubmit(e)}
             className="mt-5 border border-pink text-pink py-2 w-6/12"
           >
             Add image

@@ -32,6 +32,7 @@ function TextInput({
         className="bg-black mt-2 border focus:outline-none p-2 border-pink"
       />
       <p className="text-red text-xs">{error}</p>
+      {required && <p className="text-xs text-pink mt-2">Fieds required</p>}
     </label>
   );
 }
