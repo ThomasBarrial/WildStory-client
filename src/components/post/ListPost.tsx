@@ -20,9 +20,11 @@ function ListPost(): JSX.Element {
     return <p>Error..</p>;
   }
   if (data.length === 0) return <p>No post</p>;
+
+  const reverseData = [...data].reverse();
   return (
     <div className="w-full h-full lg:w-7/12 lg:mx-auto">
-      {data?.map((item) => {
+      {reverseData?.map((item) => {
         return (
           <div className="my-12" key={item.id}>
             <div className="border-b border-pink">
@@ -32,7 +34,7 @@ function ListPost(): JSX.Element {
             </div>
             <Link to={`/comments/${item.id}`}>
               <button
-                className="text-sm mx-3 transform -translate-y-3 underline cursor-pointer"
+                className="text-sm mx-3 transform underline cursor-pointer mt-5"
                 type="button"
               >
                 see {item.comments.length} comments{' '}

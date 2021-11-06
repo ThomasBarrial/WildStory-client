@@ -10,6 +10,12 @@ interface IPost {
   userId: string;
   comments: IComments[];
 }
+interface IPostData {
+  title: string;
+  text: string;
+  imageUrl: string[];
+  userId: string;
+}
 
 interface IUserPost {
   username: string;
