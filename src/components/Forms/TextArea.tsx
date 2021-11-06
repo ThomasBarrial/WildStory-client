@@ -30,6 +30,7 @@ function TextInput({
         {...register(name, { required })}
         className="bg-black mt-2 border h-40 focus:outline-none p-2 border-pink"
       />
+      {required && <p className="text-xs text-pink mt-2">Fieds required</p>}
       <p className="text-red text-xs">{error}</p>
     </label>
   );

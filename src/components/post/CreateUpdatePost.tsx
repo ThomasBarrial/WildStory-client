@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
-import { useMutation } from 'react-query';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { useMutation, useQuery } from 'react-query';
 import back from '../../assets/icons/back.svg';
 import TextInput from '../Forms/TextInput';
 import TextArea from '../Forms/TextArea';
@@ -17,35 +17,58 @@ interface IFormData {
 }
 
 function CreateUpdatePost(): JSX.Element {
+  const { id: postId } = useParams<{ id: string | undefined }>();
+
   const [uploadImages, setUploadImages] = useState<string[]>([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
   const { user } = useUserFromStore();
   const IdUserFormStore = user.id;
   const { isModal, setIsModal, message, setMessage } = useModal();
   const router = useHistory();
 
-  const { mutateAsync: postData, error: postError } = useMutation(post.post, {
+  useQuery<IPost>(['post', postId], () => post.getOne(postId as string), {
+    enabled: Boolean(postId),
+    onSuccess: (data) => {
+      setUploadImages(data.imageUrl);
+      setValue('title', data.title);
+      setValue('text', data.text);
+    },
+  });
+
+  const { mutateAsync: createData, error: postError } = useMutation(post.post, {
     onSuccess: () => {
       setIsModal(true);
-      setMessage('Your post as been created');
+      setMessage('Your post has been created');
+    },
+  });
+
+  const { mutateAsync: editData, error: putError } = useMutation(post.put, {
+    onSuccess: (data) => {
+      setIsModal(true);
+      setMessage('Your post has been edit');
+      setUploadImages(data.imageUrl);
+      setValue('title', data.title);
+      setValue('text', data.text);
     },
   });
 
   const onSubmit = (formData: IFormData) => {
-    const createData = {
+    const postData = {
       title: formData.title,
       text: formData.text,
       userId: IdUserFormStore,
       imageUrl: uploadImages,
     };
-    return postData({ createData });
+    if (!postId) return createData({ postData });
+    return editData({ id: postId, postData });
   };
 
-  const error = postError;
+  const error = postError || putError;
   return (
     <div className="text-white lg:w-6/12 mx-auto mt-10 px-4 pb-10 lg:px-0">
       {isModal && (
@@ -64,7 +87,9 @@ function CreateUpdatePost(): JSX.Element {
         <Link to="/">
           <img src={back} alt="goBack" />
         </Link>
-        <h3 className="text-base">Nouvelle Publication</h3>
+        <h3 className="text-base">
+          {postId ? 'Edit your story' : 'Create a story'}
+        </h3>
       </div>
       <UploadImages
         setUploadImages={setUploadImages}
@@ -76,7 +101,7 @@ function CreateUpdatePost(): JSX.Element {
           placeholder="title..."
           register={register}
           name="title"
-          required={false}
+          required
           id="title"
           error={errors.placeholder}
         />
@@ -93,7 +118,7 @@ function CreateUpdatePost(): JSX.Element {
           type="submit"
           className="mt-5 border border-pink text-pink py-2 w-6/12"
         >
-          Create Post
+          {postId ? 'Edit your story' : 'Create story'}
         </button>
       </form>
     </div>
