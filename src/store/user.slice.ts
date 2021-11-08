@@ -12,6 +12,7 @@ export interface UserState {
   avatarUrl: string;
   landimageUrl: string;
   idFormation: string;
+  mediaLink: IMediaLink[];
 }
 
 interface UserStateWithLogged extends UserState {
@@ -47,6 +48,7 @@ const initialState: UserStateWithLogged = {
     'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1244&q=80',
   idFormation: '304c9648-a2cd-464c-bcc8-445316e38488',
   logged: false,
+  mediaLink: [],
 };
 
 export const userSlice = createSlice({

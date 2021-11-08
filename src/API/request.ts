@@ -6,6 +6,8 @@ export const post = {
     AXIOS.get(`/post/${id}`).then((res) => res.data),
   getComments: (id: string): Promise<IComments[]> =>
     AXIOS.get(`/post/${id}/comments`).then((res) => res.data),
+  getUserPost: (id: string): Promise<IPost[]> =>
+    AXIOS.get(`/post/user/${id}`).then((res) => res.data),
   post: ({ postData }: { postData: IPostData }): Promise<IPostData> =>
     AXIOS.post('/post', postData).then((res) => res.data),
   put: ({
@@ -32,4 +34,19 @@ export const comment = {
     AXIOS.post<PostComment>(`/comments`, commentData).then((res) => res.data),
   delete: (id: string): Promise<IComments> =>
     AXIOS.delete(`/comments/${id}`).then((res) => res.data),
+};
+
+export const formation = {
+  getOne: (id: string): Promise<IFormation> =>
+    AXIOS.get(`/formations/${id}`).then((res) => res.data),
+};
+
+export const userSkills = {
+  getAll: (id: string): Promise<IUserSkills[]> =>
+    AXIOS.get(`/userskills/${id}`).then((res) => res.data),
+};
+
+export const skills = {
+  getOne: (id: string): Promise<ISkills> =>
+    AXIOS.get(`/skills/${id}`).then((res) => res.data),
 };
