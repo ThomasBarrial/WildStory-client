@@ -39,7 +39,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
                 />
               </div>
               <button
-                className="h-full font-thin text-xs flex m-1"
+                className="h-full text-pink font-bold text-xs flex m-1"
                 type="button"
                 onClick={() => {
                   handleDeleteImage(image);
