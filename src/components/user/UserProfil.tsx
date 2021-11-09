@@ -30,7 +30,7 @@ function UserProfil(): JSX.Element {
     return <p>Error..</p>;
   }
   return (
-    <div>
+    <div className="lg:mx-auto lg:w-8/12">
       <Header userAvatar={user.avatarUrl} userLanding={user.landimageUrl} />
       <div className="px-4 h-full transform -translate-y-16">
         <p className="font-bold text-xl">{user.username}</p>

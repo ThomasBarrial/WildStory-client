@@ -18,6 +18,7 @@ function UserPost({ userId }: { userId: string }): JSX.Element {
   if (error || !data) {
     return <p>Error..</p>;
   }
+
   return (
     <div className="transform -translate-y-16">
       <div className="flex border-b pb-2 px-4 border-pink">

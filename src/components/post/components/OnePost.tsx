@@ -17,7 +17,7 @@ function OnePost({ item }: IProps): JSX.Element {
     <div className="my-12" key={item.id}>
       <div className="border-b border-pink">
         <div className="flex w-full justify-between items-end">
-          <AvatarUser user={item.user} />
+          <AvatarUser userId={item.userId} />
           {IdUserFormStore === item.userId && <Dot postId={item.id} />}
         </div>
         {item.imageUrl.length !== 0 && <ImageSlider item={item} />}

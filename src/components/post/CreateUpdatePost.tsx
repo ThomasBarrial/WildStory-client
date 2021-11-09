@@ -83,12 +83,12 @@ function CreateUpdatePost(): JSX.Element {
           {message}
         </Modal>
       )}
-      <div className="flex w-full justify-between">
+      <div className="flex w-full items-center justify-between">
         <Link to="/">
           <img src={back} alt="goBack" />
         </Link>
-        <h3 className="text-base">
-          {postId ? 'Edit your story' : 'Create a story'}
+        <h3 className="text-base font-bold">
+          {postId ? 'Edit your post' : 'Create a new post'}
         </h3>
       </div>
       <UploadImages
@@ -118,7 +118,7 @@ function CreateUpdatePost(): JSX.Element {
           type="submit"
           className="mt-5 border border-pink text-pink py-2 w-6/12"
         >
-          {postId ? 'Edit your story' : 'Create story'}
+          {postId ? 'Edit your post' : 'Create post'}
         </button>
       </form>
     </div>

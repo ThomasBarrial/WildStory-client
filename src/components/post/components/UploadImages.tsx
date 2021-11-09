@@ -27,7 +27,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
   };
   return (
     <div>
-      <div className="flex flex-wrap mt-10">
+      <div className="flex flex-wrap mt-2">
         {uploadImages?.map((image) => {
           return (
             <div key={image} className="">

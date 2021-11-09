@@ -6,7 +6,7 @@ interface IPost {
   imageUrl: string[];
   createdAt: Date;
   updatedAt: Date;
-  user: IUserPost;
+
   userId: string;
   comments: IComments[];
 }
@@ -17,15 +17,9 @@ interface IPostData {
   userId: string;
 }
 
-interface IUserPost {
-  username: string;
-  avatarUrl: string;
-}
-
 interface IComments {
   id: string;
   text: string;
-  user: IUserPost;
   userId: string;
   postId: string;
 }
