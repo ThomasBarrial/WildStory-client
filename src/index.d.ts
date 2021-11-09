@@ -6,7 +6,7 @@ interface IPost {
   imageUrl: string[];
   createdAt: Date;
   updatedAt: Date;
-  user: IUserPost;
+
   userId: string;
   comments: IComments[];
 }
@@ -17,15 +17,9 @@ interface IPostData {
   userId: string;
 }
 
-interface IUserPost {
-  username: string;
-  avatarUrl: string;
-}
-
 interface IComments {
   id: string;
   text: string;
-  user: IUserPost;
   userId: string;
   postId: string;
 }
@@ -44,13 +38,14 @@ interface IUser {
   city: string;
   birthDate: string;
   avatarUrl: string;
-  landingImageUrl: string;
+  landimageUrl: string;
   idFormation: string;
   post: IPost[];
   createdAt: Date;
   updatedAt: Date;
   userSkills: IUserSkills[];
   comments: IComments[];
+  mediaLink: IMediaLink[];
 }
 
 interface IUserSkills {
@@ -60,4 +55,29 @@ interface IUserSkills {
   note: number;
   createdAt: Date;
   updatedAt: Date;
+}
+
+interface IFormation {
+  id: string;
+  formationName: string;
+}
+
+interface ISkills {
+  id: string;
+  name: string;
+}
+
+interface IMediaLink {
+  id: string;
+  name: string;
+  link: string;
+  idIcon: string;
+  users: IUser[];
+}
+
+interface IMediaIcon {
+  id: string;
+  name: string;
+  iconUrl: string;
+  mediaLink: IMediaLink[];
 }
