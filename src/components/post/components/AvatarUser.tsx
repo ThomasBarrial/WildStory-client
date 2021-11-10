@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { user } from '../../../API/request';
 
 interface IProps {
-  userId: string;
+  userId: string | undefined;
 }
 
 function AvatarUser({ userId }: IProps): JSX.Element {

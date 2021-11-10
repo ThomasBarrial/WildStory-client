@@ -4,9 +4,10 @@ import logo from '../../assets/logo2.png';
 import settings from '../../assets/icons/settings.svg';
 import home from '../../assets/icons/home.svg';
 import newpost from '../../assets/icons/newpost.svg';
-import avatar from '../../assets/profilPicture.png';
+import { useUserFromStore } from '../../store/user.slice';
 
 function Navabar(): JSX.Element {
+  const { user } = useUserFromStore();
   const icons = [
     { path: '/', icon: home, alt: 'home' },
     { path: '/newpost', icon: newpost, alt: 'newpost' },
@@ -32,7 +33,7 @@ function Navabar(): JSX.Element {
         <Link to="/profil">
           <img
             className="h-10 w-10 ml-2 cursor-pointer rounded-full border border-black"
-            src={avatar}
+            src={user.avatarUrl}
             alt=""
           />
         </Link>

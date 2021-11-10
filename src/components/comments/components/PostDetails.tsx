@@ -16,7 +16,7 @@ function PostDetails({ postData }: IProps): JSX.Element {
 
   return (
     <div className="pb-5">
-      <AvatarUser user={userData} />
+      <AvatarUser userId={userData?.id} />
       <p className="text-sm font-normal mx-3">{postData?.text}</p>
       {userData?.createdAt !== undefined && (
         <div className="flex mx-3 mt-3 items-center justify-between">
