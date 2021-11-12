@@ -1,25 +1,16 @@
 import React from 'react';
 
 interface IProps {
-  formationName: string;
-  city: string;
-  birthDate: string;
+  name: string;
+  children: React.ReactNode;
 }
 
-function Info({ formationName, city, birthDate }: IProps): JSX.Element {
+function Info({ name, children }: IProps): JSX.Element {
   return (
     <div>
-      <div className="mb-5 border-b border-pink pb-2">
-        <p className="font-bold">Formation</p>
-        <p>{formationName}</p>
-      </div>
-      <div className="my-5 border-b border-pink pb-2">
-        <p className="font-bold">City</p>
-        <p>{city}</p>
-      </div>
-      <div className="my-5 border-b border-pink pb-2">
-        <p className="font-bold">BirthDate</p>
-        <p>{birthDate}</p>
+      <div className="mb-5 lg:my-7 border-b border-pink pb-2">
+        <p className="font-bold">{name}</p>
+        <p className="lg:mt-1 font-thin">{children}</p>
       </div>
     </div>
   );

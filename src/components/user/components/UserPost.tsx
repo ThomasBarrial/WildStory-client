@@ -1,12 +1,10 @@
 import { AxiosError } from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { post } from '../../../API/request';
 import OnePost from '../../post/components/OnePost';
-import AllPost from './AllPost';
 
 function UserPost({ userId }: { userId: string }): JSX.Element {
-  const [isAllPost, setIsAllPost] = useState(false);
   const { data, isLoading, error } = useQuery<IPost[], AxiosError>(
     ['userPost', userId],
     () => post.getUserPost(userId)
@@ -20,32 +18,15 @@ function UserPost({ userId }: { userId: string }): JSX.Element {
   }
 
   return (
-    <div className="transform -translate-y-16">
-      <div className="flex border-b pb-2 px-4 border-pink">
-        <button
-          onClick={() => setIsAllPost(false)}
-          type="button"
-          className="mr-3"
-        >
-          Recents stories
-        </button>
-        <button
-          onClick={() => setIsAllPost(true)}
-          type="button"
-          className="ml-3"
-        >
-          All my stories
-        </button>
+    <div className="mt-5 transform -translate-y-16">
+      <div className="flex border-b pb-2 px-4 lg:px-0 border-pink">
+        <p className="mr-3">Recents stories</p>
       </div>
-      <div
-        className={`flex w-full ${
-          isAllPost ? 'flex-row flex-wrap' : 'flex-col'
-        } `}
-      >
+      <div className="flex w-full flex-col">
         {data.map((item) => {
           return (
-            <div className={`${isAllPost && 'w-1/3'}`} key={item.id}>
-              {isAllPost ? <AllPost item={item} /> : <OnePost item={item} />}
+            <div key={item.id}>
+              <OnePost item={item} />
             </div>
           );
         })}

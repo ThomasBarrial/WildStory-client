@@ -70,7 +70,7 @@ function CreateUpdatePost(): JSX.Element {
 
   const error = postError || putError;
   return (
-    <div className="text-white lg:w-6/12 mx-auto mt-10 px-4 pb-10 lg:px-0">
+    <div className="text-white lg:w-6/12 md:w-10/12 mx-auto mt-10 px-4 pb-10 lg:px-0">
       {isModal && (
         <Modal
           title="Every things geos well"

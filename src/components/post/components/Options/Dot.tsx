@@ -25,7 +25,7 @@ function Dot({ postId }: { postId: string }): JSX.Element {
       <button
         onClick={() => setIsModal(true)}
         type="button"
-        className="h-full mb-3 text-2xl font-bold"
+        className="h-full mb-3 mr-4 lg:mr-0 text-2xl font-bold"
       >
         ...
       </button>
@@ -35,7 +35,7 @@ function Dot({ postId }: { postId: string }): JSX.Element {
           title={
             isConfirmationMessage
               ? 'do you really want to delete this story'
-              : 'Every things geos well'
+              : 'Post settings'
           }
           buttons={
             isConfirmationMessage
@@ -54,11 +54,11 @@ function Dot({ postId }: { postId: string }): JSX.Element {
                 ]
               : [
                   {
-                    text: 'Edit Story',
+                    text: 'Edit post',
                     handleClick: () => router.push(`/editpost/${postId}`),
                   },
                   {
-                    text: 'delete Story',
+                    text: 'delete post',
                     handleClick: () => setIsConfirmationMessage(true),
                   },
                 ]
