@@ -30,17 +30,15 @@ function UserProfil(): JSX.Element {
     return <p>Error..</p>;
   }
   return (
-    <div className="lg:mx-auto lg:w-8/12">
+    <div className="lg:mx-auto lg:w-7/12 md:w-12/12 mx-auto">
       <Header userAvatar={user.avatarUrl} userLanding={user.landimageUrl} />
-      <div className="px-4 h-full transform -translate-y-16">
-        <p className="font-bold text-xl">{user.username}</p>
-        <p className="text-sm">{user.profilTitle}</p>
+      <div className="px-4 lg:px-0 h-full transform -translate-y-16">
+        <p className="font-bold text-xl lg:text-2xl">{user.username}</p>
+        <p className="text-sm font-thin">{user.profilTitle}</p>
         <div className="py-8">
-          <Info
-            formationName={formationData?.formationName}
-            city={user.city}
-            birthDate={user.birthDate}
-          />
+          <Info name="Formation">{formationData.formationName}</Info>
+          <Info name="City">{user.city}</Info>
+          <Info name="BithDate">{user.birthDate}</Info>
           <p className="font-bold mt-10 border-b border-pink pb-2">Skills</p>
           {userSkillsData?.map((skill) => {
             return <Skill skill={skill} />;

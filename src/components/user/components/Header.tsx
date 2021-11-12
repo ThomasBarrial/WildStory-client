@@ -9,7 +9,7 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
   return (
     <div className="w-full flex flex-col items-end">
       <div
-        className="w-full h-32 border-b border-pink"
+        className="w-full h-32 border-b lg:border border-pink"
         style={{
           backgroundImage: `url(${userLanding})`,
           backgroundPosition: 'center',

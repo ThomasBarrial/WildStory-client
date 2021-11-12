@@ -13,8 +13,9 @@ interface IProps {
 function OnePost({ item }: IProps): JSX.Element {
   const { user } = useUserFromStore();
   const IdUserFormStore = user.id;
+
   return (
-    <div className="my-12" key={item.id}>
+    <div className="mb-12 mt-5" key={item.id}>
       <div className="border-b border-pink">
         <div className="flex w-full justify-between items-end">
           <AvatarUser userId={item.userId} />
@@ -25,7 +26,7 @@ function OnePost({ item }: IProps): JSX.Element {
       </div>
       <Link to={`/comments/${item.id}`}>
         <button
-          className="text-sm mx-3 transform underline cursor-pointer mt-5"
+          className="text-sm mx-3 lg:mx-0 transform underline cursor-pointer mt-5"
           type="button"
         >
           see {item.comments.length} comments{' '}

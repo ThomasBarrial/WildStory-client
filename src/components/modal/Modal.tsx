@@ -26,7 +26,7 @@ function Modal({ title, buttons, children }: Iprops): JSX.Element {
     >
       <Dialog.Overlay className="fixed inset-0 z-50 " />
 
-      <div className="py-10 px-7 lg:px-10 w-10/12 lg:w-6/12 border border-pink shadow-buttonShadow  flex flex-col z-50 text-white bg-black rounded-md break-all">
+      <div className="py-10 pr-4 pl-7 md:px-7 lg:px-10 w-11/12 lg:w-6/12 border border-pink shadow-buttonShadow  flex flex-col z-50 text-white bg-black rounded-md break-all">
         <Dialog.Title className="sm:text-xl text-base mb-1 font-bold">
           {title}
         </Dialog.Title>
@@ -38,8 +38,8 @@ function Modal({ title, buttons, children }: Iprops): JSX.Element {
             <button
               type="button"
               key={button.text}
-              className={`focus:outline-none h-10 px-6 ${
-                index === 0 ? 'mr-2' : 'mx-5'
+              className={`focus:outline-none h-10 px-3 ${
+                index === 0 ? 'mr-2' : 'mx-4'
               } ${
                 button.backgroundColor ||
                 'text-pink  px-5 w-6/12 border border-pink'

@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { user } from '../../../API/request';
 
 interface IProps {
-  userId: string;
+  userId: string | undefined;
 }
 
 function AvatarUser({ userId }: IProps): JSX.Element {
@@ -20,7 +20,7 @@ function AvatarUser({ userId }: IProps): JSX.Element {
     return <p>Error..</p>;
   }
   return (
-    <div className="flex items-center mx-3 py-3">
+    <div className="flex items-center mx-3 lg:mx-0 py-3">
       <div
         className="h-12 w-12 rounded-full border border-white"
         style={{

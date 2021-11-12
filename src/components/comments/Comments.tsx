@@ -44,7 +44,7 @@ function Comments(): JSX.Element {
   }
 
   return (
-    <div className="flex lg:w-6/12 mx-auto  w-full">
+    <div className="flex md:w-10/12 lg:w-6/12 mx-auto  w-full">
       <Header />
       <div className="py-20">
         {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />}
@@ -52,7 +52,7 @@ function Comments(): JSX.Element {
         {!isComment && IdUserFormStore !== postData?.userId && (
           <NewComment idPost={id} />
         )}
-        <div className="border-t border-pink pt-2 mx-3">
+        <div className="border-t border-pink pt-2 mx-3 lg:mx-0">
           {data.map((item) => {
             return (
               <div key={item.id}>

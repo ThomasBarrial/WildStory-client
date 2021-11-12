@@ -61,7 +61,7 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
               {...register('text')}
             />
             <button
-              className="text-lg rounded-lg mb-5 border text-pink border-pink w-6/12 py-1"
+              className="text-lg rounded-lg my-5 border text-pink border-pink w-6/12 py-1"
               type="submit"
             >
               Comment
