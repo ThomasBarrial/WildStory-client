@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import { formation, user, userSkills } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
-import Header from './components/header/Header';
+import Header from './components/Header';
 import Info from './components/Info';
 import Skill from './components/Skill';
 import UserPost from './components/UserPost';
@@ -49,7 +49,6 @@ function UserProfil(): JSX.Element {
   return (
     <div className="lg:mx-auto lg:w-7/12 md:w-12/12 mx-auto">
       <Header
-        isUpdate={id === undefined && true}
         userAvatar={userData.avatarUrl}
         userLanding={userData.landimageUrl}
       />

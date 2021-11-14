@@ -11,7 +11,7 @@ function Navabar(): JSX.Element {
   const icons = [
     { path: '/', icon: home, alt: 'home' },
     { path: '/newpost', icon: newpost, alt: 'newpost' },
-    { path: '/settings', icon: settings, alt: 'settings' },
+    { path: `/settings/${user.id}`, icon: settings, alt: 'settings' },
   ];
   return (
     <div className="w-screen flex justify-between items-center h-16 px-4 pt-2">

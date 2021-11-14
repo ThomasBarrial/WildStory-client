@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router';
 import { useUserFromStore } from '../../store/user.slice';
-import Header from './components/header/Header';
+import HeaderSettings from './components/headerSettings/HeaderSettings';
 
 function CreateUpdateUser(): JSX.Element {
-  const { user } = useUserFromStore();
-  const [landingUrl, setLandingUrl] = useState(user.landimageUrl);
-  const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl);
+  const { id } = useParams<{ id: string }>();
 
+  const { user: userFromStore } = useUserFromStore();
+  const [landingUrl, setLandingUrl] = useState(userFromStore.landimageUrl);
+  const [avatarUrl, setAvatarUrl] = useState(userFromStore.avatarUrl);
+  console.log(id);
   return (
     <div>
-      <Header
-        isUpdate
+      <HeaderSettings
         userAvatar={avatarUrl}
         userLanding={landingUrl}
         setLandingUrl={setLandingUrl}

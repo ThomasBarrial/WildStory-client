@@ -7,10 +7,16 @@ import Landing from './Landing';
 interface IProps {
   userAvatar: string;
   userLanding: string;
-  isUpdate: boolean;
+  setLandingUrl: Dispatch<SetStateAction<string>>;
+  setAvatarUrl: Dispatch<SetStateAction<string>>;
 }
 
-function Header({ userAvatar, userLanding, isUpdate }: IProps): JSX.Element {
+function HeaderSettings({
+  userAvatar,
+  userLanding,
+  setAvatarUrl,
+  setLandingUrl,
+}: IProps): JSX.Element {
   const [isLandingUpdate, setIsLandingUpdate] = useState(false);
   const [isAvatarUpdate, setIsAvatarUpdate] = useState(false);
 
@@ -30,18 +36,10 @@ function Header({ userAvatar, userLanding, isUpdate }: IProps): JSX.Element {
           setImage={setAvatarUrl}
         />
       )}
-      <Landing
-        isUpdate={isUpdate}
-        isOpen={setIsLandingUpdate}
-        landing={userLanding}
-      />
-      <Avatar
-        isUpdate={isUpdate}
-        avatar={userAvatar}
-        isOpen={setIsAvatarUpdate}
-      />
+      <Landing isOpen={setIsLandingUpdate} landing={userLanding} />
+      <Avatar avatar={userAvatar} isOpen={setIsAvatarUpdate} />
     </>
   );
 }
 
-export default Header;
+export default HeaderSettings;

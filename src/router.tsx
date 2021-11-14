@@ -12,7 +12,7 @@ function Routes(): JSX.Element {
       <Route exact path="/" component={ListPost} />
       <Route exact path="/newpost" component={CreateUpdatePost} />
       <Route exact path="/editpost/:id" component={CreateUpdatePost} />
-      <Route exact path="/settings" component={CreateUpdateUser} />
+      <Route exact path="/settings/:id" component={CreateUpdateUser} />
       <Route exact path="/profil" component={UserProfil} />
       <Route exact path="/profil/:id" component={UserProfil} />
       <Route exact path="/comments/:id" component={Comments} />

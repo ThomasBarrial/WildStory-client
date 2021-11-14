@@ -10,7 +10,7 @@ interface IProps {
 function UserModal({ isOpen, setImage, label }: IProps): JSX.Element {
   return (
     <div className="w-screen fixed inset-0 z-50 h-full  bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="w-11/12 bg-black border rounded-md border-pink p-5">
+      <div className="w-11/12 lg:w-6/12 bg-black border rounded-md border-pink p-5 lg:p-8">
         <div className="w-full">
           <button
             onClick={() => {
