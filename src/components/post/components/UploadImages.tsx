@@ -55,7 +55,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
       <form className="mt-2 flex flex-col" action="UploadImages">
         <label className="font-bold">Upload your images</label>
         <input
-          className="bg-black mt-2 border focus:outline-none p-2 border-pink"
+          className="bg-black mt-2 border focus:outline-none p-2 border-white"
           type="text"
           onChange={(e) => {
             setImageUrl(e.target.value);
@@ -72,7 +72,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
           <button
             type="submit"
             onClick={(e) => handleImageSubmit(e)}
-            className="mt-5 border border-pink text-pink py-2 w-6/12"
+            className="mt-5 border border-white text-white py-2 w-6/12"
           >
             Add image
           </button>

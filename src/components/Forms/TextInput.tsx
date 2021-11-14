@@ -22,14 +22,14 @@ function TextInput({
   id,
 }: IProps): JSX.Element {
   return (
-    <label htmlFor={id} className="flex flex-col mt-7 font-bold">
+    <label htmlFor={id} className="flex w-full flex-col font-bold">
       {label}
       <input
         id={id}
         type="text"
         placeholder={placeholder}
         {...register(name, { required })}
-        className="bg-black mt-2 border focus:outline-none p-2 border-pink"
+        className="bg-black mt-2 border rounded-none focus:outline-none p-2 border-white"
       />
       <p className="text-red text-xs">{error}</p>
       {required && <p className="text-xs text-pink mt-2">Fieds required</p>}

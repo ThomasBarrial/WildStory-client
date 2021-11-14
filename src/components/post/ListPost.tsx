@@ -22,7 +22,11 @@ function ListPost(): JSX.Element {
   return (
     <div className="w-full h-full lg:w-7/12 md:w-12/12 max-w-5xl md:mx-auto">
       {reverseData?.map((item) => {
-        return <OnePost item={item} />;
+        return (
+          <div key={item.id}>
+            <OnePost item={item} />
+          </div>
+        );
       })}
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 
 interface IProps {
   name: string;
-  children: React.ReactNode;
+  children: string;
 }
 
 function Info({ name, children }: IProps): JSX.Element {
