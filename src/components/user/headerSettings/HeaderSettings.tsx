@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 
-import UserModal from '../../../modal/UserModal';
+import UserModal from '../../modal/UserModal';
 import Avatar from './Avatar';
 import Landing from './Landing';
 

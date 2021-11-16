@@ -1,8 +1,8 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { post } from '../../../API/request';
-import OnePost from '../../post/components/OnePost';
+import { post } from '../../API/request';
+import OnePost from '../post/OnePost';
 
 function UserPost({ userId }: { userId: string }): JSX.Element {
   const { data, isLoading, error } = useQuery<IPost[], AxiosError>(

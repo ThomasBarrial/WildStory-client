@@ -2,13 +2,13 @@ import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
-import { post } from '../../API/request';
-import { useUserFromStore } from '../../store/user.slice';
-import ImageSlider from '../post/components/ImageSlider';
-import Comment from './components/Comment';
-import Header from './components/Header';
-import NewComment from './components/NewComment';
-import PostDetails from './components/PostDetails';
+import { post } from '../API/request';
+import { useUserFromStore } from '../store/user.slice';
+import Comment from '../components/comments/Comment';
+import Header from '../components/comments/Header';
+import ImageSlider from '../components/post/ImageSlider';
+import PostDetails from '../components/comments/PostDetails';
+import NewComment from '../components/comments/NewComment';
 
 function Comments(): JSX.Element {
   const [isComment, setIsComment] = useState(false);

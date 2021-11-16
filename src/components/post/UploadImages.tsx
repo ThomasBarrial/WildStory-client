@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import AlerteMessage from '../../Forms/AlerteMessage';
+import AlerteMessage from '../Forms/AlerteMessage';
 
 interface IProps {
   setUploadImages: Dispatch<SetStateAction<string[]>>;

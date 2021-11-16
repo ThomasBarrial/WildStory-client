@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
-import { useUserFromStore } from '../../store/user.slice';
-import HeaderSettings from './components/headerSettings/HeaderSettings';
+import { useUserFromStore } from '../store/user.slice';
+import HeaderSettings from '../components/user/headerSettings/HeaderSettings';
 
 function CreateUpdateUser(): JSX.Element {
   const { id } = useParams<{ id: string }>();

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
-import { post } from '../../../../API/request';
-import useModal from '../../../../hook/useModal';
-import Modal from '../../../modal/Modal';
+import { post } from '../../../API/request';
+import useModal from '../../../hook/useModal';
+import Modal from '../../modal/Modal';
 
 function Dot({ postId }: { postId: string }): JSX.Element {
   const { isModal, setIsModal, message } = useModal();
