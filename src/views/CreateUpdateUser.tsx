@@ -4,12 +4,12 @@ import { useParams } from 'react-router';
 // import { useUserFromStore } from '../store/user.slice';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AxiosError } from 'axios';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import HeaderSettings from '../components/user/headerSettings/HeaderSettings';
 import tlc from '../assets/trc.webp';
 import logo from '../assets/WildStory.webp';
 import TextInput from '../components/forms/TextInput';
-import { formation } from '../API/request';
+import { formation, user } from '../API/request';
 import DateInput from '../components/forms/DateInput';
 import { formInputs } from '../components/forms/FormInputs';
 
@@ -28,7 +28,6 @@ function CreateUpdateUser(): JSX.Element {
     formState: { errors },
   } = useForm();
   console.log(id);
-
   // const {
   //   data: skillData,
   //   isLoading: skillsLoad,
@@ -42,7 +41,12 @@ function CreateUpdateUser(): JSX.Element {
   } = useQuery<IFormation[], AxiosError>(['formations'], () =>
     formation.getAll()
   );
-  console.log(formationData);
+
+  const { mutateAsync: createData, error: postError } = useMutation(user.post, {
+    onSuccess: () => {
+      console.log('postUser ok');
+    },
+  });
 
   const onSubmit: SubmitHandler<INewUser> = (data: INewUser) => {
     const UserData = {
@@ -56,13 +60,13 @@ function CreateUpdateUser(): JSX.Element {
       landimageUrl: landingUrl,
       idFormation: data.idFormation,
     };
-    console.log(UserData);
+    return createData({ UserData });
   };
 
   if (formationsLoad) {
     return <p>...Loading</p>;
   }
-  if (formationsError) {
+  if (formationsError || postError) {
     return <p>Error</p>;
   }
   return (
@@ -100,7 +104,7 @@ function CreateUpdateUser(): JSX.Element {
               </div>
             );
           })}
-          <DateInput id="BirthDate" register={register} name="BirthDate" />
+          <DateInput id="BirthDate" register={register} name="birthDate" />
           <div className="mt-5">
             <SelectInput
               required

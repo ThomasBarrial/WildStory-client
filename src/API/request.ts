@@ -25,6 +25,8 @@ export const post = {
 export const user = {
   getOne: (id?: string): Promise<IUser> =>
     AXIOS.get(`/users/${id}`).then((res) => res.data),
+  post: ({ UserData }: { UserData: INewUser }): Promise<INewUser> =>
+    AXIOS.post('/users', UserData).then((res) => res.data),
 };
 
 export const comment = {
