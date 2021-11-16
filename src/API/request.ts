@@ -37,6 +37,8 @@ export const comment = {
 };
 
 export const formation = {
+  getAll: (): Promise<IFormation[]> =>
+    AXIOS.get('/formations').then((res) => res.data),
   getOne: (id: string): Promise<IFormation> =>
     AXIOS.get(`/formations/${id}`).then((res) => res.data),
 };
@@ -47,6 +49,13 @@ export const userSkills = {
 };
 
 export const skills = {
+  getAll: (): Promise<ISkills[]> =>
+    AXIOS.get(`/skills`).then((res) => res.data),
   getOne: (id: string): Promise<ISkills> =>
     AXIOS.get(`/skills/${id}`).then((res) => res.data),
+};
+
+export const mediaIcons = {
+  getAll: (): Promise<IMediaIcon[]> =>
+    AXIOS.get('/mediaicons').then((res) => res.data),
 };

@@ -8,7 +8,7 @@ interface IProps {
   register: UseFormRegister<FieldValues>;
   name: string;
   required: boolean;
-  error: string | null;
+  error: string;
   id: string;
 }
 

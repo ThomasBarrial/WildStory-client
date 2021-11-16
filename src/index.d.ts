@@ -37,7 +37,7 @@ interface IUser {
   email: string;
   password: string;
   city: string;
-  birthDate: string;
+  birthDate: Date;
   avatarUrl: string;
   landimageUrl: string;
   idFormation: string;
@@ -47,6 +47,18 @@ interface IUser {
   userSkills: IUserSkills[];
   comments: IComments[];
   mediaLink: IMediaLink[];
+}
+
+interface INewUser {
+  profilTitle: string;
+  username: string;
+  email: string;
+  password: string;
+  city: string;
+  birthDate: Date;
+  avatarUrl: string;
+  landimageUrl: string;
+  idFormation: string;
 }
 
 interface IUserSkills {
