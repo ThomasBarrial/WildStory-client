@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import like from '../../../assets/icons/likebutton.svg';
+import like from '../../assets/icons/likebutton.svg';
 
 interface IProps {
   item: IPost;

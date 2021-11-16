@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import edit from '../../../../assets/icons/edit.svg';
+import edit from '../../../assets/icons/edit.svg';
 
 interface IProps {
   avatar: string;

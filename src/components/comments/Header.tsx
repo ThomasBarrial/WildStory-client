@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import back from '../../../assets/icons/back.svg';
+import back from '../../assets/icons/back.svg';
 
 function Header(): JSX.Element {
   return (

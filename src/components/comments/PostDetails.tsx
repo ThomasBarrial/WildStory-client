@@ -1,8 +1,8 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { user } from '../../../API/request';
-import AvatarUser from '../../post/components/AvatarUser';
+import { user } from '../../API/request';
+import AvatarUser from '../post/AvatarUser';
 
 interface IProps {
   postData: IPost | undefined;

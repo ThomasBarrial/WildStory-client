@@ -1,10 +1,10 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { comment, user } from '../../../API/request';
-import useModal from '../../../hook/useModal';
-import { useUserFromStore } from '../../../store/user.slice';
-import Modal from '../../modal/Modal';
+import { comment, user } from '../../API/request';
+import useModal from '../../hook/useModal';
+import { useUserFromStore } from '../../store/user.slice';
+import Modal from '../modal/Modal';
 
 interface IProps {
   item: IComments;

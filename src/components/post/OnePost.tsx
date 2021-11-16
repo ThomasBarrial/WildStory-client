@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useUserFromStore } from '../../../store/user.slice';
+import { useUserFromStore } from '../../store/user.slice';
 import AvatarUser from './AvatarUser';
 import ImageSlider from './ImageSlider';
 import Dot from './Options/Dot';

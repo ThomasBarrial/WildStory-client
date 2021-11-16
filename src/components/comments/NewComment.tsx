@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import { comment } from '../../../API/request';
-import down from '../../../assets/icons/down.svg';
-import { useUserFromStore } from '../../../store/user.slice';
+import { comment } from '../../API/request';
+import down from '../../assets/icons/down.svg';
+import { useUserFromStore } from '../../store/user.slice';
 
 interface IProps {
   idPost: string | undefined;

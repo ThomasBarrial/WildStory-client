@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Comments from './components/comments/Comments';
-import CreateUpdatePost from './components/post/CreateUpdatePost';
-import ListPost from './components/post/ListPost';
-import CreateUpdateUser from './components/user/CreateUpdateUser';
-import UserProfil from './components/user/UserProfil';
+import Comments from './views/Comments';
+import CreateUpdatePost from './views/CreateUpdatePost';
+import CreateUpdateUser from './views/CreateUpdateUser';
+import ListPost from './views/ListPost';
+import UserProfil from './views/UserProfil';
 
 function Routes(): JSX.Element {
   return (

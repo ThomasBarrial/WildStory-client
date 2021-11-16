@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { skills } from '../../../API/request';
+import { skills } from '../../API/request';
 
 function Skill({ skill }: { skill: IUserSkills }): JSX.Element {
   const { data: skillData } = useQuery<ISkills, AxiosError>(

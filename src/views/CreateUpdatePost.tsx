@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
-import back from '../../assets/icons/back.svg';
-import TextInput from '../Forms/TextInput';
-import TextArea from '../Forms/TextArea';
-import UploadImages from './components/UploadImages';
-import { useUserFromStore } from '../../store/user.slice';
-import { post } from '../../API/request';
-import useModal from '../../hook/useModal';
-import Modal from '../modal/Modal';
+import back from '../assets/icons/back.svg';
+import TextInput from '../components/Forms/TextInput';
+import TextArea from '../components/Forms/TextArea';
+import { useUserFromStore } from '../store/user.slice';
+import { post } from '../API/request';
+import useModal from '../hook/useModal';
+import Modal from '../components/modal/Modal';
+import UploadImages from '../components/post/UploadImages';
 
 interface IFormData {
   title: string;

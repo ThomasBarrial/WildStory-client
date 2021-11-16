@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { user } from '../../../API/request';
+import { user } from '../../API/request';
 
 interface IProps {
   userId: string | undefined;

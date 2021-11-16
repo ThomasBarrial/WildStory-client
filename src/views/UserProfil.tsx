@@ -2,12 +2,12 @@ import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
-import { formation, user, userSkills } from '../../API/request';
-import { useUserFromStore } from '../../store/user.slice';
-import Header from './components/Header';
-import Info from './components/Info';
-import Skill from './components/Skill';
-import UserPost from './components/UserPost';
+import { formation, user, userSkills } from '../API/request';
+import Header from '../components/user/Header';
+import Info from '../components/user/Info';
+import Skill from '../components/user/Skill';
+import UserPost from '../components/user/UserPost';
+import { useUserFromStore } from '../store/user.slice';
 
 function UserProfil(): JSX.Element {
   const { id } = useParams<{ id: string }>();
