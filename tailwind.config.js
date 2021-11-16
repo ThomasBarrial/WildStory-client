@@ -13,8 +13,8 @@ module.exports = {
         lightblack: '#323232',
       },
       height: {
-        desktop: '40rem',
-        tablet: '36rem',
+        desktop: '38rem',
+        tablet: '30rem',
         comment: '34rem',
       },
       width: {
