@@ -25,7 +25,7 @@ function UserPost({ userId }: { userId: string }): JSX.Element {
       <div className="flex w-full flex-col">
         {data.map((item) => {
           return (
-            <div key={item.id}>
+            <div key={item.title}>
               <OnePost item={item} />
             </div>
           );

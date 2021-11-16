@@ -32,6 +32,7 @@ interface PostComment {
 
 interface IUser {
   id: string;
+  profilTitle: string;
   username: string;
   email: string;
   password: string;

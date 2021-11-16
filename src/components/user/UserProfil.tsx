@@ -1,7 +1,8 @@
 import { AxiosError } from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { formation, userSkills } from '../../API/request';
+import { useParams } from 'react-router';
+import { formation, user, userSkills } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
 import Header from './components/Header';
 import Info from './components/Info';
@@ -9,43 +10,66 @@ import Skill from './components/Skill';
 import UserPost from './components/UserPost';
 
 function UserProfil(): JSX.Element {
-  const { user } = useUserFromStore();
+  const { id } = useParams<{ id: string }>();
+  const { user: userStore } = useUserFromStore();
+  const [userData, setUserData] = useState(userStore);
+
+  const { isLoading: userLoad, error: userError } = useQuery<IUser, AxiosError>(
+    ['oneUser', id],
+    () => user.getOne(id),
+    {
+      enabled: Boolean(id),
+      onSuccess: (data) => {
+        setUserData(data);
+      },
+    }
+  );
+
   const {
     data: formationData,
-    isLoading,
-    error,
-  } = useQuery<IFormation, AxiosError>(['formation', user.idFormation], () =>
-    formation.getOne(user.idFormation)
+    isLoading: formationLoad,
+    error: formationError,
+  } = useQuery<IFormation, AxiosError>(
+    ['formation', userData.idFormation],
+    () => formation.getOne(userData.idFormation)
   );
 
   const { data: userSkillsData } = useQuery<IUserSkills[], AxiosError>(
-    ['userSkills', user.id],
-    () => userSkills.getAll(user.id)
+    ['userSkills', userData.id],
+    () => userSkills.getAll(userData.id)
   );
 
-  if (isLoading) {
+  if (formationLoad || userLoad) {
     return <p>Loading</p>;
   }
-  if (error || !formationData) {
+  if (formationError || !formationData || userError) {
     return <p>Error..</p>;
   }
+
   return (
     <div className="lg:mx-auto lg:w-7/12 md:w-12/12 mx-auto">
-      <Header userAvatar={user.avatarUrl} userLanding={user.landimageUrl} />
+      <Header
+        userAvatar={userData.avatarUrl}
+        userLanding={userData.landimageUrl}
+      />
       <div className="px-4 lg:px-0 h-full transform -translate-y-16">
-        <p className="font-bold text-xl lg:text-2xl">{user.username}</p>
-        <p className="text-sm font-thin">{user.profilTitle}</p>
+        <p className="font-bold text-xl lg:text-2xl">{userData.username}</p>
+        <p className="text-sm font-thin">{userData.profilTitle}</p>
         <div className="py-8">
           <Info name="Formation">{formationData.formationName}</Info>
-          <Info name="City">{user.city}</Info>
-          <Info name="BithDate">{user.birthDate}</Info>
+          <Info name="City">{userData.city}</Info>
+          <Info name="BithDate">{userData.birthDate}</Info>
           <p className="font-bold mt-10 border-b border-pink pb-2">Skills</p>
           {userSkillsData?.map((skill) => {
-            return <Skill skill={skill} />;
+            return (
+              <div key={skill.id}>
+                <Skill skill={skill} />
+              </div>
+            );
           })}
         </div>
       </div>
-      <UserPost userId={user.id} />
+      <UserPost userId={userData.id} />
     </div>
   );
 }
