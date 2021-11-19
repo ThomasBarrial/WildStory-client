@@ -2,7 +2,7 @@ import React from 'react';
 
 interface IProps {
   name: string;
-  children: string;
+  children: string | undefined;
 }
 
 function Info({ name, children }: IProps): JSX.Element {

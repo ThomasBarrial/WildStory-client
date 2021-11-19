@@ -48,6 +48,10 @@ export const formation = {
 export const userSkills = {
   getAll: (id: string): Promise<IUserSkills[]> =>
     AXIOS.get(`/userskills/${id}`).then((res) => res.data),
+  post: ({ skillData }: { skillData: IUserSkills }): Promise<IUserSkills> =>
+    AXIOS.post<IUserSkills>(`/userskills`, skillData).then((res) => res.data),
+  delete: (id: string): Promise<IUserSkills> =>
+    AXIOS.delete(`/userskills/${id}`).then((res) => res.data),
 };
 
 export const skills = {

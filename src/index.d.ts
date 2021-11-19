@@ -50,6 +50,7 @@ interface IUser {
 }
 
 interface INewUser {
+  id?: string;
   profilTitle: string;
   username: string;
   email: string;
@@ -62,12 +63,12 @@ interface INewUser {
 }
 
 interface IUserSkills {
-  id: string;
+  id?: string;
   userId: string;
   skillId: string;
   note: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 interface IFormation {

@@ -58,12 +58,14 @@ function UserProfil(): JSX.Element {
         <div className="py-8">
           <Info name="Formation">{formationData.formationName}</Info>
           <Info name="City">{userData.city}</Info>
-          <Info name="BithDate">{userData.birthDate}</Info>
+          <Info name="BithDate">
+            {userData.birthDate?.toLocaleDateString()}
+          </Info>
           <p className="font-bold mt-10 border-b border-pink pb-2">Skills</p>
           {userSkillsData?.map((skill) => {
             return (
               <div key={skill.id}>
-                <Skill skill={skill} />
+                <Skill isForm={false} skill={skill} />
               </div>
             );
           })}
