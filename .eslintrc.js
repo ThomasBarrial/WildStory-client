@@ -18,6 +18,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
   },
   env: {
     browser: true, // Enables browser globals like window and document
