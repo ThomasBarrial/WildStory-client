@@ -13,14 +13,10 @@ module.exports = {
     react: {
       version: 'detect', // Automatically detect the react version
     },
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
-      'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     },
   },
   env: {
@@ -57,18 +53,15 @@ module.exports = {
     ],
 
     'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
+
     'import/extensions': [
       'error',
       'ignorePackages',
       {
-        js: 'never',
-        mjs: 'never',
-        jsx: 'never',
         ts: 'never',
         tsx: 'never',
       },
     ],
-
     'import/prefer-default-export': 'off',
 
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
