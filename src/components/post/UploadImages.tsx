@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import AlerteMessage from '../forms/AlerteMessage';
 
@@ -53,15 +52,17 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
       </div>
 
       <form className="mt-2 flex flex-col" action="UploadImages">
-        <label className="font-bold">Upload your images</label>
-        <input
-          className="bg-black mt-2 border focus:outline-none p-2 border-white"
-          type="text"
-          onChange={(e) => {
-            setImageUrl(e.target.value);
-            setIsPosted(false);
-          }}
-        />
+        <label htmlFor="upload" className="font-bold">
+          Upload your images
+          <input
+            className="bg-black mt-2 border focus:outline-none p-2 border-white"
+            type="text"
+            onChange={(e) => {
+              setImageUrl(e.target.value);
+              setIsPosted(false);
+            }}
+          />
+        </label>
 
         {isPosted && (
           <AlerteMessage>You already upload this image !!</AlerteMessage>
