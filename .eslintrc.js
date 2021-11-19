@@ -13,6 +13,9 @@ module.exports = {
     react: {
       version: 'detect', // Automatically detect the react version
     },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
