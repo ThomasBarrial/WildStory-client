@@ -52,12 +52,13 @@ module.exports = {
       { argsIgnorePattern: '^_', ignoreRestSiblings: true },
     ],
 
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
-
+    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     'import/extensions': [
       'error',
       'ignorePackages',
       {
+        js: 'never',
+        jsx: 'never',
         ts: 'never',
         tsx: 'never',
       },
