@@ -21,7 +21,7 @@ function HeaderSettings({
   const [isAvatarUpdate, setIsAvatarUpdate] = useState(false);
 
   return (
-    <>
+    <div className="lg:w-8/12 lg:mx-auto">
       {isLandingUpdate && (
         <UserModal
           label="landing"
@@ -38,7 +38,7 @@ function HeaderSettings({
       )}
       <Landing isOpen={setIsLandingUpdate} landing={userLanding} />
       <Avatar avatar={userAvatar} isOpen={setIsAvatarUpdate} />
-    </>
+    </div>
   );
 }
 

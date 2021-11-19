@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import SocialeMedia from './components/user/SocialeMedia';
+import SocialeMedia from './views/SocialeMedia';
 import Comments from './views/Comments';
 import CreateUpdatePost from './views/CreateUpdatePost';
 import CreateUpdateUser from './views/CreateUpdateUser';

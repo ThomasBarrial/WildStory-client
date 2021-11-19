@@ -4,10 +4,10 @@ import { useQuery } from 'react-query';
 import { post } from '../../API/request';
 import OnePost from '../post/OnePost';
 
-function UserPost({ userId }: { userId: string }): JSX.Element {
+function UserPost({ userId }: { userId: string | undefined }): JSX.Element {
   const { data, isLoading, error } = useQuery<IPost[], AxiosError>(
     ['userPost', userId],
-    () => post.getUserPost(userId)
+    () => post.getUserPost(userId as string)
   );
 
   if (isLoading) {
