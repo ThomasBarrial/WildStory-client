@@ -25,6 +25,8 @@ export const post = {
 export const user = {
   getOne: (id?: string): Promise<IUser> =>
     AXIOS.get(`/users/${id}`).then((res) => res.data),
+  post: ({ UserData }: { UserData: INewUser }): Promise<INewUser> =>
+    AXIOS.post('/users', UserData).then((res) => res.data),
 };
 
 export const comment = {
@@ -37,6 +39,8 @@ export const comment = {
 };
 
 export const formation = {
+  getAll: (): Promise<IFormation[]> =>
+    AXIOS.get('/formations').then((res) => res.data),
   getOne: (id: string): Promise<IFormation> =>
     AXIOS.get(`/formations/${id}`).then((res) => res.data),
 };
@@ -44,9 +48,20 @@ export const formation = {
 export const userSkills = {
   getAll: (id: string): Promise<IUserSkills[]> =>
     AXIOS.get(`/userskills/${id}`).then((res) => res.data),
+  post: ({ skillData }: { skillData: IUserSkills }): Promise<IUserSkills> =>
+    AXIOS.post<IUserSkills>(`/userskills`, skillData).then((res) => res.data),
+  delete: (id: string): Promise<IUserSkills> =>
+    AXIOS.delete(`/userskills/${id}`).then((res) => res.data),
 };
 
 export const skills = {
+  getAll: (): Promise<ISkills[]> =>
+    AXIOS.get(`/skills`).then((res) => res.data),
   getOne: (id: string): Promise<ISkills> =>
     AXIOS.get(`/skills/${id}`).then((res) => res.data),
+};
+
+export const mediaIcons = {
+  getAll: (): Promise<IMediaIcon[]> =>
+    AXIOS.get('/mediaicons').then((res) => res.data),
 };

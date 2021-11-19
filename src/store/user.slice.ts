@@ -8,7 +8,7 @@ export interface UserState {
   email: string;
   profilTitle: string;
   city: string;
-  birthDate: string;
+  birthDate: Date | null;
   avatarUrl: string;
   landimageUrl: string;
   idFormation: string;
@@ -41,7 +41,7 @@ const initialState: UserStateWithLogged = {
   email: 'mikeharmone@gmail.com',
   city: 'Lyon',
   profilTitle: 'Web designer & frontend developer',
-  birthDate: '25/05/2000',
+  birthDate: '1995 - 02 - 22',
   avatarUrl:
     'https://images.unsplash.com/photo-1488161628813-04466f872be2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=928&q=80',
   landimageUrl:

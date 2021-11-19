@@ -8,7 +8,7 @@ interface IProps {
   register: UseFormRegister<FieldValues>;
   name: string;
   required: boolean;
-  error: string | null;
+  error: string;
   id: string;
 }
 
@@ -22,7 +22,7 @@ function TextInput({
   id,
 }: IProps): JSX.Element {
   return (
-    <label htmlFor={id} className="flex w-full flex-col font-bold">
+    <label htmlFor={id} className="flex w-full mt-5 flex-col font-bold">
       {label}
       <input
         id={id}

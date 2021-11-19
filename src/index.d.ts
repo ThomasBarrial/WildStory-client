@@ -37,7 +37,7 @@ interface IUser {
   email: string;
   password: string;
   city: string;
-  birthDate: string;
+  birthDate: Date;
   avatarUrl: string;
   landimageUrl: string;
   idFormation: string;
@@ -49,13 +49,26 @@ interface IUser {
   mediaLink: IMediaLink[];
 }
 
+interface INewUser {
+  id?: string;
+  profilTitle: string;
+  username: string;
+  email: string;
+  password: string;
+  city: string;
+  birthDate: Date;
+  avatarUrl: string;
+  landimageUrl: string;
+  idFormation: string;
+}
+
 interface IUserSkills {
-  id: string;
+  id?: string;
   userId: string;
   skillId: string;
   note: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 interface IFormation {
