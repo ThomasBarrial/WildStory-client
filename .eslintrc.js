@@ -13,15 +13,11 @@ module.exports = {
     react: {
       version: 'detect', // Automatically detect the react version
     },
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
-    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
   },
   env: {
     browser: true, // Enables browser globals like window and document
@@ -56,13 +52,12 @@ module.exports = {
       { argsIgnorePattern: '^_', ignoreRestSiblings: true },
     ],
 
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+    'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
+
     'import/extensions': [
       'error',
       'ignorePackages',
       {
-        js: 'never',
-        jsx: 'never',
         ts: 'never',
         tsx: 'never',
       },
@@ -76,5 +71,6 @@ module.exports = {
       { namedComponents: 'function-declaration' },
     ],
     'react/prop-types': 1,
+    'import/no-unresolved': [2, { commonjs: true, amd: true }],
   },
 };
