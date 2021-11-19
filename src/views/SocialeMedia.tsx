@@ -6,8 +6,8 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import { mediaIcons, mediaLinks } from '../API/request';
 import useModal from '../hook/useModal';
-import HeaderUser from '../components/forms/HeaderUser';
-import TextInput from '../components/forms/TextInput';
+import HeaderUser from '../components/formInputs/HeaderUser';
+import TextInput from '../components/formInputs/TextInput';
 import Modal from '../components/modal/Modal';
 import MediaLink from '../components/user/MediaLink';
 

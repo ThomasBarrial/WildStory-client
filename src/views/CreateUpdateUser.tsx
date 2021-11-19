@@ -7,14 +7,14 @@ import { AxiosError } from 'axios';
 import { useMutation, useQuery } from 'react-query';
 import HeaderSettings from '../components/user/headerSettings/HeaderSettings';
 
-import TextInput from '../components/forms/TextInput';
+import TextInput from '../components/formInputs/TextInput';
 import { formation, user } from '../API/request';
-import DateInput from '../components/forms/DateInput';
-import { formInputs } from '../components/forms/FormInputs';
+import DateInput from '../components/formInputs/DateInput';
+import { formInputs } from '../components/formInputs/FormInputs';
 
-import PasswordForm from '../components/forms/PasswordForm';
-import SelectInput from '../components/forms/SelectInput';
-import HeaderUser from '../components/forms/HeaderUser';
+import PasswordForm from '../components/formInputs/PasswordForm';
+import SelectInput from '../components/formInputs/SelectInput';
+import HeaderUser from '../components/formInputs/HeaderUser';
 import { useUserFromStore } from '../store/user.slice';
 
 function CreateUpdateUser(): JSX.Element {

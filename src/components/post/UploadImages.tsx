@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import AlerteMessage from '../forms/AlerteMessage';
+import AlerteMessage from '../formInputs/AlerteMessage';
 
 interface IProps {
   setUploadImages: Dispatch<SetStateAction<string[]>>;
