@@ -62,7 +62,7 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'import/prefer-default-export': 'off',
+    'import/prefer-default-export': 'on',
 
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
     'react/react-in-jsx-scope': 'off',
