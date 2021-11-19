@@ -64,4 +64,20 @@ export const skills = {
 export const mediaIcons = {
   getAll: (): Promise<IMediaIcon[]> =>
     AXIOS.get('/mediaicons').then((res) => res.data),
+  getOne: (id: string): Promise<IMediaIcon> =>
+    AXIOS.get(`/mediaicons/${id}`).then((res) => res.data),
+};
+
+export const mediaLinks = {
+  getUsersMediaLink: (id: string): Promise<IMediaLink[]> =>
+    AXIOS.get(`/medialinks/user/${id}`).then((res) => res.data),
+  post: ({
+    medialLinkData,
+  }: {
+    medialLinkData: IMediaLink;
+  }): Promise<IMediaLink> =>
+    AXIOS.post('/medialinks', medialLinkData).then((res) => res.data),
+
+  delete: (id: string): Promise<IMediaLink> =>
+    AXIOS.delete(`/medialinks/${id}`).then((res) => res.data),
 };

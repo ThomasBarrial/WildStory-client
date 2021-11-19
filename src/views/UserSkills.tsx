@@ -2,7 +2,7 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { skills, userSkills } from '../API/request';
 import HeaderUser from '../components/forms/HeaderUser';
@@ -10,6 +10,7 @@ import SkillInput from '../components/forms/SkillInput';
 import Skill from '../components/user/Skill';
 import useModal from '../hook/useModal';
 import Modal from '../components/modal/Modal';
+import { useUserFromStore } from '../store/user.slice';
 
 interface INewSkill {
   skillId: string;
@@ -18,7 +19,7 @@ interface INewSkill {
 
 function UserSkills(): JSX.Element {
   const queryclient = useQueryClient();
-  const { id }: { id: string } = useParams();
+  const { user } = useUserFromStore();
   const { isModal, setIsModal, message, setMessage } = useModal();
   const { register, handleSubmit } = useForm();
   const router = useHistory();
@@ -38,8 +39,8 @@ function UserSkills(): JSX.Element {
     }
   );
   const { data: skill } = useQuery<IUserSkills[], AxiosError>(
-    ['userSkills', id],
-    () => userSkills.getAll(id)
+    ['userSkills', user.id],
+    () => userSkills.getAll(user.id as string)
   );
 
   const onSubmit: SubmitHandler<INewSkill> = (data: INewSkill) => {
@@ -48,7 +49,7 @@ function UserSkills(): JSX.Element {
     const skillData = {
       skillId: data.skillId,
       note: parseInt(data.note, 10),
-      userId: id,
+      userId: user.id as string,
     };
 
     if (skillfilter?.length !== 0) {
@@ -88,15 +89,15 @@ function UserSkills(): JSX.Element {
       >
         {skill?.map((item) => {
           return (
-            <div>
+            <div key={item.id}>
               <Skill isForm skill={item} />
             </div>
           );
         })}
         <SkillInput register={register} skillsData={skillsData} />
-        <div className="flex flex-col lg:flex-row items-end mt-12 justify-between">
+        <div className="flex flex-col  items-end mt-12 justify-between">
           <button
-            className="font-bold font-lexend w-full lg:w-3/12 p-2 bg-pink"
+            className="font-bold font-lexend w-full mb-10 lg:w-3/12 p-2 bg-pink"
             type="submit"
           >
             Add skill
@@ -104,15 +105,15 @@ function UserSkills(): JSX.Element {
           {skill?.length === 0 ? (
             <button
               type="button"
-              onClick={() => router.push(`/socialmedia/${id}`)}
+              onClick={() => router.push(`/socialmedia/${user.id}`)}
               className="font-bold text-right font-lexend mt-3 lg:mt-0 w-full lg:w-3/12  underline"
             >
               Skip this step
             </button>
           ) : (
             <button
-              onClick={() => router.push(`/socialmedia/${id}`)}
-              className="font-bold font-lexend w-full  mt-5 lg:mt-0 lg:w-3/12 p-2  bg-pink"
+              onClick={() => router.push(`/socialmedia/${user.id}`)}
+              className="font-bold font-lexend w-full  mt-5 lg:mt-0  p-2  bg-pink"
               type="submit"
             >
               next

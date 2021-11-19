@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface IProps {
-  userAvatar: string;
-  userLanding: string;
+  userAvatar: string | undefined;
+  userLanding: string | undefined;
 }
 
 function Header({ userAvatar, userLanding }: IProps): JSX.Element {

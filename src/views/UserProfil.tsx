@@ -31,12 +31,12 @@ function UserProfil(): JSX.Element {
     error: formationError,
   } = useQuery<IFormation, AxiosError>(
     ['formation', userData.idFormation],
-    () => formation.getOne(userData.idFormation)
+    () => formation.getOne(userData.idFormation as string)
   );
 
   const { data: userSkillsData } = useQuery<IUserSkills[], AxiosError>(
     ['userSkills', userData.id],
-    () => userSkills.getAll(userData.id)
+    () => userSkills.getAll(userData.id as string)
   );
 
   if (formationLoad || userLoad) {
@@ -49,8 +49,8 @@ function UserProfil(): JSX.Element {
   return (
     <div className="lg:mx-auto lg:w-7/12 md:w-12/12 mx-auto">
       <Header
-        userAvatar={userData.avatarUrl}
-        userLanding={userData.landimageUrl}
+        userAvatar={userData?.avatarUrl}
+        userLanding={userData?.landimageUrl}
       />
       <div className="px-4 lg:px-0 h-full transform -translate-y-16">
         <p className="font-bold text-xl lg:text-2xl">{userData.username}</p>
@@ -58,9 +58,7 @@ function UserProfil(): JSX.Element {
         <div className="py-8">
           <Info name="Formation">{formationData.formationName}</Info>
           <Info name="City">{userData.city}</Info>
-          <Info name="BithDate">
-            {userData.birthDate?.toLocaleDateString()}
-          </Info>
+          <Info name="BithDate">{userData.birthDate}</Info>
           <p className="font-bold mt-10 border-b border-pink pb-2">Skills</p>
           {userSkillsData?.map((skill) => {
             return (

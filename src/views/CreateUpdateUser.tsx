@@ -15,11 +15,12 @@ import { formInputs } from '../components/forms/FormInputs';
 import PasswordForm from '../components/forms/PasswordForm';
 import SelectInput from '../components/forms/SelectInput';
 import HeaderUser from '../components/forms/HeaderUser';
+import { useUserFromStore } from '../store/user.slice';
 
 function CreateUpdateUser(): JSX.Element {
   const { id } = useParams<{ id: string }>();
 
-  // const { user: userFromStore } = useUserFromStore();
+  const { dispatchLogin } = useUserFromStore();
   const [landingUrl, setLandingUrl] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
   const router = useHistory();
@@ -45,6 +46,7 @@ function CreateUpdateUser(): JSX.Element {
 
   const { mutateAsync: createData, error: postError } = useMutation(user.post, {
     onSuccess: (data) => {
+      dispatchLogin(data);
       router.push(`/createuserskills/${data.id}`);
     },
   });
@@ -71,51 +73,49 @@ function CreateUpdateUser(): JSX.Element {
     return <p>Error</p>;
   }
   return (
-    <div className="w-sreen h-screen pb-20 bg-black fixed inset-0 z-50 overflow-y-scroll">
-      <div className="my-14">
-        <HeaderUser title="Create your profil" />
-        <HeaderSettings
-          userAvatar={avatarUrl}
-          userLanding={landingUrl}
-          setLandingUrl={setLandingUrl}
-          setAvatarUrl={setAvatarUrl}
-        />
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          action="Create/Update Post"
-          className="mx-4 h-full  transform -translate-y-16"
-        >
-          {formInputs.map((i) => {
-            return (
-              <div key={i.id}>
-                <TextInput
-                  label={i.label}
-                  name={i.name}
-                  placeholder={i.placeholder}
-                  register={register}
-                  required={i.required}
-                  error=""
-                  id={i.id}
-                />
-              </div>
-            );
-          })}
-          <DateInput id="BirthDate" register={register} name="birthDate" />
-          <div className="mt-5">
-            <SelectInput
-              required
-              formationData={formationData}
-              name="idFormation"
-              id="formation"
-              register={register}
-            />
-          </div>
-          <PasswordForm error={errors} register={register} />
-          <button className="w-full p-2  mt-5 bg-pink" type="submit">
-            Create Account
-          </button>
-        </form>
-      </div>
+    <div className="w-sreen py-14 h-screen pb-14 bg-black fixed inset-0 z-50 overflow-y-scroll">
+      <HeaderUser title="Create your profil" />
+      <HeaderSettings
+        userAvatar={avatarUrl}
+        userLanding={landingUrl}
+        setLandingUrl={setLandingUrl}
+        setAvatarUrl={setAvatarUrl}
+      />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        action="Create/Update Post"
+        className="mx-4  lg:w-8/12 lg:mx-auto transform -translate-y-16"
+      >
+        {formInputs.map((i) => {
+          return (
+            <div key={i.id}>
+              <TextInput
+                label={i.label}
+                name={i.name}
+                placeholder={i.placeholder}
+                register={register}
+                required={i.required}
+                error=""
+                id={i.id}
+              />
+            </div>
+          );
+        })}
+        <DateInput id="BirthDate" register={register} name="birthDate" />
+        <div className="mt-5">
+          <SelectInput
+            required
+            formationData={formationData}
+            name="idFormation"
+            id="formation"
+            register={register}
+          />
+        </div>
+        <PasswordForm error={errors} register={register} />
+        <button className="w-full p-2  mt-5 lg:mt-10 bg-pink" type="submit">
+          Create my profil
+        </button>
+      </form>
     </div>
   );
 }

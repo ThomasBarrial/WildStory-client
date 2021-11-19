@@ -1,37 +1,33 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { skills, userSkills } from '../../API/request';
-import trash from '../../assets/icons/trash.svg';
+import { mediaIcons, mediaLinks } from '../../API/request';
 import useModal from '../../hook/useModal';
 import Modal from '../modal/Modal';
+import trash from '../../assets/icons/trash.svg';
 
 interface IProps {
-  skill: IUserSkills;
+  item: IMediaLink;
   isForm: boolean;
 }
 
-function Skill({ skill, isForm }: IProps): JSX.Element {
-  const { isModal, setIsModal, message, setMessage } = useModal();
+function MediaLink({ item, isForm }: IProps): JSX.Element {
   const queryclient = useQueryClient();
-  const {
-    data: skillData,
-    error: skillDataError,
-    isLoading,
-  } = useQuery<ISkills, AxiosError>(['skill', skill.skillId], () =>
-    skills.getOne(skill.skillId)
+  const { isModal, setIsModal, message, setMessage } = useModal();
+  const { data, isLoading, isError } = useQuery<IMediaIcon, AxiosError>(
+    ['oneIcon', item.iconId],
+    () => mediaIcons.getOne(item.iconId as string)
   );
 
   const { mutate, error } = useMutation(
-    () => userSkills.delete(skill.id as string),
+    () => mediaLinks.delete(item.id as string),
     {
       onSuccess: () => {
-        queryclient.refetchQueries(['userSkills']);
+        queryclient.refetchQueries(['mediaLinks']);
       },
     }
   );
-
-  if (error || skillDataError) {
+  if (isError || error) {
     setIsModal(true);
     setMessage(
       'Sorry something bad happen please retry or contact a web admin'
@@ -41,7 +37,7 @@ function Skill({ skill, isForm }: IProps): JSX.Element {
     }
   }
   return (
-    <div className="flex text-sm justify-between border-b my-5 pb-2 border-pink">
+    <div>
       {isModal && (
         <Modal
           title="Ouups"
@@ -50,9 +46,11 @@ function Skill({ skill, isForm }: IProps): JSX.Element {
           {message}
         </Modal>
       )}
-      <p>{skillData?.name}</p>
-      <div className="flex">
-        <p>{skill.note}/10</p>
+      <div className="font-lexend my-5 flex justify-between items-center border-b border-pink pb-2">
+        <div className="flex items-center">
+          <img className="h-6 w-6" src={data?.iconUrl} alt="icon" />
+          <p className="ml-2 text-xs">{item.link}</p>
+        </div>
         {isForm && (
           <button
             onClick={() => mutate()}
@@ -67,4 +65,4 @@ function Skill({ skill, isForm }: IProps): JSX.Element {
   );
 }
 
-export default Skill;
+export default MediaLink;
