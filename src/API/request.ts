@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import AXIOS from './axios';
 
 export const post = {
@@ -27,6 +28,15 @@ export const user = {
     AXIOS.get(`/users/${id}`).then((res) => res.data),
   post: ({ UserData }: { UserData: INewUser }): Promise<INewUser> =>
     AXIOS.post('/users', UserData).then((res) => res.data),
+
+  put: ({
+    UserData,
+    id,
+  }: {
+    UserData: IUpdateAssetsUser;
+    id: string | undefined;
+  }): Promise<INewUser> =>
+    AXIOS.put(`/users/${id}`, UserData).then((res) => res.data),
 };
 
 export const comment = {
@@ -80,4 +90,15 @@ export const mediaLinks = {
 
   delete: (id: string): Promise<IMediaLink> =>
     AXIOS.delete(`/medialinks/${id}`).then((res) => res.data),
+};
+
+export const auth = {
+  login: (user: {
+    username: string | undefined;
+    password: string | undefined;
+  }): Promise<{ message: string; user: IUser }> =>
+    AXIOS.post(`/auth/login`, user, { withCredentials: true }).then(
+      (res) => res.data
+    ),
+  me: (): Promise<IUser> => AXIOS.get(`/auth/me`).then((res) => res.data),
 };

@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import edit from '../../../assets/icons/edit.svg';
 
 interface IProps {
-  avatar: string;
+  avatar: string | undefined;
   isOpen: Dispatch<SetStateAction<boolean>>;
 }
 

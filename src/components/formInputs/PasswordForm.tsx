@@ -23,8 +23,10 @@ function PasswordForm({ error, register }: IMdp): JSX.Element {
           {...register('password', {
             minLength: 4,
             pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).+/,
+            required: true,
           })}
         />
+        <p className="text-xs text-pink mt-2">Fieds required</p>
         <p className="text-pink">
           {error?.password?.type === 'pattern'
             ? 'Règle: une lettre majuscule, une lettre minuscule, un chiffre'
@@ -39,8 +41,10 @@ function PasswordForm({ error, register }: IMdp): JSX.Element {
           {...register('confirmPassword', {
             minLength: 4,
             pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).+/,
+            required: true,
           })}
         />
+        <p className="text-xs text-pink mt-2">Fieds required</p>
         <p className="text-pink">
           {error?.confirmPassword?.type === 'pattern'
             ? 'Règle: une lettre majuscule, une lettre minuscule, un chiffre'

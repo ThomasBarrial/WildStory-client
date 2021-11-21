@@ -14,7 +14,7 @@ interface IPostData {
   title: string;
   text: string;
   imageUrl: string[];
-  userId: string;
+  userId: string | undefined;
 }
 
 interface IComments {
@@ -51,15 +51,20 @@ interface IUser {
 
 interface INewUser {
   id?: string;
-  profilTitle: string;
-  username: string;
-  email: string;
-  password: string;
-  city: string;
-  birthDate: string;
-  avatarUrl: string;
-  landimageUrl: string;
-  idFormation: string;
+  profilTitle?: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  city?: string;
+  birthDate?: string;
+  avatarUrl?: string;
+  landimageUrl?: string;
+  idFormation?: string;
+}
+
+interface IUpdateAssetsUser {
+  avatarUrl?: string;
+  landimageUrl?: string;
 }
 
 interface IUserSkills {
