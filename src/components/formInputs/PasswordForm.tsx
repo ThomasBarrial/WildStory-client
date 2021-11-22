@@ -10,11 +10,32 @@ import {
 interface IMdp {
   error: DeepMap<FieldValues, FieldError>;
   register: UseFormRegister<FieldValues>;
+  id: string;
 }
 
-function PasswordForm({ error, register }: IMdp): JSX.Element {
+function PasswordForm({ error, register, id }: IMdp): JSX.Element {
   return (
     <div className="transform  flex flex-col justify-start mt-5 font-lexend font-bold">
+      {id !== undefined && (
+        <label htmlFor="mdp" className="flex flex-col mb-5">
+          OldPassword
+          <input
+            className="bg-black border rounded-none p-2 mt-2 focus:outline-none"
+            type="password"
+            {...register('oldPassword', {
+              minLength: 4,
+              pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).+/,
+              required: true,
+            })}
+          />
+          <p className="text-xs text-pink mt-2">Fieds required</p>
+          <p className="text-pink">
+            {error?.password?.type === 'pattern'
+              ? 'Règle: une lettre majuscule, une lettre minuscule, un chiffre'
+              : error?.password?.message}
+          </p>
+        </label>
+      )}
       <label htmlFor="mdp" className="flex flex-col">
         Password
         <input

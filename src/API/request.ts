@@ -33,10 +33,18 @@ export const user = {
     UserData,
     id,
   }: {
-    UserData: IUpdateAssetsUser;
+    UserData: IUpdateAssetsUser | INewUser;
     id: string | undefined;
   }): Promise<INewUser> =>
     AXIOS.put(`/users/${id}`, UserData).then((res) => res.data),
+  updatePasword: ({
+    passwordsToCompare,
+  }: {
+    passwordsToCompare: IPasswordMutate;
+  }): Promise<IUser> =>
+    AXIOS.put(`/users/self/password`, passwordsToCompare).then(
+      (res) => res.data
+    ),
 };
 
 export const comment = {

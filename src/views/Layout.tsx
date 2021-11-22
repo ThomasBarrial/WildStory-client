@@ -20,7 +20,7 @@ function Layout(): JSX.Element {
       history.push(pathname, search);
     },
     onError: () => {
-      if (pathname !== '/signup' && id) {
+      if (pathname !== '/signup' && id === undefined) {
         history.push('/login');
       }
     },

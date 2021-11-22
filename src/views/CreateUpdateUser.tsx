@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 // import { useUserFromStore } from '../store/user.slice';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AxiosError } from 'axios';
@@ -15,6 +15,7 @@ import PasswordForm from '../components/formInputs/PasswordForm';
 import SelectInput from '../components/formInputs/SelectInput';
 import HeaderUser from '../components/formInputs/HeaderUser';
 import { useUserFromStore } from '../store/user.slice';
+import useModal from '../hook/useModal';
 
 interface IResMutation {
   message: string;
@@ -27,15 +28,19 @@ interface IUserLog {
   password: string | undefined;
 }
 function CreateUpdateUser(): JSX.Element {
+  const [isPassword, setIsPassword] = useState(false);
   const [password, setPassword] = useState<string | undefined>();
-
+  const { setIsModal, setMessage } = useModal();
   const { dispatchLogin } = useUserFromStore();
-
   const router = useHistory();
+  const { dispatchUser } = useUserFromStore();
+  const { id } = useParams<{ id: string }>();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    setError,
   } = useForm();
 
   const {
@@ -45,6 +50,23 @@ function CreateUpdateUser(): JSX.Element {
   } = useQuery<IFormation[], AxiosError>(['formations'], () =>
     formation.getAll()
   );
+
+  const { isLoading: usertoUpdateLoad, error: usertoUpdateError } = useQuery<
+    IUser,
+    AxiosError
+  >(['getUserDataToUpdate', id], () => user.getOne(id), {
+    enabled: Boolean(id),
+    onSuccess: (data) => {
+      setValue('profilTitle', data.profilTitle);
+      setValue('username', data.username);
+      setValue('email', data.email);
+      setValue('city', data.city);
+      setValue('birthDate', data.birthDate);
+      setValue('avatarUrl', data.avatarUrl);
+      setValue('landimageUrl', data.landimageUrl);
+      setValue('idFormation', data.idFormation);
+    },
+  });
 
   const { mutate, isLoading, isError } = useMutation<
     IResMutation,
@@ -58,11 +80,33 @@ function CreateUpdateUser(): JSX.Element {
     },
   });
 
-  const { mutateAsync: createData, error: postError } = useMutation(user.post, {
+  const { mutateAsync: createData, error } = useMutation(user.post, {
     onSuccess: (data) => {
       mutate({ username: data.username, password });
     },
   });
+
+  const { mutateAsync: updateData, error: putError } = useMutation(user.put, {
+    onSuccess: (data) => {
+      dispatchLogin(data);
+    },
+  });
+
+  const { mutateAsync: passwordMutate } = useMutation(
+    'user',
+    user.updatePasword,
+    {
+      onSuccess: (data) => {
+        setMessage('Les données ont bien été modifiées');
+        setIsModal(true);
+        dispatchUser(data);
+      },
+      onError: () =>
+        setError('user.oldPassword', {
+          message: "L'ancien mot de passe est incorrect.",
+        }),
+    }
+  );
 
   const onSubmit: SubmitHandler<INewUser> = (data: INewUser) => {
     setPassword(data.password);
@@ -77,18 +121,49 @@ function CreateUpdateUser(): JSX.Element {
       landimageUrl: '',
       idFormation: data.idFormation,
     };
-    return createData({ UserData });
+
+    const passwordsToCompare = {
+      oldPassword: data.oldPassword,
+      password,
+    };
+
+    if (passwordsToCompare.oldPassword === password) {
+      setError('password', {
+        message: "Le nouveau mot de passe est simlaire à l'ancien",
+      });
+    } else if (password !== data.confirmPassword) {
+      setError('confirmPassword', {
+        message: 'Les deux mots de passes sont identiques',
+      });
+    } else {
+      passwordMutate({
+        passwordsToCompare,
+      });
+      setMessage('Les données ont bien été modifiées');
+      setIsModal(true);
+    }
+
+    if (!id) return createData({ UserData });
+    return updateData({ id, UserData });
   };
 
-  if (formationsLoad || isLoading) {
+  if (formationsLoad || isLoading || usertoUpdateLoad) {
     return <p>...Loading</p>;
   }
-  if (formationsError || postError || isError) {
+  if (formationsError || isError || usertoUpdateError || putError) {
     return <p>Error</p>;
   }
+
   return (
-    <div className="w-sreen py-14 h-screen pb-14 bg-black fixed inset-0 z-50 overflow-y-scroll">
-      <HeaderUser title="Create your profil" />
+    <div
+      className={`w-sreen py-14  pb-14 bg-black ${
+        !id && `fixed h-screen inset-0 z-50 overflow-y-scroll`
+      } `}
+    >
+      <HeaderUser
+        userUpdateid={id}
+        title={!id ? `Create your profil` : `Edit your profil`}
+      />
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -120,10 +195,21 @@ function CreateUpdateUser(): JSX.Element {
             register={register}
           />
         </div>
-        <PasswordForm error={errors} register={register} />
+        {!id || isPassword ? (
+          <PasswordForm id={id} error={errors} register={register} />
+        ) : (
+          <button
+            onClick={() => setIsPassword(true)}
+            className="text-pink underline mt-5"
+            type="button"
+          >
+            EditPassword
+          </button>
+        )}
         <button className="w-full p-2  mt-5 lg:mt-10 bg-pink" type="submit">
-          Create my profil
+          {!id ? 'Create my profil' : 'Edit profil'}
         </button>
+        {error && <p className="text-red-500">Username or email already use</p>}
       </form>
     </div>
   );

@@ -30,11 +30,15 @@ function Navabar(): JSX.Element {
             </Link>
           );
         })}
-        <Link to="/profil">
-          <img
+        <Link to={`/profil/${user.id}`}>
+          <div
             className="h-10 w-10 ml-2 cursor-pointer rounded-full border border-black"
-            src={user.avatarUrl}
-            alt=""
+            style={{
+              backgroundImage: `url(${user.avatarUrl})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+            }}
           />
         </Link>
       </div>

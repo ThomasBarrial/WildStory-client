@@ -37,7 +37,7 @@ function AssetSettings(): JSX.Element {
   }
   return (
     <div className="w-sreen h-screen py-10 bg-black fixed inset-0 z-50 overflow-y-scroll">
-      <HeaderUser title="Add Nice Assets" />
+      <HeaderUser userUpdateid={undefined} title="Add Nice Assets" />
       {isLandingUpdate && (
         <UserModal
           name="landimageUrl"
@@ -59,7 +59,7 @@ function AssetSettings(): JSX.Element {
         </div>
         <div className="flex flex-col h-full items-end">
           <button
-            onClick={() => router.push(`/socialmedia/${id}`)}
+            onClick={() => router.push(`/createuserskills/${id}`)}
             className="font-bold font-lexend w-full  my-3 lg:mt-0  p-2  border border-white lg:w-4/12"
             type="submit"
           >

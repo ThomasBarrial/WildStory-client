@@ -2,9 +2,10 @@ import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
-import { formation, user, userSkills } from '../API/request';
+import { formation, mediaLinks, user, userSkills } from '../API/request';
 import Header from '../components/user/Header';
 import Info from '../components/user/Info';
+import MediaIcon from '../components/user/MediaIcon';
 import Skill from '../components/user/Skill';
 import UserPost from '../components/user/UserPost';
 import { useUserFromStore } from '../store/user.slice';
@@ -39,6 +40,11 @@ function UserProfil(): JSX.Element {
     () => userSkills.getAll(userData.id as string)
   );
 
+  const { data: userMediaLinksData } = useQuery<IMediaLink[], AxiosError>(
+    ['userMediaLinks', userData.id],
+    () => mediaLinks.getUsersMediaLink(userData.id as string)
+  );
+
   if (formationLoad || userLoad) {
     return <p>Loading</p>;
   }
@@ -67,6 +73,15 @@ function UserProfil(): JSX.Element {
               </div>
             );
           })}
+          <div className="flex">
+            {userMediaLinksData?.map((media) => {
+              return (
+                <div key={media.id}>
+                  <MediaIcon media={media} />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
       <UserPost userId={userData.id} />

@@ -38,6 +38,7 @@ function UserSkills(): JSX.Element {
       },
     }
   );
+
   const { data: skill } = useQuery<IUserSkills[], AxiosError>(
     ['userSkills', user.id],
     () => userSkills.getAll(user.id as string)
@@ -81,7 +82,7 @@ function UserSkills(): JSX.Element {
           {message}
         </Modal>
       )}
-      <HeaderUser title="Add your best skills" />
+      <HeaderUser userUpdateid={undefined} title="Add your best skills" />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mx-4 lg:w-8/12 lg:mx-auto"

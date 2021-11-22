@@ -54,7 +54,9 @@ interface INewUser {
   profilTitle?: string;
   username?: string;
   email?: string;
+  oldPassword?: string;
   password?: string;
+  confirmPassword?: string;
   city?: string;
   birthDate?: string;
   avatarUrl?: string;
@@ -98,4 +100,9 @@ interface IMediaIcon {
   name: string;
   iconUrl: string;
   mediaLink: IMediaLink[];
+}
+
+interface IPasswordMutate {
+  password: string | undefined;
+  oldPassword: string | undefined;
 }
