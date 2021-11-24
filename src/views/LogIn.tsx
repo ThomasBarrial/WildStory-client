@@ -71,7 +71,7 @@ function LogIn(): JSX.Element {
           >
             Username
             <input
-              className=" focus:outline-none border-white p-2 bg-black rounded-none border mt-2 "
+              className=" focus:outline-none border-white p-2 bg-black rounded-md border mt-2 "
               type="text"
               {...register('username', { required: true })}
             />
@@ -82,7 +82,7 @@ function LogIn(): JSX.Element {
           >
             Password{' '}
             <input
-              className=" focus:outline-none border-white p-2 bg-black rounded-none border mt-2 "
+              className=" focus:outline-none border-white p-2 bg-black rounded-md border mt-2 "
               type="password"
               {...register('password', { required: true })}
             />

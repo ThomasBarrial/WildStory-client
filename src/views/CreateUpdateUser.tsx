@@ -11,11 +11,12 @@ import { auth, formation, user } from '../API/request';
 import DateInput from '../components/formInputs/DateInput';
 import { formInputs } from '../components/formInputs/FormInputs';
 
-import PasswordForm from '../components/formInputs/PasswordForm';
+import PasswordForm from './PasswordForm';
 import SelectInput from '../components/formInputs/SelectInput';
 import HeaderUser from '../components/formInputs/HeaderUser';
 import { useUserFromStore } from '../store/user.slice';
 import useModal from '../hook/useModal';
+import Modal from '../components/modal/Modal';
 
 interface IResMutation {
   message: string;
@@ -30,7 +31,7 @@ interface IUserLog {
 function CreateUpdateUser(): JSX.Element {
   const [isPassword, setIsPassword] = useState(false);
   const [password, setPassword] = useState<string | undefined>();
-  const { setIsModal, setMessage } = useModal();
+  const { setIsModal, setMessage, isModal, message } = useModal();
   const { dispatchLogin } = useUserFromStore();
   const router = useHistory();
   const { dispatchUser } = useUserFromStore();
@@ -83,12 +84,24 @@ function CreateUpdateUser(): JSX.Element {
   const { mutateAsync: createData, error } = useMutation(user.post, {
     onSuccess: (data) => {
       mutate({ username: data.username, password });
+      setMessage('Something goes wrong :( Please try later');
+      setIsModal(true);
     },
   });
 
-  const { mutateAsync: updateData, error: putError } = useMutation(user.put, {
+  const { mutateAsync: updateData } = useMutation<
+    INewUser,
+    AxiosError,
+    { UserData: INewUser; id: string }
+  >(user.put, {
     onSuccess: (data) => {
       dispatchLogin(data);
+      setMessage('Les données ont bien été modifiées');
+      setIsModal(true);
+    },
+    onError: () => {
+      setMessage('Oups email or username already use');
+      setIsModal(true);
     },
   });
 
@@ -100,6 +113,7 @@ function CreateUpdateUser(): JSX.Element {
         setMessage('Les données ont bien été modifiées');
         setIsModal(true);
         dispatchUser(data);
+        console.log('passwordMutate');
       },
       onError: () =>
         setError('user.oldPassword', {
@@ -124,23 +138,23 @@ function CreateUpdateUser(): JSX.Element {
 
     const passwordsToCompare = {
       oldPassword: data.oldPassword,
-      password,
+      password: data.password,
     };
 
-    if (passwordsToCompare.oldPassword === password) {
+    console.log(data);
+
+    if (passwordsToCompare.oldPassword === passwordsToCompare.password) {
       setError('password', {
-        message: "Le nouveau mot de passe est simlaire à l'ancien",
+        message: 'The new password is the same as the older',
       });
-    } else if (password !== data.confirmPassword) {
+    } else if (passwordsToCompare.password !== data.confirmPassword) {
       setError('confirmPassword', {
-        message: 'Les deux mots de passes sont identiques',
+        message: 'You can not use the same password',
       });
     } else {
       passwordMutate({
         passwordsToCompare,
       });
-      setMessage('Les données ont bien été modifiées');
-      setIsModal(true);
     }
 
     if (!id) return createData({ UserData });
@@ -150,16 +164,39 @@ function CreateUpdateUser(): JSX.Element {
   if (formationsLoad || isLoading || usertoUpdateLoad) {
     return <p>...Loading</p>;
   }
-  if (formationsError || isError || usertoUpdateError || putError) {
+  if (formationsError || isError || usertoUpdateError) {
     return <p>Error</p>;
   }
 
   return (
     <div
-      className={`w-sreen py-14  pb-14 bg-black ${
+      className={`w-sreen py-8  pb-14 bg-black ${
         !id && `fixed h-screen inset-0 z-50 overflow-y-scroll`
       } `}
     >
+      {isModal && (
+        <Modal
+          title="Every things geos well"
+          buttons={
+            !error
+              ? [
+                  {
+                    text: 'ok',
+                    handleClick: () => {
+                      if (message === 'Oups email or username already use') {
+                        setIsModal(false);
+                      } else {
+                        router.push(`/profil/${id}`);
+                      }
+                    },
+                  },
+                ]
+              : [{ text: 'New try', handleClick: () => setIsModal(false) }]
+          }
+        >
+          {message}
+        </Modal>
+      )}
       <HeaderUser
         userUpdateid={id}
         title={!id ? `Create your profil` : `Edit your profil`}
@@ -206,7 +243,11 @@ function CreateUpdateUser(): JSX.Element {
             EditPassword
           </button>
         )}
-        <button className="w-full p-2  mt-5 lg:mt-10 bg-pink" type="submit">
+
+        <button
+          className="w-full p-2 rounded-md mt-5 lg:mt-5 bg-pink"
+          type="submit"
+        >
           {!id ? 'Create my profil' : 'Edit profil'}
         </button>
         {error && <p className="text-red-500">Username or email already use</p>}

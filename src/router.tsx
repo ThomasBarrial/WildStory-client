@@ -9,6 +9,7 @@ import UserProfil from './views/UserProfil';
 import UserSkills from './views/UserSkills';
 import LogIn from './views/LogIn';
 import AssetSettings from './components/user/AssetsUser/AssetSettings';
+import Logout from './views/LogOut';
 
 function Routes(): JSX.Element {
   return (
@@ -24,6 +25,7 @@ function Routes(): JSX.Element {
       <Route exact path="/userassets/:id" component={AssetSettings} />
       <Route exact path="/createuserskills/:id" component={UserSkills} />
       <Route exact path="/socialmedia/:id" component={SocialeMedia} />
+      <Route exact path="/logout" component={Logout} />
     </>
   );
 }

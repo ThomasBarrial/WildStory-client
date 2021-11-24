@@ -93,7 +93,7 @@ function SocialeMedia(): JSX.Element {
         <label className="font-bold font-lexend" htmlFor="Foramtions">
           Select Social Media
           <select
-            className="bg-black w-full mt-2 h-12 p-3 rounded-none border"
+            className="bg-black w-full mt-2 h-12 p-3 rounded-md border"
             {...register('iconId', { required: true })}
           >
             {icons?.map((item) => {

@@ -109,4 +109,5 @@ export const auth = {
       (res) => res.data
     ),
   me: (): Promise<IUser> => AXIOS.get(`/auth/me`).then((res) => res.data),
+  logout: (): Promise<{ message: string }> => AXIOS.get('/auth/logout'),
 };

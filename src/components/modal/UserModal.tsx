@@ -76,7 +76,7 @@ function UserModal({ isOpen, label, name }: IProps): JSX.Element {
               placeholder="Url..."
               defaultValue=""
               {...register(name, { required: true })}
-              className="bg-black mt-2 border rounded-none focus:outline-none p-2 border-white"
+              className="bg-black mt-2 border rounded-md focus:outline-none p-2 border-white"
             />
           </label>
         </div>
