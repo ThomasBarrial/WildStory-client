@@ -59,7 +59,7 @@ function AssetSettings(): JSX.Element {
         </div>
         <div className="flex flex-col h-full items-end">
           <button
-            onClick={() => router.push(`/createuserskills/${id}`)}
+            onClick={() => router.push(`/userskills/${id}`)}
             className="font-bold font-lexend w-full  my-3 lg:mt-0  p-2  border border-white lg:w-4/12"
             type="submit"
           >
@@ -67,7 +67,7 @@ function AssetSettings(): JSX.Element {
           </button>{' '}
           <button
             type="button"
-            onClick={() => router.push(`/createuserskills/${id}`)}
+            onClick={() => router.push(`/userskills/${id}`)}
             className="font-bold text-right font-lexend lg:mt-0 w-full lg:w-3/12  underline"
           >
             Skip this step

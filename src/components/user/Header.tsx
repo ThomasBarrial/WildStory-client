@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router';
+import edit from '../../assets/icons/edit.svg';
+import { useUserFromStore } from '../../store/user.slice';
+import UserModal from '../modal/UserModal';
 
 interface IProps {
   userAvatar: string | undefined;
@@ -6,26 +10,61 @@ interface IProps {
 }
 
 function Header({ userAvatar, userLanding }: IProps): JSX.Element {
+  const [isLandingUpdate, setIsLandingUpdate] = useState(false);
+  const [isAvatarUpdate, setIsAvatarUpdate] = useState(false);
+  const { id } = useParams<{ id: string }>();
+  const { user } = useUserFromStore();
+
   return (
     <div className="w-full flex flex-col items-end">
+      {isLandingUpdate && (
+        <UserModal
+          name="landimageUrl"
+          label="landing"
+          isOpen={setIsLandingUpdate}
+        />
+      )}
+      {isAvatarUpdate && (
+        <UserModal name="avatarUrl" label="avatar" isOpen={setIsAvatarUpdate} />
+      )}
       <div
-        className="w-full h-32 border-b lg:border border-pink"
+        className="w-full flex p-3 items-end h-44 lg:h-52 border-b lg:border border-pink"
         style={{
           backgroundImage: `url(${userLanding})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
-      />
+      >
+        {id === user.id && (
+          <button type="button" onClick={() => setIsLandingUpdate(true)}>
+            <img
+              className="h-6 w-6 transform translate-y-7  duration-500 hover:scale-125"
+              src={edit}
+              alt="edit"
+            />
+          </button>
+        )}
+      </div>
       <div
-        className="w-24 h-24 rounded-full border border-pink mr-6 transform -translate-y-12"
+        className="w-24 h-24 flex items-end rounded-full border border-pink mr-6 transform -translate-y-12"
         style={{
           backgroundImage: `url(${userAvatar})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
-      />
+      >
+        {id === user.id && (
+          <button type="button" onClick={() => setIsAvatarUpdate(true)}>
+            <img
+              className="h-6 w-6 transform -translate-y-2 -translate-x-2  duration-500 hover:scale-125"
+              src={edit}
+              alt="edit"
+            />
+          </button>
+        )}
+      </div>
     </div>
   );
 }

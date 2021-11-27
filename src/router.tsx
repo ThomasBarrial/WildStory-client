@@ -9,7 +9,7 @@ import UserProfil from './views/UserProfil';
 import UserSkills from './views/UserSkills';
 import LogIn from './views/LogIn';
 import AssetSettings from './components/user/AssetsUser/AssetSettings';
-import Logout from './views/LogOut';
+import Logout from './views/Logout';
 
 function Routes(): JSX.Element {
   return (
@@ -23,8 +23,10 @@ function Routes(): JSX.Element {
       <Route exact path="/profil/:id" component={UserProfil} />
       <Route exact path="/comments/:id" component={Comments} />
       <Route exact path="/userassets/:id" component={AssetSettings} />
-      <Route exact path="/createuserskills/:id" component={UserSkills} />
+      <Route exact path="/userskills/:id" component={UserSkills} />
+      <Route exact path="/edituserskills/:id" component={UserSkills} />
       <Route exact path="/socialmedia/:id" component={SocialeMedia} />
+      <Route exact path="/editsocialmedia/:id" component={SocialeMedia} />
       <Route exact path="/logout" component={Logout} />
     </>
   );

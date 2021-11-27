@@ -34,7 +34,7 @@ function CreateUpdateUser(): JSX.Element {
   const { setIsModal, setMessage, isModal, message } = useModal();
   const { dispatchLogin } = useUserFromStore();
   const router = useHistory();
-  const { dispatchUser } = useUserFromStore();
+  const { dispatchUser, user: userFromStore } = useUserFromStore();
   const { id } = useParams<{ id: string }>();
   const {
     register,
@@ -96,7 +96,7 @@ function CreateUpdateUser(): JSX.Element {
   >(user.put, {
     onSuccess: (data) => {
       dispatchLogin(data);
-      setMessage('Les données ont bien été modifiées');
+      setMessage('Your profil as been edit successfully');
       setIsModal(true);
     },
     onError: () => {
@@ -113,7 +113,6 @@ function CreateUpdateUser(): JSX.Element {
         setMessage('Les données ont bien été modifiées');
         setIsModal(true);
         dispatchUser(data);
-        console.log('passwordMutate');
       },
       onError: () =>
         setError('user.oldPassword', {
@@ -131,8 +130,8 @@ function CreateUpdateUser(): JSX.Element {
       password: data.password,
       city: data.city,
       birthDate: data.birthDate,
-      avatarUrl: '',
-      landimageUrl: '',
+      avatarUrl: userFromStore.avatarUrl,
+      landimageUrl: userFromStore.landimageUrl,
       idFormation: data.idFormation,
     };
 
@@ -140,8 +139,6 @@ function CreateUpdateUser(): JSX.Element {
       oldPassword: data.oldPassword,
       password: data.password,
     };
-
-    console.log(data);
 
     if (passwordsToCompare.oldPassword === passwordsToCompare.password) {
       setError('password', {

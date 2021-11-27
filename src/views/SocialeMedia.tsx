@@ -3,13 +3,15 @@ import { AxiosError } from 'axios';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { mediaIcons, mediaLinks } from '../API/request';
 import useModal from '../hook/useModal';
 import HeaderUser from '../components/formInputs/HeaderUser';
 import TextInput from '../components/formInputs/TextInput';
 import Modal from '../components/modal/Modal';
 import MediaLink from '../components/user/MediaLink';
+import { useUserFromStore } from '../store/user.slice';
 
 function SocialeMedia(): JSX.Element {
   const router = useHistory();
@@ -17,6 +19,8 @@ function SocialeMedia(): JSX.Element {
   const queryclient = useQueryClient();
   const { register, handleSubmit } = useForm();
   const { isModal, setIsModal, message, setMessage } = useModal();
+  const { pathname } = useLocation();
+  const { user: userStore } = useUserFromStore();
 
   const {
     data: icons,
@@ -81,7 +85,14 @@ function SocialeMedia(): JSX.Element {
           {message}
         </Modal>
       )}
-      <HeaderUser title="Add your sociale links" />
+      <HeaderUser
+        userUpdateid={id}
+        title={
+          pathname === `/editsocialmedia/${userStore.id}`
+            ? 'Edit your socials links'
+            : 'Add sociale link'
+        }
+      />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mx-4 lg:w-8/12 lg:mx-auto"
@@ -119,22 +130,32 @@ function SocialeMedia(): JSX.Element {
           <button className=" p-2 w-full lg:w-3/12  mt-5 bg-pink" type="submit">
             Add sociale link
           </button>
-          {Medialinks?.length === 0 ? (
-            <button
-              type="button"
-              onClick={() => router.push(`/`)}
-              className="font-bold text-right font-lexend mt-3 lg:mt-0 w-full lg:w-3/12  underline"
-            >
-              Skip this step
-            </button>
+          {pathname === `/editsocialmedia/${userStore.id}` ? (
+            <Link to={`/profil/${userStore.id}`}>
+              <p className="font-bold font-lexend w-full text-center  mt-5 lg:mt-0 lg:w-80 p-2  bg-pink">
+                Done
+              </p>
+            </Link>
           ) : (
-            <button
-              onClick={() => router.push(`/`)}
-              className="font-bold font-lexend w-full  mt-5 lg:mt-0 lg:w-3/12 p-2  bg-pink"
-              type="submit"
-            >
-              next
-            </button>
+            <div>
+              {Medialinks?.length === 0 ? (
+                <button
+                  type="button"
+                  onClick={() => router.push(`/`)}
+                  className="font-bold text-right font-lexend mt-3 lg:mt-0 w-full lg:w-3/12  underline"
+                >
+                  Skip this step
+                </button>
+              ) : (
+                <button
+                  onClick={() => router.push(`/`)}
+                  className="font-bold font-lexend w-full  mt-5 lg:mt-0 lg:w-3/12 p-2  bg-pink"
+                  type="submit"
+                >
+                  next
+                </button>
+              )}
+            </div>
           )}
         </div>
       </form>

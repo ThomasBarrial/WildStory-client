@@ -24,7 +24,7 @@ function AvatarUser({ userId }: IProps): JSX.Element {
     <Link to={`/profil/${data.id}`}>
       <div className="flex items-center mx-3 lg:mx-0 py-3">
         <div
-          className="h-12 w-12 rounded-full border border-white"
+          className="h-12 w-12 rounded-full border border-pink"
           style={{
             backgroundImage: `url(${data.avatarUrl})`,
             backgroundSize: 'cover',
@@ -32,7 +32,10 @@ function AvatarUser({ userId }: IProps): JSX.Element {
             backgroundPosition: 'center',
           }}
         />
-        <p className="ml-4 text-sm">{data.username}</p>
+        <div className="flex ml-4 flex-col items-start">
+          <p className="">{data.username}</p>
+          <p className="text-xs font-thin">{data.profilTitle}</p>
+        </div>
       </div>
     </Link>
   );
