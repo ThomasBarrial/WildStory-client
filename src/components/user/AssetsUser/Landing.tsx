@@ -3,7 +3,7 @@ import edit from '../../../assets/icons/edit.svg';
 
 interface IProps {
   isOpen: Dispatch<SetStateAction<boolean>>;
-  landing: string;
+  landing: string | undefined;
 }
 
 function Landing({ isOpen, landing }: IProps): JSX.Element {

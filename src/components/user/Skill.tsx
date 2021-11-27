@@ -34,7 +34,7 @@ function Skill({ skill, isForm }: IProps): JSX.Element {
   if (error || skillDataError) {
     setIsModal(true);
     setMessage(
-      'Sorry something bad happen please retry or contact a web admin'
+      'Sorry something bad happen please retry or contact a administrator'
     );
     if (isLoading) {
       return <p>...Loading</p>;

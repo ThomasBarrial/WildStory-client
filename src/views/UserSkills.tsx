@@ -2,8 +2,9 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { skills, userSkills } from '../API/request';
 import HeaderUser from '../components/formInputs/HeaderUser';
 import SkillInput from '../components/formInputs/SkillInput';
@@ -24,6 +25,8 @@ function UserSkills(): JSX.Element {
   const { register, handleSubmit } = useForm();
   const router = useHistory();
 
+  const { pathname } = useLocation<{ params: string }>();
+
   const {
     data: skillsData,
     isLoading,
@@ -38,6 +41,7 @@ function UserSkills(): JSX.Element {
       },
     }
   );
+
   const { data: skill } = useQuery<IUserSkills[], AxiosError>(
     ['userSkills', user.id],
     () => userSkills.getAll(user.id as string)
@@ -68,7 +72,7 @@ function UserSkills(): JSX.Element {
   if (error || postError) {
     setIsModal(true);
     setMessage(
-      'Sorry something bad happen please retry or contact a web admin'
+      'Sorry something bad happen please retry or contact a administrator'
     );
   }
   return (
@@ -81,7 +85,14 @@ function UserSkills(): JSX.Element {
           {message}
         </Modal>
       )}
-      <HeaderUser title="Add your best skills" />
+      <HeaderUser
+        userUpdateid={undefined}
+        title={
+          pathname === `/edituserskills/${user.id}`
+            ? 'Edit your skills'
+            : 'Add your best skills'
+        }
+      />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mx-4 lg:w-8/12 lg:mx-auto"
@@ -102,22 +113,32 @@ function UserSkills(): JSX.Element {
           >
             Add skill
           </button>
-          {skill?.length === 0 ? (
-            <button
-              type="button"
-              onClick={() => router.push(`/socialmedia/${user.id}`)}
-              className="font-bold text-right font-lexend mt-3 lg:mt-0 w-full lg:w-3/12  underline"
-            >
-              Skip this step
-            </button>
+          {pathname === `/edituserskills/${user.id}` ? (
+            <Link to={`/profil/${user.id}`}>
+              <p className="font-bold font-lexend w-full  mt-5 lg:mt-0  p-2 px-10  bg-pink">
+                Done
+              </p>
+            </Link>
           ) : (
-            <button
-              onClick={() => router.push(`/socialmedia/${user.id}`)}
-              className="font-bold font-lexend w-full  mt-5 lg:mt-0  p-2  bg-pink"
-              type="submit"
-            >
-              next
-            </button>
+            <div className="w-full">
+              {skill?.length === 0 ? (
+                <button
+                  type="button"
+                  onClick={() => router.push(`/socialmedia/${user.id}`)}
+                  className="font-bold text-right font-lexend mt-3 lg:mt-0 w-full lg:w-3/12  underline"
+                >
+                  Skip this step
+                </button>
+              ) : (
+                <button
+                  onClick={() => router.push(`/socialmedia/${user.id}`)}
+                  className="font-bold font-lexend w-full  mt-5 lg:mt-0  p-2  bg-pink"
+                  type="submit"
+                >
+                  next
+                </button>
+              )}
+            </div>
           )}
         </div>
       </form>
