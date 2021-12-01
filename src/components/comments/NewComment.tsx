@@ -36,7 +36,7 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
     return postComment({ commentData });
   };
   return (
-    <div className=" lg:pb-3 px-4 w-full">
+    <div className=" lg:pb-3 px-4 lg:px-0 w-full">
       <div className="w-full flex items-start justify-between">
         <button
           onClick={() => setIsNewComment(true)}
@@ -55,13 +55,13 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
         <div className="w-full">
           <form onSubmit={handleSubmit(onSubmit)} action="postComment">
             <textarea
-              className="bg-black font-thin text-base text-white border border-pink w-full focus:outline-none rounded-lg h-24 px-3 py-3"
+              className="bg-black font-thin text-base text-white border border-pink w-full focus:outline-none h-24 px-3 py-3"
               id="text"
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...register('text')}
             />
             <button
-              className="text-lg rounded-lg my-5 border text-pink border-pink w-6/12 py-1"
+              className="text-lg my-5 border text-pink border-pink w-6/12 py-1"
               type="submit"
             >
               Comment

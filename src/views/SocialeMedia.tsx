@@ -104,7 +104,7 @@ function SocialeMedia(): JSX.Element {
         <label className="font-bold font-lexend" htmlFor="Foramtions">
           Select Social Media
           <select
-            className="bg-black w-full mt-2 h-12 p-3 rounded-md border"
+            className="bg-black w-full mt-2 h-12 p-  border"
             {...register('iconId', { required: true })}
           >
             {icons?.map((item) => {
@@ -142,14 +142,14 @@ function SocialeMedia(): JSX.Element {
                 <button
                   type="button"
                   onClick={() => router.push(`/`)}
-                  className="font-bold text-right font-lexend mt-3 lg:mt-0 w-full lg:w-3/12  underline"
+                  className="font-bold text-right font-lexend mt-3 lg:mt-0 w-full lg:w-12/12  underline"
                 >
                   Skip this step
                 </button>
               ) : (
                 <button
                   onClick={() => router.push(`/`)}
-                  className="font-bold font-lexend w-full  mt-5 lg:mt-0 lg:w-3/12 p-2  bg-pink"
+                  className="font-bold font-lexend w-full  mt-5 lg:mt-0 lg:w-12/12 p-2 px-10  bg-pink"
                   type="submit"
                 >
                   next

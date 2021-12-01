@@ -22,11 +22,11 @@ function PassworrdInput({
   name,
 }: IProps): JSX.Element {
   return (
-    <div>
-      <label htmlFor="confirmmdp" className="w-full mt-5">
+    <div className="mt-5">
+      <label htmlFor="confirmmdp" className="w-full mt-10">
         {label}
         <input
-          className="bg-black w-full border rounded-md p-2 my-4 focus:outline-none"
+          className="bg-black w-full border p-2 mt-2 focus:outline-none"
           type="password"
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...register(name, {

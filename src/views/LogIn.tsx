@@ -5,11 +5,12 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import { auth } from '../API/request';
-import logo from '../assets/logo3.png';
 import img from '../assets/img1.webp';
 import { UserState, useUserFromStore } from '../store/user.slice';
+import Header from '../components/login/Header';
+import Form from '../components/login/Form';
+import Footer from '../components/login/Footer';
 
 interface IFormInput {
   username: string;
@@ -57,70 +58,15 @@ function LogIn(): JSX.Element {
           onSubmit={handleSubmit(onSubmit)}
           action="login"
         >
-          <img
-            className="h-16  transform -translate-x-2 lg:-translate-x-5 lg:h-20"
-            src={logo}
-            alt="WildStory"
-          />
-          <p className="mt-5 text-sm text-left lg:text-sm">
-            Take part in a network of digital players all over Europe
-          </p>
-          <label
-            className="mt-5 lg:mt-5  w-full  text-sm flex flex-col"
-            htmlFor="username"
-          >
-            Username
-            <input
-              className=" focus:outline-none border-white p-2 bg-black rounded-md border mt-2 "
-              type="text"
-              {...register('username', { required: true })}
-            />
-          </label>
-          <label
-            className="mt-5 w-full  text-sm flex flex-col"
-            htmlFor="Password"
-          >
-            Password{' '}
-            <input
-              className=" focus:outline-none border-white p-2 bg-black rounded-md border mt-2 "
-              type="password"
-              {...register('password', { required: true })}
-            />
-          </label>
-          {isError && (
-            <p className="text-red-500 w-full  text-left text-xs mt-2">
-              wrong credentials try again
-            </p>
-          )}
+          <Header />
+          <Form register={register} isError={isError} required />
           <button
             type="submit"
             className="w-full  text-sm p-2  mt-10 lg:mt-10 bg-pink"
           >
             Login
           </button>
-
-          <div className="flex w-full mt-1 lg:w-8/12  text-xs font-bold items-start">
-            <p>Need a new account</p>
-            <Link to="/signup">
-              <button
-                className="font-bold text-pink ml-2 underline"
-                type="button"
-              >
-                Signup
-              </button>
-            </Link>
-          </div>
-          <div className="text-xs w-full items-start flex  mt-10">
-            <p>In collaboration with</p>
-            <a
-              href="https://digitalcopilote.io/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-pink ml-2 underline"
-            >
-              @DigitalCopilote
-            </a>
-          </div>
+          <Footer />
         </form>
       </div>
     </div>

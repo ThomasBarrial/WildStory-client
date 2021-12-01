@@ -26,7 +26,7 @@ interface IComments {
 
 interface PostComment {
   text: string;
-  userId: string;
+  userId: string | undefined;
   postId: string;
 }
 

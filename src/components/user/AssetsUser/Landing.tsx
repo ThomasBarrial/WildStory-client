@@ -12,10 +12,10 @@ function Landing({ isOpen, landing }: IProps): JSX.Element {
       <button
         type="button"
         onClick={() => isOpen(true)}
-        className="w-full h-32 border-t border-b bg-pink bg-opacity-10 lg:border border-pink"
+        className="w-full h-32 lg:h-52 border-t border-b bg-pink bg-opacity-10 lg:border border-pink"
         style={{
           backgroundImage: `url(${landing})`,
-          backgroundPosition: 'center',
+          backgroundPosition: 'bottom',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}

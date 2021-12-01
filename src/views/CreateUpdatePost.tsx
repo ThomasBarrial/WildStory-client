@@ -120,7 +120,7 @@ function CreateUpdatePost(): JSX.Element {
         />
         <button
           type="submit"
-          className="mt-5 border border-white text-white py-2 w-6/12"
+          className="mt-5 border border-pink text-pink py-2 w-6/12"
         >
           {postId ? 'Edit your post' : 'Create post'}
         </button>

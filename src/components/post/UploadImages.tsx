@@ -73,7 +73,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
           <button
             type="submit"
             onClick={(e) => handleImageSubmit(e)}
-            className="mt-5 border border-white text-white py-2 w-6/12"
+            className="mt-5 border border-pink text-pink py-2 w-6/12"
           >
             Add image
           </button>

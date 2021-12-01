@@ -21,7 +21,7 @@ function Comments(): JSX.Element {
     {
       onSuccess: (commentRes) => {
         const checkComments = commentRes.filter((com) =>
-          com.userId.includes(IdUserFormStore)
+          com.userId.includes(IdUserFormStore as string)
         );
         if (checkComments.length !== 0) {
           setIsComment(true);
