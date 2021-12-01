@@ -44,7 +44,7 @@ function Comments(): JSX.Element {
   }
 
   return (
-    <div className="flex md:w-10/12 lg:w-6/12 mx-auto  w-full">
+    <div className="flex md:w-10/12 lg:w-7/12 mx-auto  w-full">
       <Header />
       <div className="py-20">
         {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />}
