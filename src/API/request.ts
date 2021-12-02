@@ -7,6 +7,8 @@ export const post = {
     AXIOS.get(`/post/${id}`).then((res) => res.data),
   getComments: (id: string): Promise<IComments[]> =>
     AXIOS.get(`/post/${id}/comments`).then((res) => res.data),
+  getLikes: (id: string): Promise<ILikes[]> =>
+    AXIOS.get(`/post/${id}/likes`).then((res) => res.data),
   getUserPost: (id: string): Promise<IPost[]> =>
     AXIOS.get(`/post/user/${id}`).then((res) => res.data),
   post: ({ postData }: { postData: IPostData }): Promise<IPostData> =>
@@ -45,6 +47,19 @@ export const user = {
     AXIOS.put(`/users/self/password`, passwordsToCompare).then(
       (res) => res.data
     ),
+};
+
+export const likes = {
+  post: ({ likesData }: { likesData: IPostLikes }): Promise<ILikes> =>
+    AXIOS.post<ILikes>(`/likes`, likesData).then((res) => res.data),
+  update: ({
+    id,
+    likesData,
+  }: {
+    likesData: IPostLikes;
+    id: string;
+  }): Promise<ILikes> =>
+    AXIOS.put<ILikes>(`/likes/${id}`, likesData).then((res) => res.data),
 };
 
 export const comment = {

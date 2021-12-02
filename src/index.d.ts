@@ -2,11 +2,10 @@ interface IPost {
   id: string;
   title: string;
   text: string;
-  likes: number;
+  likes: ILikes[];
   imageUrl: string[];
   createdAt: Date;
   updatedAt: Date;
-
   userId: string;
   comments: IComments[];
 }
@@ -22,6 +21,15 @@ interface IComments {
   text: string;
   userId: string;
   postId: string;
+}
+
+type IPostLikes = Omit<ILikes, 'id'>;
+
+interface ILikes {
+  id: string;
+  userId: string;
+  postId: string;
+  isLike: boolean;
 }
 
 interface PostComment {
