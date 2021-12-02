@@ -86,8 +86,6 @@ function TextPost({ item }: IProps): JSX.Element {
     return <p>Error..</p>;
   }
 
-  console.log(isLike);
-
   return (
     <div className="mx-3 lg:mx-0 pb-5">
       <div className="flex justify-between">
