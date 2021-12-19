@@ -13,7 +13,6 @@ interface IProps {
 function OnePost({ item }: IProps): JSX.Element {
   const { user } = useUserFromStore();
   const IdUserFormStore = user.id;
-
   return (
     <div className="mb-12 mt-5">
       <div className="border-b border-pink">

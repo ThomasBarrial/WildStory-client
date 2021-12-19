@@ -17,6 +17,8 @@ function TextPost({ item }: IProps): JSX.Element {
   const [count, setCount] = useState(0);
   const queryclient = useQueryClient();
   const { user } = useUserFromStore();
+
+  // CREATE A NEW LIKE
   const { mutateAsync: createLike } = useMutation(likes.post, {
     onSuccess: () => {
       queryclient.refetchQueries(['getLikes']);
@@ -24,37 +26,43 @@ function TextPost({ item }: IProps): JSX.Element {
     },
   });
 
+  // UPDATE EXISTING LIKE
   const { mutateAsync: updateLike } = useMutation(likes.update, {
     onSuccess: () => {
       queryclient.refetchQueries(['getLikes']);
       setIsLike((prev) => !prev);
     },
   });
+
+  // FECTH ALL THE LIKES OF THE POST
   const { isLoading, error, data } = useQuery<ILikes[], AxiosError>(
     ['getLikes', item.id],
     () => post.getLikes(item.id),
     {
       onSuccess: (likeRes) => {
+        // FILTER ALL LIKES WHERE ISLIKE VARIABLES IS TRUE AND SET THE COUNT OF LIKE WITH THE ARRAY'S LENGHT
         const checklikes = likeRes.filter((l) => l.isLike === true);
         setCount(checklikes.length);
+        // CHECK IF THE USER ALREADY LIKE THIS POST
         const checkUserLike = likeRes.filter((u) =>
           u.userId.includes(user.id as string)
         );
-        const checkPostlike = likeRes.filter((p) => p.postId.includes(item.id));
-
-        if (checkPostlike.length !== 0 && checkUserLike.length !== 0) {
-          if (checkPostlike[0].isLike === true) {
+        // CHANGE THE LIKE STATE IN FUNCTION OFF THE "ISLIKE" VARIABLE
+        if (checkUserLike.length !== 0) {
+          // IF A USERLIKE EXIST ON THIS POST SO WE SET THE USERLIKE STATE
+          setUserlike(checkUserLike[0]);
+          if (checkUserLike[0].isLike === true) {
             setIsLike(true);
           } else {
             setIsLike(false);
           }
         }
-        setUserlike(checkPostlike[0]);
       },
     }
   );
 
   const onLike = () => {
+    // IF THE USER NEVER LIKE THE POST CREATE A NEW LIKE
     if (!isLike && !userLike) {
       const likesData = {
         userId: user.id as string,
@@ -62,6 +70,7 @@ function TextPost({ item }: IProps): JSX.Element {
         isLike: true,
       };
       createLike({ likesData });
+      // IF THE USER ALREADY LIKE THE POST, UPDATE THE EXISTING LIKE TO UNLIKE
     } else if (userLike?.isLike === true) {
       const likesData = {
         userId: user.id as string,
@@ -69,6 +78,7 @@ function TextPost({ item }: IProps): JSX.Element {
         isLike: false,
       };
       updateLike({ likesData, id: userLike.id });
+      // IF THE USER ALREADY UNLIKE THE POST UPDATE THE EXISTING LIKE TO LIKE
     } else if (userLike?.isLike === false) {
       const likesData = {
         userId: user.id as string,

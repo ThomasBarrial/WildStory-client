@@ -68,14 +68,17 @@ function UserProfil(): JSX.Element {
           <Info name="Formation">{formationData.formationName}</Info>
           <Info name="City">{userData.city}</Info>
           <Info name="BithDate">{userData.birthDate}</Info>
-          <div className="mt-10 border-b border-pink pb-2 flex items-center justify-between">
-            <p className="font-bold text-xl">Skills</p>
-            {id === userStore.id && (
-              <Link to={`/edituserskills/${userData.id}`}>
-                <p className=" text-sm underline">Edit your skills</p>
-              </Link>
-            )}
-          </div>
+          {userSkillsData?.length !== 0 && (
+            <div className="mt-10 border-b border-pink pb-2 flex items-center justify-between">
+              <p className="font-bold text-xl">Skills</p>
+              {id === userStore.id && (
+                <Link to={`/edituserskills/${userData.id}`}>
+                  <p className=" text-sm underline">Edit your skills</p>
+                </Link>
+              )}
+            </div>
+          )}
+
           {userSkillsData?.map((skill) => {
             return (
               <div key={skill.id}>

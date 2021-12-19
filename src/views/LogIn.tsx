@@ -62,7 +62,7 @@ function LogIn(): JSX.Element {
           <Form register={register} isError={isError} required />
           <button
             type="submit"
-            className="w-full  text-sm p-2  mt-10 lg:mt-10 bg-pink"
+            className="w-full rounded-md text-sm p-2  mt-10 lg:mt-10 bg-pink"
           >
             Login
           </button>

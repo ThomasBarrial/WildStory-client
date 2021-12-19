@@ -7,8 +7,9 @@ import { useUserFromStore } from '../store/user.slice';
 import Comment from '../components/comments/Comment';
 import Header from '../components/comments/Header';
 import ImageSlider from '../components/post/ImageSlider';
-import PostDetails from '../components/comments/PostDetails';
 import NewComment from '../components/comments/NewComment';
+import TextPost from '../components/post/TextPost';
+import AvatarUser from '../components/post/AvatarUser';
 
 function Comments(): JSX.Element {
   const [isComment, setIsComment] = useState(false);
@@ -46,9 +47,10 @@ function Comments(): JSX.Element {
   return (
     <div className="flex md:w-10/12 lg:w-7/12 mx-auto  w-full">
       <Header />
-      <div className="py-20">
+      <div className="py-20 w-full">
+        <AvatarUser userId={postData?.userId} />
         {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />}
-        <PostDetails postData={postData} />
+        {postData && <TextPost item={postData} />}
         {!isComment && IdUserFormStore !== postData?.userId && (
           <NewComment idPost={id} />
         )}
