@@ -20,7 +20,7 @@ function ListPost(): JSX.Element {
 
   const reverseData = [...data].reverse();
   return (
-    <div className="w-full h-full lg:w-7/12 md:w-12/12 max-w-5xl md:mx-auto">
+    <div className="w-full  pb-20">
       {reverseData?.map((item) => {
         return (
           <div key={item.id}>

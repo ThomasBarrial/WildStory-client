@@ -202,7 +202,7 @@ function CreateUpdateUser(): JSX.Element {
       <form
         onSubmit={handleSubmit(onSubmit)}
         action="Create/Update Post"
-        className="mx-4  lg:w-8/12 lg:mx-auto"
+        className="w-full"
       >
         {formInputs.map((i) => {
           return (

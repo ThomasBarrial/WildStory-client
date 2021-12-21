@@ -14,7 +14,7 @@ function OnePost({ item }: IProps): JSX.Element {
   const { user } = useUserFromStore();
   const IdUserFormStore = user.id;
   return (
-    <div className="mb-12 mt-5">
+    <div className="my-5 mt-5 lg:bg-dark rounded-md lg:p-5">
       <div className="border-b border-pink">
         <div className="flex w-full justify-between items-end">
           <AvatarUser userId={item.userId} />

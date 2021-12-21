@@ -54,7 +54,7 @@ function UserProfil(): JSX.Element {
   }
 
   return (
-    <div className="lg:mx-auto lg:w-7/12 md:w-12/12 mx-auto">
+    <div className="w-full">
       <Header
         userAvatar={userData?.avatarUrl}
         userLanding={userData?.landimageUrl}
