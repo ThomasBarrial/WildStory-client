@@ -7,8 +7,8 @@ import { useHistory, useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { mediaIcons, mediaLinks } from '../API/request';
 import useModal from '../hook/useModal';
-import HeaderUser from '../components/formInputs/HeaderUser';
-import TextInput from '../components/formInputs/TextInput';
+import HeaderUser from '../components/formComponents/HeaderUser';
+import TextInput from '../components/formComponents/TextInput';
 import Modal from '../components/modal/Modal';
 import MediaLink from '../components/user/MediaLink';
 import { useUserFromStore } from '../store/user.slice';
@@ -127,7 +127,10 @@ function SocialeMedia(): JSX.Element {
           id="link"
         />
         <div className="flex flex-col lg:flex-row items-end mt-5 mb-20 justify-between">
-          <button className=" p-2 w-full lg:w-3/12  mt-5 bg-pink" type="submit">
+          <button
+            className=" p-2 w-full rounded-md lg:w-3/12  mt-5 bg-pink"
+            type="submit"
+          >
             Add sociale link
           </button>
           {pathname === `/editsocialmedia/${userStore.id}` ? (
@@ -142,14 +145,14 @@ function SocialeMedia(): JSX.Element {
                 <button
                   type="button"
                   onClick={() => router.push(`/`)}
-                  className="font-bold text-right font-lexend mt-3 lg:mt-0 w-full lg:w-12/12  underline"
+                  className="font-bold rounded-md text-right font-lexend mt-3 lg:mt-0 w-full lg:w-12/12  underline"
                 >
                   Skip this step
                 </button>
               ) : (
                 <button
                   onClick={() => router.push(`/`)}
-                  className="font-bold font-lexend w-full  mt-5 lg:mt-0 lg:w-12/12 p-2 px-10  bg-pink"
+                  className="font-bold rounded-md font-lexend w-full  mt-5 lg:mt-0 lg:w-12/12 p-2 px-10  bg-pink"
                   type="submit"
                 >
                   next

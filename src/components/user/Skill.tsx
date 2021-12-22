@@ -41,7 +41,7 @@ function Skill({ skill, isForm }: IProps): JSX.Element {
     }
   }
   return (
-    <div className="flex text-sm justify-between border-b my-5 pb-2 border-pink">
+    <div className="flex text-sm justify-between border-b border-opacity-40 my-5 pb-2 border-pink">
       {isModal && (
         <Modal
           title="Ouups"

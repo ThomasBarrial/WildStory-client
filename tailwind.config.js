@@ -21,6 +21,7 @@ module.exports = {
       },
       width: {
         feed: '900px',
+        comments: '47%',
       },
       margin: {
         span: '0.15rem',

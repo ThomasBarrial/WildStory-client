@@ -6,14 +6,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { AxiosError } from 'axios';
 import { useMutation, useQuery } from 'react-query';
 
-import TextInput from '../components/formInputs/TextInput';
+import TextInput from '../components/formComponents/TextInput';
 import { auth, formation, user } from '../API/request';
-import DateInput from '../components/formInputs/DateInput';
-import { formInputs } from '../components/formInputs/FormInputs';
+import DateInput from '../components/formComponents/DateInput';
+import { formInputs } from '../components/formComponents/FormInputs';
 
 import PasswordForm from './PasswordForm';
-import SelectInput from '../components/formInputs/SelectInput';
-import HeaderUser from '../components/formInputs/HeaderUser';
+import SelectInput from '../components/formComponents/SelectInput';
+import HeaderUser from '../components/formComponents/HeaderUser';
 import { useUserFromStore } from '../store/user.slice';
 import useModal from '../hook/useModal';
 import Modal from '../components/modal/Modal';
@@ -234,7 +234,7 @@ function CreateUpdateUser(): JSX.Element {
         ) : (
           <button
             onClick={() => setIsPassword(true)}
-            className="text-pink underline mt-5"
+            className="text-pink underline rounded-md mt-5"
             type="button"
           >
             EditPassword

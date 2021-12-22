@@ -34,7 +34,7 @@ function Layout(): JSX.Element {
     <div className=" w-screen bg-black flex pb-3 lg:pb-2 font-lexend text-white  md:w-12/12 max-w-6xl md:mx-auto">
       <Navabar />
 
-      <div className="pt-12 w-full lg:px-5">
+      <div className="pt-14 lg:pt-12 w-full lg:pl-5">
         <Switch>
           <Routes />
         </Switch>{' '}

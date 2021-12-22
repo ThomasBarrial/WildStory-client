@@ -22,7 +22,7 @@ function AvatarUser({ userId }: IProps): JSX.Element {
   }
   return (
     <Link to={`/profil/${data.id}`}>
-      <div className="flex items-center mx-3 lg:mx-0 py-3">
+      <div className="flex items-center mx-3 lg:mx-0 pb-3">
         <div
           className="h-12 w-12 rounded-full border border-pink"
           style={{

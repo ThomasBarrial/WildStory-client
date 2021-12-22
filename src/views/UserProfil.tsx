@@ -59,7 +59,7 @@ function UserProfil(): JSX.Element {
         userAvatar={userData?.avatarUrl}
         userLanding={userData?.landimageUrl}
       />
-      <div className="px-4 lg:px-0 h-full transform -translate-y-16">
+      <div className="px-4 lg:px-5 h-full transform -translate-y-16 bg-dark rounded-md py-5">
         <p className="font-bold mt-2 text-xl lg:text-2xl">
           {userData.username}
         </p>
