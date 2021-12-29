@@ -167,7 +167,7 @@ function CreateUpdateUser(): JSX.Element {
 
   return (
     <div
-      className={`w-sreen py-8  pb-14 bg-black ${
+      className={`w-sreen py-8 px-4 lg:px-0 pb-28 lg:pb-14 bg-black ${
         !id && `fixed h-screen inset-0 z-50 overflow-y-scroll`
       } `}
     >

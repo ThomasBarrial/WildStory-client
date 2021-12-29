@@ -10,6 +10,7 @@ import UserSkills from './views/UserSkills';
 import LogIn from './views/LogIn';
 import AssetSettings from './components/user/AssetsUser/AssetSettings';
 import Logout from './views/Logout';
+import Formations from './views/Formations';
 
 function Routes(): JSX.Element {
   return (
@@ -28,6 +29,7 @@ function Routes(): JSX.Element {
       <Route exact path="/socialmedia/:id" component={SocialeMedia} />
       <Route exact path="/editsocialmedia/:id" component={SocialeMedia} />
       <Route exact path="/logout" component={Logout} />
+      <Route exact path="/formation/:id" component={Formations} />
     </>
   );
 }

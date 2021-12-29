@@ -56,6 +56,9 @@ interface IUser {
   comments: IComments[];
   mediaLink: IMediaLink[];
 }
+interface IUserFormation {
+  id: string;
+}
 
 interface INewUser {
   id?: string;

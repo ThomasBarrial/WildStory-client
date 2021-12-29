@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo3.png';
 import settings from '../../assets/icons/settings.svg';
@@ -6,7 +6,11 @@ import home from '../../assets/icons/home.svg';
 import newpost from '../../assets/icons/newpost.svg';
 import { useUserFromStore } from '../../store/user.slice';
 
-function Navabar(): JSX.Element {
+interface IProps {
+  setIsSideBar: Dispatch<SetStateAction<boolean>>;
+}
+
+function Navabar({ setIsSideBar }: IProps): JSX.Element {
   const { user } = useUserFromStore();
   const icons = [
     { path: '/', icon: home, alt: 'home' },
@@ -15,11 +19,15 @@ function Navabar(): JSX.Element {
   ];
   return (
     <div className="w-full  max-w-6xl flex justify-between fixed z-50 bg-black items-center border-b lg:border-none  border-pink  px-4 py-4 lg:py-3">
-      <div className="lg:hidden  flex flex-col">
+      <button
+        onClick={() => setIsSideBar(true)}
+        type="button"
+        className="lg:hidden  flex flex-col"
+      >
         <span className="h-span my-span w-7 bg-pink" />
         <span className="h-span my-span w-7 bg-pink" />
         <span className="h-span my-span w-7 bg-pink" />
-      </div>
+      </button>
       <div className="flex lg:w-full justify-end lg:justify-between items-center">
         <Link className="w-5/12 flex lg:w-32" to="/">
           <img src={logo} alt="logo" />

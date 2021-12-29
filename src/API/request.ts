@@ -76,6 +76,8 @@ export const formation = {
     AXIOS.get('/formations').then((res) => res.data),
   getOne: (id: string): Promise<IFormation> =>
     AXIOS.get(`/formations/${id}`).then((res) => res.data),
+  getUsers: (id?: string): Promise<IUserFormation[]> =>
+    AXIOS.get(`/formations/users/${id}`).then((res) => res.data),
 };
 
 export const userSkills = {

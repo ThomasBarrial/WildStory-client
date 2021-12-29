@@ -18,9 +18,18 @@ function ListPost(): JSX.Element {
   }
   if (data.length === 0) return <p>No post</p>;
 
+  // ORDER THE POST BY THERE DATE FROM THE OLDER THE YOUNGER
+  data.sort(
+    (date1, date2) =>
+      new Date(date1.createdAt).setHours(0, 0, 0, 0) -
+      new Date(date2.createdAt).setHours(0, 0, 0, 0)
+  );
+
+  // THEN REVERSE THE POST'S ARRAY TO RENDER THE YOUNGER ONE IN FIRST
   const reverseData = [...data].reverse();
+
   return (
-    <div className="w-full  pb-20">
+    <div className="w-full pt-3 lg:pt-0 pb-20">
       {reverseData?.map((item) => {
         return (
           <div key={item.id}>
