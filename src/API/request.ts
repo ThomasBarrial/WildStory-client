@@ -128,3 +128,12 @@ export const auth = {
   me: (): Promise<IUser> => AXIOS.get(`/auth/me`).then((res) => res.data),
   logout: (): Promise<{ message: string }> => AXIOS.get('/auth/logout'),
 };
+
+export const topics = {
+  getAll: (): Promise<ITopics[]> =>
+    AXIOS.get(`/topics`).then((res) => res.data),
+  getOne: (id: string): Promise<ITopics> =>
+    AXIOS.get(`/topics/${id}`).then((res) => res.data),
+  getPost: (id: string): Promise<IPost[]> =>
+    AXIOS.get(`/topics/posts/${id}`).then((res) => res.data),
+};

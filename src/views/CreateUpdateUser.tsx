@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-// import { useUserFromStore } from '../store/user.slice';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AxiosError } from 'axios';
 import { useMutation, useQuery } from 'react-query';
@@ -164,11 +163,10 @@ function CreateUpdateUser(): JSX.Element {
   if (formationsError || isError || usertoUpdateError) {
     return <p>Error</p>;
   }
-
   return (
     <div
-      className={`w-sreen py-8 px-4 lg:px-0 pb-28 lg:pb-14 bg-black ${
-        !id && `fixed h-screen inset-0 z-50 overflow-y-scroll`
+      className={`w-sreen py-8 px-4 lg:px-0 pb-28 lg:pb-14   bg-black ${
+        !id && `fixed h-screen inset-0 z-50 lg:px-44 overflow-y-scroll`
       } `}
     >
       {isModal && (

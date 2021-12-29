@@ -3,16 +3,16 @@ import { useForm } from 'react-hook-form';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 import back from '../assets/icons/back.svg';
-import TextInput from '../components/formComponents/TextInput';
 import TextArea from '../components/formComponents/TextArea';
 import { useUserFromStore } from '../store/user.slice';
 import { post } from '../API/request';
 import useModal from '../hook/useModal';
 import Modal from '../components/modal/Modal';
 import UploadImages from '../components/post/UploadImages';
+import SelectTopics from '../components/formComponents/SelectTopics';
 
 interface IFormData {
-  title: string;
+  topicsId: string;
   text: string;
 }
 
@@ -36,7 +36,7 @@ function CreateUpdatePost(): JSX.Element {
     enabled: Boolean(postId),
     onSuccess: (data) => {
       setUploadImages(data.imageUrl);
-      setValue('title', data.title);
+      setValue('topicsId', data.topicsId);
       setValue('text', data.text);
     },
   });
@@ -55,7 +55,7 @@ function CreateUpdatePost(): JSX.Element {
       setIsModal(true);
       setMessage('Your post has been edit');
       setUploadImages(data.imageUrl);
-      setValue('title', data.title);
+      setValue('topicsId', data.topicsId);
       setValue('text', data.text);
     },
   });
@@ -63,9 +63,9 @@ function CreateUpdatePost(): JSX.Element {
   // FUNCTION EXECUTE WHEN USER CLIQUE SUBMIT
   const onSubmit = (formData: IFormData) => {
     const postData = {
-      title: formData.title,
       text: formData.text,
       userId: IdUserFormStore,
+      topicsId: formData.topicsId,
       imageUrl: uploadImages,
     };
     // IF THE POSTID FROM THE ROUT PATH IS UNDIFINED WE CREATE A NEW POST ELSE WE UPDATE THE CURRENT ONE
@@ -105,14 +105,11 @@ function CreateUpdatePost(): JSX.Element {
         onSubmit={handleSubmit(onSubmit)}
         action="Create/Update Post"
       >
-        <TextInput
-          label="Post title"
-          placeholder="title..."
+        <SelectTopics
           register={register}
-          name="title"
+          name="topicsId"
           required
-          id="title"
-          error={errors.placeholder}
+          id="topicsId"
         />
         <TextArea
           label="Post Description"

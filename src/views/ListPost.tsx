@@ -16,7 +16,7 @@ function ListPost(): JSX.Element {
   if (error || !data) {
     return <p>Error..</p>;
   }
-  if (data.length === 0) return <p>No post</p>;
+  if (data.length === 0) return <p className="mt-10">No post</p>;
 
   // ORDER THE POST BY THERE DATE FROM THE OLDER THE YOUNGER
   data.sort(

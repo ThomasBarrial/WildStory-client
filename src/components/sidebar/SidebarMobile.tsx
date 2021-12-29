@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import close from '../../assets/icons/close.svg';
 import Formations from './Components/Formations';
+import Topics from './Components/Topics';
 
 interface IProps {
   isSidebar: boolean;
@@ -22,11 +23,11 @@ function SidebarMobile({ isSidebar, setIsSideBar }: IProps): JSX.Element {
           <img src={close} alt="close" />
         </button>
       </div>
-      <div className="bg-dark w-full lg:w-80 rounded-md p-4  h-48 text-white">
+      <div className="bg-dark w-full lg:w-80 rounded-md p-4  h-56 text-white">
         <Formations setIsSideBar={setIsSideBar} />
       </div>
-      <div className="bg-dark w-full lg:w-80 lg:fixed rounded-md p-2  h-40 lg:mt-96 text-white my-5">
-        you may know this person
+      <div className="bg-dark w-full lg:w-80 lg:fixed rounded-md p-4  h-56 lg:mt-96 text-white my-5">
+        <Topics setIsSideBar={setIsSideBar} />
       </div>
     </div>
   );

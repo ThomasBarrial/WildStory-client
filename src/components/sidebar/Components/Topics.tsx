@@ -1,16 +1,15 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router';
-import { formation } from '../../../API/request';
+import { topics } from '../../../API/request';
 
 interface IProps {
   setIsSideBar: Dispatch<SetStateAction<boolean>>;
 }
 
-function Formations({ setIsSideBar }: IProps): JSX.Element {
-  const { data, isLoading, error } = useQuery<IFormation[]>(
-    ['getAllFormations'],
-    () => formation.getAll()
+function Topics({ setIsSideBar }: IProps): JSX.Element {
+  const { data, isLoading, error } = useQuery<ITopics[]>(['getAllTopcis'], () =>
+    topics.getAll()
   );
 
   const router = useHistory();
@@ -23,19 +22,19 @@ function Formations({ setIsSideBar }: IProps): JSX.Element {
   }
   return (
     <div>
-      <h4 className="text-lg border-b pb-1 mb-1 border-pink">Formations</h4>
+      <h4 className="text-lg border-b pb-1 mb-1 border-pink">Topics</h4>
       {data.map((item) => {
         return (
           <div className="my-2 lg:my-1" key={item.id}>
             <button
               onClick={() => {
-                router.push(`/formation/${item.id}`);
+                router.push(`/topic/${item.id}`);
                 setIsSideBar(false);
               }}
               type="button"
             >
               <p className="text-base lg:text-sm font-thin">
-                {item.formationName}
+                {item.topicsName}
               </p>
             </button>
           </div>
@@ -45,4 +44,4 @@ function Formations({ setIsSideBar }: IProps): JSX.Element {
   );
 }
 
-export default Formations;
+export default Topics;

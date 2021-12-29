@@ -1,16 +1,15 @@
 interface IPost {
   id: string;
-  title: string;
   text: string;
   likes: ILikes[];
   imageUrl: string[];
   createdAt: Date;
   updatedAt: Date;
   userId: string;
+  topicsId: string;
   comments: IComments[];
 }
 interface IPostData {
-  title: string;
   text: string;
   imageUrl: string[];
   userId: string | undefined;
@@ -116,4 +115,9 @@ interface IMediaIcon {
 interface IPasswordMutate {
   password: string | undefined;
   oldPassword: string | undefined;
+}
+
+interface ITopics {
+  id: string;
+  topicsName: string;
 }

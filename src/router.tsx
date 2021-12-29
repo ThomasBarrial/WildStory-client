@@ -11,6 +11,7 @@ import LogIn from './views/LogIn';
 import AssetSettings from './components/user/AssetsUser/AssetSettings';
 import Logout from './views/Logout';
 import Formations from './views/Formations';
+import OneTopic from './views/OneTopic';
 
 function Routes(): JSX.Element {
   return (
@@ -30,6 +31,7 @@ function Routes(): JSX.Element {
       <Route exact path="/editsocialmedia/:id" component={SocialeMedia} />
       <Route exact path="/logout" component={Logout} />
       <Route exact path="/formation/:id" component={Formations} />
+      <Route exact path="/topic/:id" component={OneTopic} />
     </>
   );
 }
