@@ -16,7 +16,7 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
   const { user } = useUserFromStore();
 
   return (
-    <div className="w-full flex flex-col items-end">
+    <div className="w-full flex flex-col mt-5 items-end">
       {isLandingUpdate && (
         <UserModal
           name="landimageUrl"
@@ -28,7 +28,7 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
         <UserModal name="avatarUrl" label="avatar" isOpen={setIsAvatarUpdate} />
       )}
       <div
-        className="w-full flex p-3 items-end h-44 lg:h-52 border-b lg:border border-pink"
+        className="w-full flex p-3 rounded-md items-end h-44 lg:h-52 border-b lg:border border-pink"
         style={{
           backgroundImage: `url(${userLanding})`,
           backgroundPosition: 'center',
@@ -47,7 +47,7 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
         )}
       </div>
       <div
-        className="w-24 h-24 flex items-end rounded-full border border-pink mr-6 transform -translate-y-12"
+        className="w-24 h-24 flex items-end z-20 rounded-full border border-pink mr-6 transform -translate-y-12"
         style={{
           backgroundImage: `url(${userAvatar})`,
           backgroundPosition: 'center',

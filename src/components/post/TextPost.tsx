@@ -99,19 +99,18 @@ function TextPost({ item }: IProps): JSX.Element {
   return (
     <div className="mx-3 lg:mx-0 pb-5">
       <div className="flex justify-between">
-        <h3 className="text-lg">{item.title}</h3>
         <div className="flex">
           <p className="text-base mx-2">{count}</p>
           <button type="button" onClick={() => onLike()}>
             {isLike ? (
               <img className="h-5 w-5" src={like} alt="like" />
             ) : (
-              <img className="h-5 w-5" src={unlike} alt="unlike" />
+              <img className="h-5 w-5" src={unlike} alt="like" />
             )}
           </button>
         </div>
       </div>
-      <p className="text-xs mt-3">
+      <p className="text-xs font-bold mt-3">
         posted : {new Date(item.createdAt).toLocaleDateString('fr-FR')}
       </p>
       <p
@@ -122,13 +121,15 @@ function TextPost({ item }: IProps): JSX.Element {
       >
         {item.text}
       </p>
-      <button
-        onClick={() => setIsText((c) => !c)}
-        type="button"
-        className="text-sm underline"
-      >
-        {istext ? 'Plus..' : 'moins'}
-      </button>
+      {item.text.split('').length > 200 && (
+        <button
+          onClick={() => setIsText((c) => !c)}
+          type="button"
+          className="text-sm underline"
+        >
+          {istext ? 'Plus..' : 'moins'}
+        </button>
+      )}
     </div>
   );
 }

@@ -32,7 +32,7 @@ function SkillInput({ register, skillsData }: IProps): JSX.Element {
         Rate your skill between 0 and 10
         <input
           {...register('note')}
-          className="ml-5 w-1/6 bg-black mt-2 border rounded-md focus:outline-none p-2 border-white"
+          className="ml-5 w-1/6 bg-black  mt-2 border rounded-md focus:outline-none p-2 border-white"
           type="number"
           min="0"
           max="10"

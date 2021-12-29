@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import AlerteMessage from '../formInputs/AlerteMessage';
+import AlerteMessage from '../formComponents/AlerteMessage';
 
 interface IProps {
   setUploadImages: Dispatch<SetStateAction<string[]>>;
@@ -55,7 +55,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
         <label htmlFor="upload" className="font-bold">
           Upload your images
           <input
-            className="bg-black w-full mt-2 border focus:outline-none p-2 border-white"
+            className="bg-black rounded-md w-full mt-2 border focus:outline-none p-2 border-white"
             type="text"
             onChange={(e) => {
               setImageUrl(e.target.value);
@@ -73,7 +73,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
           <button
             type="submit"
             onClick={(e) => handleImageSubmit(e)}
-            className="mt-5 border border-pink text-pink py-2 w-6/12"
+            className="mt-5 border rounded-md border-pink text-pink py-2 w-6/12"
           >
             Add image
           </button>

@@ -6,8 +6,8 @@ import { useHistory, useLocation } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { skills, userSkills } from '../API/request';
-import HeaderUser from '../components/formInputs/HeaderUser';
-import SkillInput from '../components/formInputs/SkillInput';
+import HeaderUser from '../components/formComponents/HeaderUser';
+import SkillInput from '../components/formComponents/SkillInput';
 import Skill from '../components/user/Skill';
 import useModal from '../hook/useModal';
 import Modal from '../components/modal/Modal';
@@ -108,7 +108,7 @@ function UserSkills(): JSX.Element {
         <SkillInput register={register} skillsData={skillsData} />
         <div className="flex flex-col  items-end mt-12 justify-between">
           <button
-            className="font-bold font-lexend w-full mb-10 lg:w-3/12 p-2 text-pink  border border-pink"
+            className="font-bold rounded-md font-lexend w-full mb-10 lg:w-3/12 p-2 text-pink  border border-pink"
             type="submit"
           >
             Add skill
@@ -125,14 +125,14 @@ function UserSkills(): JSX.Element {
                 <button
                   type="button"
                   onClick={() => router.push(`/socialmedia/${user.id}`)}
-                  className="font-bold text-right font-lexend mt-3 lg:mt-0 w-full lg:w-3/12  underlin"
+                  className="font-bold text-right rounded-md font-lexend mt-3 lg:mt-0 w-full lg:w-3/12  underlin"
                 >
                   Skip this step
                 </button>
               ) : (
                 <button
                   onClick={() => router.push(`/socialmedia/${user.id}`)}
-                  className="font-bold font-lexend w-full  mt-5 lg:mt-0 p-2  text-pink  border border-pink"
+                  className="font-bold font-lexend rounded-md w-full  mt-5 lg:mt-0 p-2  text-pink  border border-pink"
                   type="submit"
                 >
                   next

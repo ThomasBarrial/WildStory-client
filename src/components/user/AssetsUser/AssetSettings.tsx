@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import { user } from '../../../API/request';
 import { useUserFromStore } from '../../../store/user.slice';
-import HeaderUser from '../../formInputs/HeaderUser';
+import HeaderUser from '../../formComponents/HeaderUser';
 import UserModal from '../../modal/UserModal';
 import Avatar from './Avatar';
 import Landing from './Landing';
@@ -60,7 +60,7 @@ function AssetSettings(): JSX.Element {
         <div className="flex flex-col h-full items-end">
           <button
             onClick={() => router.push(`/userskills/${id}`)}
-            className="font-bold font-lexend w-full  my-3 lg:mt-0  p-2  border border-white lg:w-4/12"
+            className="font-bold rounded-md font-lexend w-full  my-3 lg:mt-0  p-2  border border-white lg:w-4/12"
             type="submit"
           >
             next
@@ -68,7 +68,7 @@ function AssetSettings(): JSX.Element {
           <button
             type="button"
             onClick={() => router.push(`/userskills/${id}`)}
-            className="font-bold text-right font-lexend lg:mt-0 w-full lg:w-3/12  underline"
+            className="font-bold rounded-md text-right font-lexend lg:mt-0 w-full lg:w-3/12  underline"
           >
             Skip this step
           </button>

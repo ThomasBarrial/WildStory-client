@@ -20,7 +20,8 @@ module.exports = {
         span: '0.25rem',
       },
       width: {
-        feed: '900px',
+        feed: '69%',
+        comments: '47%',
       },
       margin: {
         span: '0.15rem',

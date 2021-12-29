@@ -3,23 +3,23 @@ import { useForm } from 'react-hook-form';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 import back from '../assets/icons/back.svg';
-import TextInput from '../components/formInputs/TextInput';
-import TextArea from '../components/formInputs/TextArea';
+import TextArea from '../components/formComponents/TextArea';
 import { useUserFromStore } from '../store/user.slice';
 import { post } from '../API/request';
 import useModal from '../hook/useModal';
 import Modal from '../components/modal/Modal';
 import UploadImages from '../components/post/UploadImages';
+import SelectTopics from '../components/formComponents/SelectTopics';
 
 interface IFormData {
-  title: string;
+  topicsId: string;
   text: string;
 }
 
 function CreateUpdatePost(): JSX.Element {
   const { id: postId } = useParams<{ id: string | undefined }>();
-
   const [uploadImages, setUploadImages] = useState<string[]>([]);
+
   const {
     register,
     handleSubmit,
@@ -31,15 +31,17 @@ function CreateUpdatePost(): JSX.Element {
   const { isModal, setIsModal, message, setMessage } = useModal();
   const router = useHistory();
 
+  // FETCH THE POST'S DATA (ONLY IF POSTID IS DEFINED)
   useQuery<IPost>(['post', postId], () => post.getOne(postId as string), {
     enabled: Boolean(postId),
     onSuccess: (data) => {
       setUploadImages(data.imageUrl);
-      setValue('title', data.title);
+      setValue('topicsId', data.topicsId);
       setValue('text', data.text);
     },
   });
 
+  // CREATE A NEW POST
   const { mutateAsync: createData, error: postError } = useMutation(post.post, {
     onSuccess: () => {
       setIsModal(true);
@@ -47,30 +49,33 @@ function CreateUpdatePost(): JSX.Element {
     },
   });
 
+  // UPDATE THE CURRENT POST (ONLY IF ID IN THE ROUTPATH)
   const { mutateAsync: editData, error: putError } = useMutation(post.put, {
     onSuccess: (data) => {
       setIsModal(true);
       setMessage('Your post has been edit');
       setUploadImages(data.imageUrl);
-      setValue('title', data.title);
+      setValue('topicsId', data.topicsId);
       setValue('text', data.text);
     },
   });
 
+  // FUNCTION EXECUTE WHEN USER CLIQUE SUBMIT
   const onSubmit = (formData: IFormData) => {
     const postData = {
-      title: formData.title,
       text: formData.text,
       userId: IdUserFormStore,
+      topicsId: formData.topicsId,
       imageUrl: uploadImages,
     };
+    // IF THE POSTID FROM THE ROUT PATH IS UNDIFINED WE CREATE A NEW POST ELSE WE UPDATE THE CURRENT ONE
     if (!postId) return createData({ postData });
     return editData({ id: postId, postData });
   };
 
   const error = postError || putError;
   return (
-    <div className="text-white w-full  mt-10 px-4 pb-20 lg:px-0">
+    <div className="text-white w-full min-h-screen  mt-10 px-4 pb-20 lg:px-0">
       {isModal && (
         <Modal
           title="Every things geos well"
@@ -100,14 +105,11 @@ function CreateUpdatePost(): JSX.Element {
         onSubmit={handleSubmit(onSubmit)}
         action="Create/Update Post"
       >
-        <TextInput
-          label="Post title"
-          placeholder="title..."
+        <SelectTopics
           register={register}
-          name="title"
+          name="topicsId"
           required
-          id="title"
-          error={errors.placeholder}
+          id="topicsId"
         />
         <TextArea
           label="Post Description"
@@ -120,7 +122,7 @@ function CreateUpdatePost(): JSX.Element {
         />
         <button
           type="submit"
-          className="mt-5 border border-pink text-pink py-2 w-6/12"
+          className="mt-5 border rounded-md border-pink text-pink py-2 w-6/12"
         >
           {postId ? 'Edit your post' : 'Create post'}
         </button>

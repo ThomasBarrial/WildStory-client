@@ -76,6 +76,8 @@ export const formation = {
     AXIOS.get('/formations').then((res) => res.data),
   getOne: (id: string): Promise<IFormation> =>
     AXIOS.get(`/formations/${id}`).then((res) => res.data),
+  getUsers: (id?: string): Promise<IUserFormation[]> =>
+    AXIOS.get(`/formations/users/${id}`).then((res) => res.data),
 };
 
 export const userSkills = {
@@ -125,4 +127,13 @@ export const auth = {
     ),
   me: (): Promise<IUser> => AXIOS.get(`/auth/me`).then((res) => res.data),
   logout: (): Promise<{ message: string }> => AXIOS.get('/auth/logout'),
+};
+
+export const topics = {
+  getAll: (): Promise<ITopics[]> =>
+    AXIOS.get(`/topics`).then((res) => res.data),
+  getOne: (id: string): Promise<ITopics> =>
+    AXIOS.get(`/topics/${id}`).then((res) => res.data),
+  getPost: (id: string): Promise<IPost[]> =>
+    AXIOS.get(`/topics/posts/${id}`).then((res) => res.data),
 };

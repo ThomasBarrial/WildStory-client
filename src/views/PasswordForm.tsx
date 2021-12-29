@@ -6,7 +6,7 @@ import {
   FieldValues,
   UseFormRegister,
 } from 'react-hook-form';
-import PassworrdInput from '../components/formInputs/PassworrdInput';
+import PassworrdInput from '../components/formComponents/PassworrdInput';
 
 interface IMdp {
   error: DeepMap<FieldValues, FieldError>;
