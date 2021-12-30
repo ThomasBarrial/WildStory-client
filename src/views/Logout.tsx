@@ -14,7 +14,7 @@ function Logout(): JSX.Element | null {
     {
       onSuccess: () => {
         dispatchLogout();
-        history.push('/login');
+        history.push('/');
       },
     }
   );

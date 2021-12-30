@@ -55,13 +55,13 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
         <div className="w-full">
           <form onSubmit={handleSubmit(onSubmit)} action="postComment">
             <textarea
-              className="bg-black rounded-md font-thin text-base text-white border border-pink w-full focus:outline-none h-24 px-3 py-3"
+              className="bg-black rounded-sm font-thin text-base text-white border border-pink w-full focus:outline-none h-24 px-3 py-3"
               id="text"
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...register('text')}
             />
             <button
-              className="text-lg rounded-md my-5 border text-pink border-pink w-6/12 py-1"
+              className="text-lg rounded-sm my-5 border text-pink border-pink w-6/12 py-1"
               type="submit"
             >
               Comment

@@ -1,30 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useUserFromStore } from '../../store/user.slice';
-import settings from '../../assets/icons/settings.svg';
 import home from '../../assets/icons/home.svg';
-import newpost from '../../assets/icons/newpost.svg';
 import search from '../../assets/icons/search.svg';
+import formations from '../../assets/icons/formations.svg';
+import topics from '../../assets/icons/topics.svg';
 
 function MobileNavBar(): JSX.Element {
-  const { user } = useUserFromStore();
   const icons = [
     { path: '/', icon: home, alt: 'home' },
-    { path: '/newpost', icon: newpost, alt: 'newpost' },
-    { path: `/settings/${user.id}`, icon: settings, alt: 'settings' },
     { path: `/search`, icon: search, alt: 'search' },
+    { path: `/formations`, icon: formations, alt: 'formations' },
+    { path: `/topics`, icon: topics, alt: 'topics' },
   ];
   return (
-    <div className="lg:hidden fixed bottom-0 w-full z-30 flex items-center justify-center bg-black border-t border-pink h-20">
+    <div className="lg:hidden fixed bottom-0 w-full z-30 flex items-center justify-center bg-black h-20">
       <div className="flex lg:hidden">
         {icons.map((item) => {
           return (
-            <Link className="mx-8" key={item.path} to={item.path}>
+            <Link
+              className="mx-6 flex flex-col items-center"
+              key={item.path}
+              to={item.path}
+            >
               <img
-                className="h-6 w-6 cursor-pointer"
+                className="h-6 cursor-pointer"
                 src={item.icon}
                 alt={item.alt}
               />
+              <p className="text-xs text-pink mt-2">{item.alt}</p>
             </Link>
           );
         })}

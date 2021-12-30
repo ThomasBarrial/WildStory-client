@@ -1,17 +1,15 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { formation } from '../../../API/request';
 
-interface IProps {
-  setIsSideBar: Dispatch<SetStateAction<boolean>>;
-}
-
-function Formations({ setIsSideBar }: IProps): JSX.Element {
+function Formations(): JSX.Element {
   const { data, isLoading, error } = useQuery<IFormation[]>(
     ['getAllFormations'],
     () => formation.getAll()
   );
+
+  const { pathname } = useLocation();
 
   const router = useHistory();
 
@@ -22,19 +20,27 @@ function Formations({ setIsSideBar }: IProps): JSX.Element {
     return <p>Error..</p>;
   }
   return (
-    <div>
-      <h4 className="text-lg border-b pb-1 mb-1 border-pink">Formations</h4>
+    <div className="mt-2 lg:mt-0 p-4 lg:p-0">
+      <h4 className="text-xl lg:text-lg font-bold lg:font-normal border-b pb-1 mb-1 border-pink">
+        Formations
+      </h4>
       {data.map((item) => {
         return (
-          <div className="my-2 lg:my-1" key={item.id}>
+          <div
+            className="my-4 pb-2 lg:pb-0 lg:my-1 lg:border-none border-b border-pink border-opacity-50"
+            key={item.id}
+          >
             <button
               onClick={() => {
                 router.push(`/formation/${item.id}`);
-                setIsSideBar(false);
               }}
               type="button"
             >
-              <p className="text-base lg:text-sm font-thin">
+              <p
+                className={`text-lg hover:text-pink duration-300  lg:text-sm lg:font-thin ${
+                  pathname === `/formation/${item.id}` && 'text-pink'
+                }`}
+              >
                 {item.formationName}
               </p>
             </button>

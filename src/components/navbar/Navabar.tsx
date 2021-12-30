@@ -1,68 +1,58 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo3.png';
-import settings from '../../assets/icons/settings.svg';
-import home from '../../assets/icons/home.svg';
-import newpost from '../../assets/icons/newpost.svg';
 import { useUserFromStore } from '../../store/user.slice';
 import defaultAvatar from '../../assets/defaultAvatar.png';
+import NavIcons from './components/NavIcons';
+import MobileIcons from './components/MobileIcons';
 
-interface IProps {
-  setIsSideBar: Dispatch<SetStateAction<boolean>>;
-}
-
-function Navabar({ setIsSideBar }: IProps): JSX.Element {
+function Navabar(): JSX.Element {
   const { user } = useUserFromStore();
-  const icons = [
-    { path: '/', icon: home, alt: 'home' },
-    { path: '/newpost', icon: newpost, alt: 'newpost' },
-    { path: `/settings/${user.id}`, icon: settings, alt: 'settings' },
-  ];
+
   return (
-    <div className="w-full  max-w-6xl flex justify-between fixed z-50 bg-black items-center border-b lg:border-none  border-pink  px-4 py-4 lg:py-3">
-      <button
-        onClick={() => setIsSideBar(true)}
-        type="button"
-        className="lg:hidden  flex flex-col"
-      >
-        <span className="h-span my-span w-7 bg-pink" />
-        <span className="h-span my-span w-7 bg-pink" />
-        <span className="h-span my-span w-7 bg-pink" />
-      </button>
-      <div className="flex lg:w-full justify-end lg:justify-between items-center">
-        <Link className="w-5/12 flex lg:w-32" to="/">
+    <div className="w-full  max-w-6xl flex justify-between fixed z-50 bg-black items-center px-4 py-5 lg:py-3">
+      <div className="flex lg:w-full justify-between w-full lg:justify-between items-center">
+        <Link className="flex w-4/12 lg:w-32" to="/">
           <img src={logo} alt="logo" />
         </Link>
-        <div className=" flex h-full items-center ">
-          <div className="hidden lg:flex">
-            {icons.map((item) => {
-              return (
-                <Link className="mx-2" key={item.path} to={item.path}>
-                  <img
-                    className="h-5 w-5 cursor-pointer"
-                    src={item.icon}
-                    alt={item.alt}
-                  />
-                </Link>
-              );
-            })}
+        {user.logged === false ? (
+          <div>
+            <Link
+              className="border mx-2 py-2 px-4 font-thin text-sm text-white hover:border-pink hover:text-pink rounded-sm"
+              to="/login"
+            >
+              SignIn
+            </Link>
+            <Link
+              className="border ml-2 py-2 px-4 font-thin text-sm text-white hover:border-pink hover:text-pink rounded-sm"
+              to="/signup"
+            >
+              SignUp
+            </Link>
           </div>
-          <Link to={`/profil/${user.id}`}>
-            <div
-              className="h-10 w-10 ml-2 cursor-pointer rounded-full border border-pink"
-              style={{
-                backgroundImage: `url(${
-                  user.avatarUrl === null || user.avatarUrl === undefined
-                    ? defaultAvatar
-                    : user.avatarUrl
-                })`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-              }}
-            />
-          </Link>
-        </div>
+        ) : (
+          <div className=" flex h-full items-center ">
+            {/* ONLY ON DESKTOP */}
+            <NavIcons />
+            {/* ONLY ON MOBILE */}
+            <MobileIcons />
+            <Link to={`/profil/${user.id}`}>
+              <div
+                className="h-10 w-10 ml-2 cursor-pointer rounded-full border border-pink"
+                style={{
+                  backgroundImage: `url(${
+                    user.avatarUrl === null || user.avatarUrl === undefined
+                      ? defaultAvatar
+                      : user.avatarUrl
+                  })`,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                }}
+              />
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

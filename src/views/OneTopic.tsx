@@ -2,8 +2,10 @@ import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { topics } from '../API/request';
 import OnePost from '../components/post/OnePost';
+import back from '../assets/icons/back.svg';
 
 function OneTopic(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -32,11 +34,21 @@ function OneTopic(): JSX.Element {
   }
 
   return (
-    <div className="mt-5  lg:bg-dark rounded-lg lg:px-0">
-      <div className="p-4 lg:mx-4 flex items-end justify-between border-b border-pink">
-        <h4 className="text-2xl mt-2 ">{topicsData.topicsName}</h4>
-        <h4>Topics</h4>
+    <div className="mt-5 lg:mt-0 mb-20  rounded-lg lg:px-0">
+      <div className="flex px-4 lg:px-0 lg:hidden lg:flex-row flex-row-reverse justify-between">
+        <p>Topics</p>
+        <Link className="lg:hidden" to="/topics">
+          <img src={back} alt="return" />
+        </Link>
       </div>
+      <h4 className="text-2xl mt-2 lg:pt-5 px-4 lg:px-0 ">
+        {topicsData.topicsName}
+        {postsData.length === 0 && (
+          <p className="mt-5 text-lg text-pink">
+            There is no story for this topic...
+          </p>
+        )}
+      </h4>
       {postsData.map((item) => {
         return (
           <div key={item.id}>

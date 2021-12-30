@@ -21,7 +21,7 @@ function SelectInput({
     <label className="font-bold font-lexend" htmlFor="Foramtions">
       Select your actual or old formation
       <select
-        className="bg-black w-full rounded-md mt-2 h-12 p-3  border"
+        className="bg-black w-full rounded-sm mt-2 h-12 p-3  border"
         {...register(name, { required })}
         id={id}
       >

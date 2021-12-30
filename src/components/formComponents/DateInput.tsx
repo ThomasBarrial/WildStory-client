@@ -14,7 +14,7 @@ function DateInput({ id, register, name }: IProps): JSX.Element {
       {' '}
       <label htmlFor={id} className="flex w-full mt-5 flex-col font-bold">
         BirthDate
-        <p className="mt-2 h-14 px-3 pt-4 border border-white rounded-md ">
+        <p className="mt-2 h-12 px-3 pt-3 border border-white rounded-sm">
           <input className="bg-black" type="Date" id="bd" {...register(name)} />
         </p>
       </label>

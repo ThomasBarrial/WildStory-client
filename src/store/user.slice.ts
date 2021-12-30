@@ -13,6 +13,7 @@ export interface UserState {
   avatarUrl?: string;
   landimageUrl?: string;
   idFormation?: string;
+  logged?: boolean;
 }
 
 interface UserStateWithLogged extends UserState {

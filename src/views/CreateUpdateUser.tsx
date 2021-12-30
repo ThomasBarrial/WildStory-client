@@ -4,12 +4,10 @@ import { useHistory, useParams } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AxiosError } from 'axios';
 import { useMutation, useQuery } from 'react-query';
-
 import TextInput from '../components/formComponents/TextInput';
 import { auth, formation, user } from '../API/request';
 import DateInput from '../components/formComponents/DateInput';
 import { formInputs } from '../components/formComponents/FormInputs';
-
 import PasswordForm from './PasswordForm';
 import SelectInput from '../components/formComponents/SelectInput';
 import HeaderUser from '../components/formComponents/HeaderUser';
@@ -43,6 +41,7 @@ function CreateUpdateUser(): JSX.Element {
     setError,
   } = useForm();
 
+  // FETCH ALL THE FORMATIONS FOR THE SELECT INPUT
   const {
     data: formationData,
     isLoading: formationsLoad,
@@ -51,6 +50,7 @@ function CreateUpdateUser(): JSX.Element {
     formation.getAll()
   );
 
+  // IF THE ID FROM THE URL IS DEFINED WE FETCH THE USER'S DATA AND SET THE DEFAULT VALUES OF THE FORM
   const { isLoading: usertoUpdateLoad, error: usertoUpdateError } = useQuery<
     IUser,
     AxiosError
@@ -68,18 +68,21 @@ function CreateUpdateUser(): JSX.Element {
     },
   });
 
+  // IF THE USER WAS SUCCESSFULLY CREATED WE LOG HIM AND OPEN HIS PROFIL PAGE
   const { mutate, isLoading, isError } = useMutation<
     IResMutation,
     // eslint-disable-next-line camelcase
     AxiosError<{ message_en: string; message_fr: string }>,
     IUserLog
   >(auth.login, {
+    // SET THE NEW DATAS IN THE REDUX STORE
     onSuccess: (data) => {
       dispatchLogin(data);
-      router.push(`/userassets/${data.id as string}`);
+      router.push(`/profil/${data.id as string}`);
     },
   });
 
+  // IF THE ID IS UNDIFINED ON SUBMIT WE CREATE A NEW USER
   const { mutateAsync: createData, error } = useMutation(user.post, {
     onSuccess: (data) => {
       mutate({ username: data.username, password });
@@ -88,6 +91,7 @@ function CreateUpdateUser(): JSX.Element {
     },
   });
 
+  // IF THE ID IS DIFINED ON SUBMIT WE UPDATE THE USER
   const { mutateAsync: updateData } = useMutation<
     INewUser,
     AxiosError,
@@ -104,6 +108,7 @@ function CreateUpdateUser(): JSX.Element {
     },
   });
 
+  // WE UPDATE THE USER'S PASSWORD
   const { mutateAsync: passwordMutate } = useMutation(
     'user',
     user.updatePasword,
@@ -139,10 +144,12 @@ function CreateUpdateUser(): JSX.Element {
       password: data.password,
     };
 
+    // CHECK IF THE NEW PASSWORD IS DIFFERENT THAN THE OLDER
     if (passwordsToCompare.oldPassword === passwordsToCompare.password) {
       setError('password', {
         message: 'The new password is the same as the older',
       });
+      // SAME FOR THE CONFIRM PASSWORD
     } else if (passwordsToCompare.password !== data.confirmPassword) {
       setError('confirmPassword', {
         message: 'You can not use the same password',
@@ -164,11 +171,7 @@ function CreateUpdateUser(): JSX.Element {
     return <p>Error</p>;
   }
   return (
-    <div
-      className={`w-sreen py-8 px-4 lg:px-0 pb-28 lg:pb-14   bg-black ${
-        !id && `fixed h-screen inset-0 z-50 lg:px-44 overflow-y-scroll`
-      } `}
-    >
+    <div className="px-4 lg:px-0 pb-28 lg:pb-14 bg-black">
       {isModal && (
         <Modal
           title="Every things geos well"
@@ -240,7 +243,7 @@ function CreateUpdateUser(): JSX.Element {
         )}
 
         <button
-          className="w-full p-2 rounded-md mt-5 lg:mt-5 bg-pink"
+          className="w-full p-2 rounded-sm mt-5 lg:mt-5  text-pink border border-pink"
           type="submit"
         >
           {!id ? 'Create my profil' : 'Edit profil'}

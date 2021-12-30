@@ -5,6 +5,7 @@ import { comment, user } from '../../API/request';
 import useModal from '../../hook/useModal';
 import { useUserFromStore } from '../../store/user.slice';
 import Modal from '../modal/Modal';
+import defaultAvatar from '../../assets/defaultAvatar.png';
 
 interface IProps {
   item: IComments;
@@ -50,9 +51,13 @@ function Comment({ item }: IProps): JSX.Element {
         </Modal>
       )}
       <div
-        className="h-12 w-12 rounded-full border border-white"
+        className="h-12 w-12 rounded-full border border-pink"
         style={{
-          backgroundImage: `url(${userData?.avatarUrl})`,
+          backgroundImage: `url(${
+            userData?.avatarUrl === undefined || userData.avatarUrl === null
+              ? defaultAvatar
+              : userData?.avatarUrl
+          })`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',

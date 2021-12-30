@@ -2,10 +2,12 @@ import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { formation } from '../API/request';
 import AvatarUser from '../components/post/AvatarUser';
+import back from '../assets/icons/back.svg';
 
-function Formations(): JSX.Element {
+function OneFormation(): JSX.Element {
   // TAKE THE FORMATION ID IN THE PARAMS
   const { id } = useParams<{ id: string }>();
 
@@ -41,9 +43,14 @@ function Formations(): JSX.Element {
   }
 
   return (
-    <div className="w-full mt-10 lg:mt-5  pb-20 px-4 lg:p-5 bg-dark rounded-lg">
-      Formations
-      <h1 className="text-2xl font-bold mt-2">{dataFormation.formationName}</h1>
+    <div className="w-full mt-2 lg:mt-5  pb-20 p-4 lg:p-5 lg:bg-dark rounded-lg">
+      <div className="flex lg:flex-row flex-row-reverse justify-between">
+        <p>Formations</p>
+        <Link className="lg:hidden" to="/formations">
+          <img src={back} alt="return" />
+        </Link>
+      </div>
+      <h1 className="text-2xl font-bold mt-5">{dataFormation.formationName}</h1>
       {dataFormationUsers.length === 0 && (
         <p className="mt-5 text-pink">
           There is no wilder in this formation for now...
@@ -60,4 +67,4 @@ function Formations(): JSX.Element {
   );
 }
 
-export default Formations;
+export default OneFormation;
