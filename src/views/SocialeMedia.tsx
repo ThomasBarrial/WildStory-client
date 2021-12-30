@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { mediaIcons, mediaLinks } from '../API/request';
 import useModal from '../hook/useModal';
@@ -14,7 +14,6 @@ import MediaLink from '../components/user/MediaLink';
 import { useUserFromStore } from '../store/user.slice';
 
 function SocialeMedia(): JSX.Element {
-  const router = useHistory();
   const { id }: { id: string } = useParams();
   const queryclient = useQueryClient();
   const { register, handleSubmit } = useForm();
@@ -76,7 +75,7 @@ function SocialeMedia(): JSX.Element {
     );
   }
   return (
-    <div className="w-sreen pt-14  h-screen pb-20 bg-black fixed inset-0 z-50 overflow-y-scroll">
+    <div className="pt-5">
       {isModal && (
         <Modal
           title="Ouups"
@@ -86,7 +85,7 @@ function SocialeMedia(): JSX.Element {
         </Modal>
       )}
       <HeaderUser
-        userUpdateid={id}
+        userUpdateid={undefined}
         title={
           pathname === `/editsocialmedia/${userStore.id}`
             ? 'Edit your socials links'
@@ -95,7 +94,7 @@ function SocialeMedia(): JSX.Element {
       />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mx-4 lg:w-8/12 lg:mx-auto"
+        className=""
         action="getUserSocialLinks"
       >
         {Medialinks?.map((item) => {
@@ -104,7 +103,7 @@ function SocialeMedia(): JSX.Element {
         <label className="font-bold font-lexend" htmlFor="Foramtions">
           Select Social Media
           <select
-            className="bg-black w-full mt-2 h-12 p-  border"
+            className="bg-black w-full mt-2 h-12 p-2 rounded-sm  border"
             {...register('iconId', { required: true })}
           >
             {icons?.map((item) => {
@@ -128,38 +127,17 @@ function SocialeMedia(): JSX.Element {
         />
         <div className="flex flex-col lg:flex-row items-end mt-5 mb-20 justify-between">
           <button
-            className=" p-2 w-full rounded-md lg:w-3/12  mt-5 bg-pink"
+            className=" p-2 w-full text-pink bg-pink bg-opacity-0 rounded-sm lg:w-3/12 hover:bg-opacity-30 duration-300  mt-5 border border-pink"
             type="submit"
           >
             Add sociale link
           </button>
-          {pathname === `/editsocialmedia/${userStore.id}` ? (
-            <Link to={`/profil/${userStore.id}`}>
-              <p className="font-bold font-lexend w-full text-center  mt-5 lg:mt-0 lg:w-80 p-2  bg-pink">
-                Done
-              </p>
-            </Link>
-          ) : (
-            <div>
-              {Medialinks?.length === 0 ? (
-                <button
-                  type="button"
-                  onClick={() => router.push(`/`)}
-                  className="font-bold rounded-md text-right font-lexend mt-3 lg:mt-0 w-full lg:w-12/12  underline"
-                >
-                  Skip this step
-                </button>
-              ) : (
-                <button
-                  onClick={() => router.push(`/`)}
-                  className="font-bold rounded-md font-lexend w-full  mt-5 lg:mt-0 lg:w-12/12 p-2 px-10  bg-pink"
-                  type="submit"
-                >
-                  next
-                </button>
-              )}
-            </div>
-          )}
+
+          <Link to={`/profil/${userStore.id}`}>
+            <p className="font-bold font-lexend rounded-sm w-full text-center  mt-5 lg:mt-0 lg:w-80 p-2  border border-pink text-pink bg-pink bg-opacity-0 hover:bg-opacity-30 duration-300 ">
+              Done
+            </p>
+          </Link>
         </div>
       </form>
     </div>

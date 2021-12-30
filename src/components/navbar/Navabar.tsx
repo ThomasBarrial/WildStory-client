@@ -5,6 +5,7 @@ import settings from '../../assets/icons/settings.svg';
 import home from '../../assets/icons/home.svg';
 import newpost from '../../assets/icons/newpost.svg';
 import { useUserFromStore } from '../../store/user.slice';
+import defaultAvatar from '../../assets/defaultAvatar.png';
 
 interface IProps {
   setIsSideBar: Dispatch<SetStateAction<boolean>>;
@@ -50,7 +51,11 @@ function Navabar({ setIsSideBar }: IProps): JSX.Element {
             <div
               className="h-10 w-10 ml-2 cursor-pointer rounded-full border border-pink"
               style={{
-                backgroundImage: `url(${user.avatarUrl})`,
+                backgroundImage: `url(${
+                  user.avatarUrl === null || user.avatarUrl === undefined
+                    ? defaultAvatar
+                    : user.avatarUrl
+                })`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',

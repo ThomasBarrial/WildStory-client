@@ -2,7 +2,6 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory, useLocation } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { skills, userSkills } from '../API/request';
@@ -23,9 +22,6 @@ function UserSkills(): JSX.Element {
   const { user } = useUserFromStore();
   const { isModal, setIsModal, message, setMessage } = useModal();
   const { register, handleSubmit } = useForm();
-  const router = useHistory();
-
-  const { pathname } = useLocation<{ params: string }>();
 
   const {
     data: skillsData,
@@ -76,7 +72,7 @@ function UserSkills(): JSX.Element {
     );
   }
   return (
-    <div className="w-sreen h-screen py-10 bg-black fixed inset-0 z-50 overflow-y-scroll">
+    <div className="py-5">
       {isModal && (
         <Modal
           title="Ouups"
@@ -85,17 +81,10 @@ function UserSkills(): JSX.Element {
           {message}
         </Modal>
       )}
-      <HeaderUser
-        userUpdateid={undefined}
-        title={
-          pathname === `/edituserskills/${user.id}`
-            ? 'Edit your skills'
-            : 'Add your best skills'
-        }
-      />
+      <HeaderUser userUpdateid={undefined} title="Edit your skills" />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mx-4 lg:w-8/12 lg:mx-auto"
+        className=""
         action="getuserskills"
       >
         {skill?.map((item) => {
@@ -106,40 +95,18 @@ function UserSkills(): JSX.Element {
           );
         })}
         <SkillInput register={register} skillsData={skillsData} />
-        <div className="flex flex-col  items-end mt-12 justify-between">
+        <div className="flex items-center mt-12 justify-between">
           <button
-            className="font-bold rounded-md font-lexend w-full mb-10 lg:w-3/12 p-2 text-pink  border border-pink"
+            className="font-bold rounded-sm font-lexend w-full lg:w-3/12 p-2 text-pink  border border-pink bg-pink bg-opacity-0 hover:bg-opacity-30 duration-300"
             type="submit"
           >
             Add skill
           </button>
-          {pathname === `/edituserskills/${user.id}` ? (
-            <Link to={`/profil/${user.id}`}>
-              <p className="font-bold font-lexend w-full  mt-5 lg:mt-0  p-2 px-10  text-pink  border border-pink">
-                Done
-              </p>
-            </Link>
-          ) : (
-            <div className="w-full">
-              {skill?.length === 0 ? (
-                <button
-                  type="button"
-                  onClick={() => router.push(`/socialmedia/${user.id}`)}
-                  className="font-bold text-right rounded-md font-lexend mt-3 lg:mt-0 w-full lg:w-3/12  underlin"
-                >
-                  Skip this step
-                </button>
-              ) : (
-                <button
-                  onClick={() => router.push(`/socialmedia/${user.id}`)}
-                  className="font-bold font-lexend rounded-md w-full  mt-5 lg:mt-0 p-2  text-pink  border border-pink"
-                  type="submit"
-                >
-                  next
-                </button>
-              )}
-            </div>
-          )}
+          <Link to={`/profil/${user.id}`}>
+            <p className="font-bold font-lexend rounded-sm w-full text-center  mt-5 lg:mt-0 lg:w-80 p-2  border border-pink text-pink bg-pink bg-opacity-0 hover:bg-opacity-30 duration-300 ">
+              Done
+            </p>
+          </Link>
         </div>
       </form>
     </div>

@@ -35,7 +35,7 @@ function Dot({ postId }: { postId: string }): JSX.Element {
           title={
             isConfirmationMessage
               ? 'do you really want to delete this story'
-              : 'Post settings'
+              : 'Story settings'
           }
           buttons={
             isConfirmationMessage

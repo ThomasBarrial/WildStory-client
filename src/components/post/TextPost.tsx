@@ -100,7 +100,7 @@ function TextPost({ item }: IProps): JSX.Element {
     <div className="mx-3 lg:mx-0 pb-5">
       <div className="flex justify-between">
         <div className="flex">
-          <p className="text-base mx-2">{count}</p>
+          <p className="text-base mr-1">{count}</p>
           <button type="button" onClick={() => onLike()}>
             {isLike ? (
               <img className="h-5 w-5" src={like} alt="like" />

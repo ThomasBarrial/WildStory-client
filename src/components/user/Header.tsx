@@ -3,6 +3,8 @@ import { useParams } from 'react-router';
 import edit from '../../assets/icons/edit.svg';
 import { useUserFromStore } from '../../store/user.slice';
 import UserModal from '../modal/UserModal';
+import defaultLanding from '../../assets/defaultLanding.png';
+import defaultAvatar from '../../assets/defaultAvatar.png';
 
 interface IProps {
   userAvatar: string | undefined;
@@ -30,7 +32,11 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
       <div
         className="w-full flex p-3 rounded-md items-end h-44 lg:h-52 border-b lg:border border-pink"
         style={{
-          backgroundImage: `url(${userLanding})`,
+          backgroundImage: `url(${
+            userLanding === null || userLanding === undefined
+              ? defaultLanding
+              : userLanding
+          })`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
@@ -47,9 +53,13 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
         )}
       </div>
       <div
-        className="w-24 h-24 flex items-end z-20 rounded-full border border-pink mr-6 transform -translate-y-12"
+        className="w-24 h-24 flex items-end z-20 bg-black rounded-full border border-pink mr-6 transform -translate-y-12"
         style={{
-          backgroundImage: `url(${userAvatar})`,
+          backgroundImage: `url(${
+            userAvatar === null || userAvatar === undefined
+              ? defaultAvatar
+              : userAvatar
+          })`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',

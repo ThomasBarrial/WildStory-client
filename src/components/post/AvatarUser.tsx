@@ -3,6 +3,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { user } from '../../API/request';
+import defaultAvatar from '../../assets/defaultAvatar.png';
 
 interface IProps {
   userId: string | undefined;
@@ -26,7 +27,11 @@ function AvatarUser({ userId }: IProps): JSX.Element {
         <div
           className="h-12 w-12 rounded-full border border-pink"
           style={{
-            backgroundImage: `url(${data.avatarUrl})`,
+            backgroundImage: `url(${
+              data.avatarUrl === null || data.avatarUrl === undefined
+                ? defaultAvatar
+                : data.avatarUrl
+            })`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',

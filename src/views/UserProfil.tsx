@@ -59,12 +59,21 @@ function UserProfil(): JSX.Element {
         userAvatar={userData?.avatarUrl}
         userLanding={userData?.landimageUrl}
       />
-      <div className="px-4 lg:px-5 h-full transform -translate-y-16 lg:bg-dark rounded-md py-5">
-        <p className="font-bold mt-2 text-xl lg:text-2xl">
-          {userData.username}
-        </p>
-        <p className="text-sm mb-5 lg:mb-2 font-thin">{userData.profilTitle}</p>
-        <div className="pb-8">
+      <div className="px-4 lg:px-0 h-full transform -translate-y-16 ">
+        <div className="lg:mx-4 border-b border-pink ">
+          <p className="font-bold mt-2 text-xl lg:text-2xl">
+            {userData.username}
+          </p>
+          <div className="w-full flex justify-between">
+            <p className="text-sm mb-5 lg:mb-2 font-thin">
+              {userData.profilTitle}
+            </p>
+            <Link to={`/settings/${userData.id}`}>
+              <p className="text-sm underline">Edit your profil</p>
+            </Link>
+          </div>
+        </div>
+        <div className="pb-8 lg:bg-dark rounded-md lg:px-5 lg:pt-2 mt-5 ">
           <Info name="Formation">{formationData.formationName}</Info>
           <Info name="City">{userData.city}</Info>
           <Info name="BithDate">{userData.birthDate}</Info>
@@ -78,6 +87,14 @@ function UserProfil(): JSX.Element {
               )}
             </div>
           )}
+          {userSkillsData?.length === 0 && (
+            <p className="text-pink font-thin my-2 w-full flex items-center">
+              There is no skill for now{' '}
+              <Link to={`/edituserskills/${userData.id}`}>
+                <p className="ml-2 text-sm underline">Edit your skills</p>
+              </Link>
+            </p>
+          )}
 
           {userSkillsData?.map((skill) => {
             return (
@@ -87,7 +104,7 @@ function UserProfil(): JSX.Element {
             );
           })}
 
-          <div className="w-full">
+          <div className="w-full flex items-end justify-between">
             <div className="flex">
               {userMediaLinksData?.map((media) => {
                 return (
