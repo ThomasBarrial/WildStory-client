@@ -48,12 +48,12 @@ function Comments(): JSX.Element {
     <div className="flex flex-col w-full">
       <Header />
       <div className="pb-20 w-full">
-        <div className="bg-dark rounded-md p-4">
+        <div className="lg:bg-dark rounded-md lg:p-4">
           <AvatarUser userId={postData?.userId} />
           {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />}
           {postData && <TextPost item={postData} />}
         </div>
-        <div className="bg-dark rounded-md mt-2 p-4 mx-3 lg:mx-0">
+        <div className="lg:bg-dark rounded-md mt-2 lg:p-4 mx-3 lg:mx-0">
           {!isComment &&
             IdUserFormStore !== postData?.userId &&
             user.logged === true && <NewComment idPost={id} />}

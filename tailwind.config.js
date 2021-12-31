@@ -11,7 +11,7 @@ module.exports = {
         pink: '#EC6D6A',
         black: '#181818',
         lightblack: '#323232',
-        dark: '#000000',
+        dark: '#010101',
       },
       height: {
         desktop: '32rem',

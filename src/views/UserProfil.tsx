@@ -10,6 +10,7 @@ import MediaIcon from '../components/user/MediaIcon';
 import Skill from '../components/user/Skill';
 import UserPost from '../components/user/UserPost';
 import { useUserFromStore } from '../store/user.slice';
+import edit from '../assets/icons/edit.svg';
 
 function UserProfil(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -68,13 +69,21 @@ function UserProfil(): JSX.Element {
             <p className="text-sm mb-5 lg:mb-2 font-thin">
               {userData.profilTitle}
             </p>
-            <Link to={`/settings/${userData.id}`}>
-              <p className="text-sm underline">Edit your profil</p>
-            </Link>
+            <p className="text-sm">Contact: {userData.email}</p>
           </div>
         </div>
         <div className="pb-8 lg:bg-dark rounded-md lg:px-5 lg:pt-2 mt-5 ">
-          <Info name="Formation">{formationData.formationName}</Info>
+          <div className="w-full">
+            {id === userStore.id && (
+              <Link to={`/settings/${userData.id}`}>
+                <p className="text-sm w-full transform translate-y-2 justify-end flex text-right underline">
+                  <img className="mr-2" src={edit} alt="" />
+                  Edit your profil
+                </p>
+              </Link>
+            )}
+            <Info name="Formation">{formationData.formationName}</Info>
+          </div>
           <Info name="City">{userData.city}</Info>
           <Info name="BithDate">{userData.birthDate}</Info>
           {userSkillsData?.length !== 0 && (
@@ -87,7 +96,7 @@ function UserProfil(): JSX.Element {
               )}
             </div>
           )}
-          {userSkillsData?.length === 0 && (
+          {userSkillsData?.length === 0 && userStore.id === id && (
             <p className="text-pink font-thin my-2 w-full flex items-center">
               There is no skill for now{' '}
               <Link to={`/edituserskills/${userData.id}`}>
@@ -114,12 +123,20 @@ function UserProfil(): JSX.Element {
                 );
               })}
             </div>
-            {userStore.id === id && (
+            {userStore.id === id && userMediaLinksData?.length !== 0 && (
               <Link to={`/editsocialmedia/${userStore.id}`}>
                 <p className="underline mt-3 lg:mt-5 text-sm">
                   Edit your links
                 </p>
               </Link>
+            )}
+            {userMediaLinksData?.length === 0 && userStore.id === id && (
+              <p className="text-pink font-thin my-2 w-full flex items-center">
+                There is no social media links for now{' '}
+                <Link to={`/editsocialmedia/${userData.id}`}>
+                  <p className="ml-2 text-sm underline">Edit your links</p>
+                </Link>
+              </p>
             )}
           </div>
         </div>

@@ -63,9 +63,9 @@ function Comment({ item }: IProps): JSX.Element {
           backgroundPosition: 'center',
         }}
       />
-      <div className="ml-4 w-11/12">
+      <div className="ml-4 w-10/12">
         <p className="text-sm">{userData?.username}</p>
-        <p className="text-sm font-thin mt-1">{item.text}</p>
+        <p className="text-sm font-thin">{item.text}</p>
         {item.userId === idUser && (
           <button
             className="text-xl h-3 flex items-end w-full justify-end"

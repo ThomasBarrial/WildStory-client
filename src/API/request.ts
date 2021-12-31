@@ -138,3 +138,12 @@ export const topics = {
   getPost: (id: string): Promise<IPost[]> =>
     AXIOS.get(`/topics/posts/${id}`).then((res) => res.data),
 };
+
+export const savePost = {
+  post: ({ savePostData }: { savePostData: ISavePost }): Promise<ISavePost> =>
+    AXIOS.post(`/savepost`, savePostData).then((res) => res.data),
+  getUserSavedPost: (id: string): Promise<ISavePost[]> =>
+    AXIOS.get(`/savepost/user/${id}`).then((res) => res.data),
+  delete: (id: string): Promise<ISavePost> =>
+    AXIOS.delete(`/savepost/${id}`).then((res) => res.data),
+};

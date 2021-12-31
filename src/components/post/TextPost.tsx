@@ -1,10 +1,12 @@
 import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { likes, post } from '../../API/request';
+import { likes, post, savePost } from '../../API/request';
 import like from '../../assets/icons/like.svg';
 import unlike from '../../assets/icons/unlike.svg';
 import { useUserFromStore } from '../../store/user.slice';
+import save from '../../assets/icons/save.svg';
+import saved from '../../assets/icons/saved.svg';
 
 interface IProps {
   item: IPost;
@@ -12,6 +14,8 @@ interface IProps {
 
 function TextPost({ item }: IProps): JSX.Element {
   const [isLike, setIsLike] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [savedPostId, setSavedPostId] = useState('');
   const [istext, setIsText] = useState(true);
   const [userLike, setUserlike] = useState<ILikes>();
   const [count, setCount] = useState(0);
@@ -34,8 +38,51 @@ function TextPost({ item }: IProps): JSX.Element {
     },
   });
 
-  // FECTH ALL THE LIKES OF THE POST
-  const { isLoading, error, data } = useQuery<ILikes[], AxiosError>(
+  // CREATE A NEW SAVEDPOST
+  const { mutateAsync: createSavePost } = useMutation(savePost.post, {
+    onSuccess: () => {
+      setIsSaved(true);
+      queryclient.refetchQueries(['getUsersSavedPost']);
+    },
+  });
+
+  // FETCH ALL USER'S SAVEDPOST
+  const { isLoading: savePostLoading, error: savePostError } = useQuery<
+    ISavePost[],
+    AxiosError
+  >(
+    ['getUsersSavedPost', user.id],
+    () => savePost.getUserSavedPost(user.id as string),
+    {
+      onSuccess: (data) => {
+        // WHEN THE FETCH IS OK WE CHECK IF THE USER ALREADY SAVE THE POST OR NOT
+        const isPostSaved = data.filter((sp) => sp.postId === item.id);
+        // IF THE USER SAVE THE POST WE SET THE SAVE VARIABLE TO TRUE
+        if (isPostSaved.length !== 0) {
+          setSavedPostId(isPostSaved[0].id as string);
+          setIsSaved(true);
+        }
+      },
+    }
+  );
+
+  // DELETE THE SAVEDPOST
+  const { mutateAsync: deleteSavedPost } = useMutation(
+    () => savePost.delete(savedPostId),
+    {
+      onSuccess: () => {
+        setIsSaved(false);
+        queryclient.refetchQueries(['getUsersSavedPost']);
+      },
+    }
+  );
+
+  // FECTH ALL THE POST'S LIKES
+  const {
+    isLoading: likesIsLoading,
+    error: likesError,
+    data,
+  } = useQuery<ILikes[], AxiosError>(
     ['getLikes', item.id],
     () => post.getLikes(item.id),
     {
@@ -61,6 +108,20 @@ function TextPost({ item }: IProps): JSX.Element {
     }
   );
 
+  const onSavePost = () => {
+    // IF THE POST IS ALREADY SAVE BY THE USER WE DELETE THE RELATED SAVED POST
+    if (isSaved) {
+      deleteSavedPost();
+      // ELSE WE CREATE A NEW SAVED POST
+    } else {
+      const savePostData = {
+        userId: user.id as string,
+        postId: item.id,
+      };
+      createSavePost({ savePostData });
+    }
+  };
+
   const onLike = () => {
     // IF THE USER NEVER LIKE THE POST CREATE A NEW LIKE
     if (!isLike && !userLike) {
@@ -70,7 +131,7 @@ function TextPost({ item }: IProps): JSX.Element {
         isLike: true,
       };
       createLike({ likesData });
-      // IF THE USER ALREADY LIKE THE POST, UPDATE THE EXISTING LIKE TO UNLIKE
+      // IF THE USER ALREADY LIKE THE POST, UPDATE THE EXISTING LIKE TO ISLIKE = FALSE
     } else if (userLike?.isLike === true) {
       const likesData = {
         userId: user.id as string,
@@ -78,7 +139,7 @@ function TextPost({ item }: IProps): JSX.Element {
         isLike: false,
       };
       updateLike({ likesData, id: userLike.id });
-      // IF THE USER ALREADY UNLIKE THE POST UPDATE THE EXISTING LIKE TO LIKE
+      // IF THE USER ALREADY UNLIKE THE POST UPDATE THE EXISTING LIKE TO ISLIKE = TRUE
     } else if (userLike?.isLike === false) {
       const likesData = {
         userId: user.id as string,
@@ -89,10 +150,10 @@ function TextPost({ item }: IProps): JSX.Element {
     }
   };
 
-  if (isLoading) {
+  if (likesIsLoading || savePostLoading || savePostError) {
     return <p>Loading</p>;
   }
-  if (error || !data) {
+  if (likesError || !data) {
     return <p>Error..</p>;
   }
 
@@ -100,7 +161,6 @@ function TextPost({ item }: IProps): JSX.Element {
     <div className="mx-3 lg:mx-0 pb-5">
       <div className="flex justify-between">
         <div className="flex">
-          <p className="text-base mr-1">{count}</p>
           <button
             type="button"
             onClick={() => {
@@ -115,7 +175,18 @@ function TextPost({ item }: IProps): JSX.Element {
               <img className="h-5 w-5" src={unlike} alt="like" />
             )}
           </button>
+          <p className="text-base ml-1">{count}</p>
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            if (user.logged === true) {
+              onSavePost();
+            }
+          }}
+        >
+          <img className="h-6" src={isSaved ? saved : save} alt="Save" />
+        </button>
       </div>
       <p className="text-xs font-bold mt-3">
         posted : {new Date(item.createdAt).toLocaleDateString('fr-FR')}
@@ -128,7 +199,7 @@ function TextPost({ item }: IProps): JSX.Element {
       >
         {item.text}
       </p>
-      {item.text.split('').length > 200 && (
+      {item.text.split('').length > 450 && (
         <button
           onClick={() => setIsText((c) => !c)}
           type="button"

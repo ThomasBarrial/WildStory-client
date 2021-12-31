@@ -121,3 +121,9 @@ interface ITopics {
   id: string;
   topicsName: string;
 }
+
+interface ISavePost {
+  id?: string;
+  userId: string;
+  postId: string;
+}

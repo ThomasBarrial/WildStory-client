@@ -21,13 +21,13 @@ function Formations(): JSX.Element {
   }
   return (
     <div className="mt-2 lg:mt-0 p-4 lg:p-0">
-      <h4 className="text-xl lg:text-lg font-bold lg:font-normal border-b pb-1 mb-1 border-pink">
+      <h4 className="text-2xl lg:text-lg font-bold lg:font-normal border-b pb-2 mb-1 border-pink">
         Formations
       </h4>
       {data.map((item) => {
         return (
           <div
-            className="my-4 pb-2 lg:pb-0 lg:my-1 lg:border-none border-b border-pink border-opacity-50"
+            className="my-5 pb-2 lg:pb-0 lg:my-1 lg:border-none border-b border-pink border-opacity-50"
             key={item.id}
           >
             <button

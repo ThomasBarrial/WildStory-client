@@ -8,7 +8,7 @@ interface IProps {
 function Info({ name, children }: IProps): JSX.Element {
   return (
     <div>
-      <div className="mb-5 lg:my-7 border-b border-pink pb-2">
+      <div className="mb-5 lg:mb-5 border-b border-pink pb-2">
         <p className="font-bold">{name}</p>
         <p className="lg:mt-1 font-thin">{children}</p>
       </div>
