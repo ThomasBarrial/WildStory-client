@@ -24,10 +24,10 @@ function SidebarMobile({ isSidebar, setIsSideBar }: IProps): JSX.Element {
         </button>
       </div>
       <div className="bg-dark w-full lg:w-80 rounded-md p-4  h-56 text-white">
-        <Formations setIsSideBar={setIsSideBar} />
+        <Formations />
       </div>
       <div className="bg-dark w-full lg:w-80 lg:fixed rounded-md p-4  h-56 lg:mt-96 text-white my-5">
-        <Topics setIsSideBar={setIsSideBar} />
+        <Topics />
       </div>
     </div>
   );

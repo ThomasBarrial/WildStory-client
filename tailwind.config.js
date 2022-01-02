@@ -15,7 +15,7 @@ module.exports = {
       },
       height: {
         desktop: '32rem',
-        tablet: '28rem',
+        tablet: '52rem',
         comment: '34rem',
         span: '0.25rem',
       },
@@ -25,6 +25,9 @@ module.exports = {
       },
       margin: {
         span: '0.15rem',
+      },
+      screens: {
+        xl: '1150px',
       },
     },
   },

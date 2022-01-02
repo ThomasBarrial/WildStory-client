@@ -66,14 +66,14 @@ function UserProfil(): JSX.Element {
             {userData.username}
           </p>
           <div className="w-full flex justify-between">
-            <p className="text-sm mb-5 lg:mb-2 font-thin">
+            <p className="text-sm mb-2 lg:mb-2 font-thin">
               {userData.profilTitle}
             </p>
             <p className="text-sm">Contact: {userData.email}</p>
           </div>
         </div>
         <div className="pb-8 lg:bg-dark rounded-md lg:px-5 lg:pt-2 mt-5 ">
-          <div className="w-full">
+          <div className="w-full mt-2">
             {id === userStore.id && (
               <Link to={`/settings/${userData.id}`}>
                 <p className="text-sm w-full transform translate-y-2 justify-end flex text-right underline">

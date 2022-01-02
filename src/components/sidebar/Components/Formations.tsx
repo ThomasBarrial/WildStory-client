@@ -19,8 +19,9 @@ function Formations(): JSX.Element {
   if (error || !data) {
     return <p>Error..</p>;
   }
+
   return (
-    <div className="mt-2 lg:mt-0 p-4 lg:p-0">
+    <div className="mt-2 lg:mt-0 p-4 lg:p-0 ">
       <h4 className="text-2xl lg:text-lg font-bold lg:font-normal border-b pb-2 mb-1 border-pink">
         Formations
       </h4>
