@@ -29,7 +29,7 @@ function SelectInput({ name, id, register, required }: IProps): JSX.Element {
     <label className="font-bold font-lexend" htmlFor="Foramtions">
       {`Select the post's topic`}
       <select
-        className="bg-black w-full rounded-md mt-2 h-12 p-3  border"
+        className="bg-black w-full rounded-sm mt-2 h-12 p-3  border"
         {...register(name, { required })}
         id={id}
       >

@@ -36,7 +36,7 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
     return postComment({ commentData });
   };
   return (
-    <div className=" lg:pb-3 px-4 lg:px-0 w-full">
+    <div className=" lg:pb-3 w-full">
       <div className="w-full flex items-start justify-between">
         <button
           onClick={() => setIsNewComment(true)}
