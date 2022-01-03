@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router';
+import { toast } from 'react-toastify';
 import { topics } from '../../../API/request';
 
 function Topics(): JSX.Element {
@@ -16,14 +17,22 @@ function Topics(): JSX.Element {
     return <p>Loading</p>;
   }
   if (error || !data) {
-    return <p>Error..</p>;
+    toast('404 Oops somthing went wrong', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
   return (
     <div className="mt-2 lg:mt-0 p-4 lg:p-0">
       <h4 className="text-2xl lg:text-lg font-bold lg:font-normal border-b pb-2 mb-1 border-pink">
         Topics
       </h4>
-      {data.map((item) => {
+      {data?.map((item) => {
         return (
           <div
             className="my-5 pb-2 lg:pb-0 lg:my-1 lg:border-none border-b border-pink border-opacity-50"
