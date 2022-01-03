@@ -11,6 +11,7 @@ import Skill from '../components/user/Skill';
 import useModal from '../hook/useModal';
 import Modal from '../components/modal/Modal';
 import { useUserFromStore } from '../store/user.slice';
+import Loader from '../components/loader/Loader';
 
 interface INewSkill {
   skillId: string;
@@ -63,7 +64,7 @@ function UserSkills(): JSX.Element {
   };
 
   if (isLoading) {
-    return <p>...Loading</p>;
+    return <Loader />;
   }
   if (error || postError) {
     setIsModal(true);

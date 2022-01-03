@@ -14,6 +14,7 @@ import HeaderUser from '../components/formComponents/HeaderUser';
 import { useUserFromStore } from '../store/user.slice';
 import useModal from '../hook/useModal';
 import Modal from '../components/modal/Modal';
+import Loader from '../components/loader/Loader';
 
 interface IResMutation {
   message: string;
@@ -28,6 +29,7 @@ interface IUserLog {
 function CreateUpdateUser(): JSX.Element {
   const [isPassword, setIsPassword] = useState(false);
   const [password, setPassword] = useState<string | undefined>();
+
   const { setIsModal, setMessage, isModal, message } = useModal();
   const { dispatchLogin } = useUserFromStore();
   const router = useHistory();
@@ -102,9 +104,13 @@ function CreateUpdateUser(): JSX.Element {
       setMessage('Your profil as been edit successfully');
       setIsModal(true);
     },
-    onError: () => {
-      setMessage('Oups email or username already use');
-      setIsModal(true);
+    onError: (err) => {
+      if (err.response?.statusText === 'Internal Server Error') {
+        setIsModal(true);
+        setMessage('Oups email or username already use');
+      } else {
+        router.push('/error');
+      }
     },
   });
 
@@ -165,10 +171,10 @@ function CreateUpdateUser(): JSX.Element {
   };
 
   if (formationsLoad || isLoading || usertoUpdateLoad) {
-    return <p>...Loading</p>;
+    return <Loader />;
   }
   if (formationsError || isError || usertoUpdateError) {
-    return <p>Error</p>;
+    router.push('/error');
   }
   return (
     <div className="px-4 lg:px-0 pb-28 lg:pb-14 bg-black">
@@ -182,7 +188,7 @@ function CreateUpdateUser(): JSX.Element {
                     text: 'ok',
                     handleClick: () => {
                       if (message === 'Oups email or username already use') {
-                        setIsModal(false);
+                        window.location.reload();
                       } else {
                         router.push(`/profil/${id}`);
                       }

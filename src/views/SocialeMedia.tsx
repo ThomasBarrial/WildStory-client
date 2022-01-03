@@ -12,6 +12,7 @@ import TextInput from '../components/formComponents/TextInput';
 import Modal from '../components/modal/Modal';
 import MediaLink from '../components/user/MediaLink';
 import { useUserFromStore } from '../store/user.slice';
+import Loader from '../components/loader/Loader';
 
 function SocialeMedia(): JSX.Element {
   const { id }: { id: string } = useParams();
@@ -66,7 +67,7 @@ function SocialeMedia(): JSX.Element {
   };
 
   if (isLoading || LoadMedLi) {
-    return <p>...Loading</p>;
+    return <Loader />;
   }
   if (isError || postError || ErrMedLi) {
     setIsModal(true);

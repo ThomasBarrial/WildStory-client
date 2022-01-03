@@ -4,6 +4,7 @@ import { AxiosError } from 'axios';
 import { useHistory } from 'react-router-dom';
 import { auth } from '../API/request';
 import { useUserFromStore } from '../store/user.slice';
+import Loader from '../components/loader/Loader';
 
 function Logout(): JSX.Element | null {
   const { dispatchLogout } = useUserFromStore();
@@ -20,7 +21,7 @@ function Logout(): JSX.Element | null {
   );
 
   if (isLoading) {
-    return <p>...Loading</p>;
+    return <Loader />;
   }
 
   if (error) {

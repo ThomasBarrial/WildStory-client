@@ -8,12 +8,13 @@ import React, {
   useState,
 } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { user } from '../../API/request';
 import cross from '../../assets/icons/close.svg';
 import { useUserFromStore } from '../../store/user.slice';
 import defaultAvatar from '../../assets/defaultAvatar.png';
 import defaultLanding from '../../assets/defaultLanding.png';
+import Loader from '../loader/Loader';
 
 interface IProps {
   isOpen: Dispatch<SetStateAction<boolean>>;
@@ -29,6 +30,7 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
   const [deleteToken, setDeleteToken] = useState('');
   const [UserData, setUserData] = useState({});
   const [preview, setPreview] = useState('');
+  const router = useHistory();
   const [defaultImage, setDefaultImage] = useState<string | undefined>();
 
   const formData = new FormData();
@@ -116,10 +118,10 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
   };
 
   if (isLoading || Loading) {
-    return <p>...Loading</p>;
+    return <Loader />;
   }
   if (putError || Error) {
-    return <p>Error</p>;
+    router.push('/error');
   }
 
   return (

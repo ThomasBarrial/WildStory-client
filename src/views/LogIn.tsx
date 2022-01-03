@@ -11,6 +11,7 @@ import { UserState, useUserFromStore } from '../store/user.slice';
 import Header from '../components/login/Header';
 import Form from '../components/login/Form';
 import Footer from '../components/login/Footer';
+import Loader from '../components/loader/Loader';
 
 interface IFormInput {
   username: string;
@@ -47,7 +48,7 @@ function LogIn(): JSX.Element {
     mutate(user);
   };
 
-  if (isLoading) return <p>...Loading</p>;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="w-sreen font-lexend flex items-center justify-center h-full  bg-black fixed inset-0 z-50 overflow-y-scroll">

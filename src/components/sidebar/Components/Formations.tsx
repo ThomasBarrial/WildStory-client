@@ -2,6 +2,8 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router';
 import { formation } from '../../../API/request';
+import ErrorPage from '../../../views/ErrorPage';
+import Loader from '../../loader/Loader';
 
 function Formations(): JSX.Element {
   const { data, isLoading, error } = useQuery<IFormation[]>(
@@ -14,10 +16,10 @@ function Formations(): JSX.Element {
   const router = useHistory();
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <Loader />;
   }
   if (error || !data) {
-    return <p>Error..</p>;
+    return <ErrorPage />;
   }
 
   return (
