@@ -185,7 +185,7 @@ function TextPost({ item }: IProps): JSX.Element {
             }
           }}
         >
-          <img className="h-6" src={isSaved ? saved : save} alt="Save" />
+          <img className="h-5" src={isSaved ? saved : save} alt="Save" />
         </button>
       </div>
       <p className="text-xs font-bold mt-3">

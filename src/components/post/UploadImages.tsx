@@ -17,7 +17,9 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
   const formData = new FormData();
   const [deleteToken, setDeleteToken] = useState('');
 
+  // ON CLICK CLANCEL DELETE THE IMAGE FROM THE CLOUDINARY LYBRARY
   const handleDeleteImage = async (image: string) => {
+    // REMOVE THE POSTED IMAGE FROM THE ARRAY OF IMAGES THAT WE GONNA UPDLOAD
     setUploadImages(uploadImages?.filter((item) => item !== image));
     const deleteBody = {
       token: deleteToken,
@@ -28,28 +30,37 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
     );
   };
 
+  // IF THE USER UPLOAD VIA URL
   const handleUrlSubmit = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+    // CHECK IF THE SAME URL DOESN'T EXIST ON THE ARRAY OF IMAGES THAT WE GONNA UPDLOAD
     if (uploadImages?.filter((image) => image.includes(imageUrl)).length > 0) {
       setIsPosted(true);
     } else {
+      // ADD THE POSTED URL IN THE ARRAY OF IMAGES THAT WE GONNA UPDLOAD
       setUploadImages([...uploadImages, imageUrl]);
     }
   };
 
+  // ON CHANGE OF THE FILE INPUT WE POST THE IMAGE ON CLOUDINARY
   const handleImageSubmit = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    // ACTIVATE THE LOADER
     setLoading(true);
+    // SET THE NEW FORM DATA VALUE WITH THE FILE DATA AND PRESETS
     formData.append('file', e.target.files?.[0] as File);
     formData.append('upload_preset', 'myUploads');
-
+    // POST THE IMAGE ON CLOUDINARY API
     await axios
       .post('https://api.cloudinary.com/v1_1/dyxboy0zg/image/upload', formData)
       .then((res) => {
+        // GET THE DELETE_TOKEN DATA WE USE FOR THE DELETE FUNCTION
         setDeleteToken(res.data.delete_token);
+        // ADD THE POSTED IMAGE IN THE ARRAY OF IMAGES THAT WE GONNA UPDLOAD
         setUploadImages([...uploadImages, res.data.secure_url]);
+        // DESACTIVATE THE LOADER
         setLoading(false);
       });
   };
@@ -68,9 +79,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: 'cover',
                 }}
-              >
-                {Loading && <p>...Loading</p>}
-              </div>
+              />
               <button
                 className=" text-pink font-bold text-xs flex transform translate-x-4 -translate-y-8"
                 type="button"
@@ -83,6 +92,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
             </div>
           );
         })}
+        {Loading && <p>...Loading</p>}
       </div>
 
       <form className="mt-2 flex flex-col" action="UploadImages">
