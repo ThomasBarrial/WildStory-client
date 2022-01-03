@@ -1,12 +1,14 @@
 import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useHistory } from 'react-router';
 import { likes, post, savePost } from '../../API/request';
 import like from '../../assets/icons/like.svg';
 import unlike from '../../assets/icons/unlike.svg';
 import { useUserFromStore } from '../../store/user.slice';
 import save from '../../assets/icons/save.svg';
 import saved from '../../assets/icons/saved.svg';
+import Loader from '../loader/Loader';
 
 interface IProps {
   item: IPost;
@@ -14,6 +16,7 @@ interface IProps {
 
 function TextPost({ item }: IProps): JSX.Element {
   const [isLike, setIsLike] = useState(false);
+  const router = useHistory();
   const [isSaved, setIsSaved] = useState(false);
   const [savedPostId, setSavedPostId] = useState('');
   const [istext, setIsText] = useState(true);
@@ -151,10 +154,10 @@ function TextPost({ item }: IProps): JSX.Element {
   };
 
   if (likesIsLoading || savePostLoading || savePostError) {
-    return <p>Loading</p>;
+    return <Loader />;
   }
   if (likesError || !data) {
-    return <p>Error..</p>;
+    router.push('/error');
   }
 
   return (

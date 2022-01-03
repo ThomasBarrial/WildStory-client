@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import AlerteMessage from '../formComponents/AlerteMessage';
 import trash from '../../assets/icons/pinktrash.svg';
+import Loader from '../loader/Loader';
 
 interface IProps {
   setUploadImages: Dispatch<SetStateAction<string[]>>;
@@ -92,7 +93,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
             </div>
           );
         })}
-        {Loading && <p>...Loading</p>}
+        {Loading && <Loader />}
       </div>
 
       <form className="mt-2 flex flex-col" action="UploadImages">

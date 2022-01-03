@@ -63,7 +63,7 @@ function Comment({ item }: IProps): JSX.Element {
           backgroundPosition: 'center',
         }}
       />
-      <div className="ml-4 w-10/12">
+      <div className="ml-4 w-10/12 lg:w-11/12">
         <p className="text-sm">{userData?.username}</p>
         <p className="text-sm font-thin">{item.text}</p>
         {item.userId === idUser && (

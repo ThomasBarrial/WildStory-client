@@ -5,6 +5,7 @@ import { mediaIcons, mediaLinks } from '../../API/request';
 import useModal from '../../hook/useModal';
 import Modal from '../modal/Modal';
 import trash from '../../assets/icons/trash.svg';
+import Loader from '../loader/Loader';
 
 interface IProps {
   item: IMediaLink;
@@ -33,7 +34,7 @@ function MediaLink({ item, isForm }: IProps): JSX.Element {
       'Sorry something bad happen please retry or contact a web admin'
     );
     if (isLoading) {
-      return <p>...Loading</p>;
+      return <Loader />;
     }
   }
   return (

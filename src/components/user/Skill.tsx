@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { skills, userSkills } from '../../API/request';
 import trash from '../../assets/icons/trash.svg';
 import useModal from '../../hook/useModal';
+import Loader from '../loader/Loader';
 import Modal from '../modal/Modal';
 
 interface IProps {
@@ -37,7 +38,7 @@ function Skill({ skill, isForm }: IProps): JSX.Element {
       'Sorry something bad happen please retry or contact a administrator'
     );
     if (isLoading) {
-      return <p>...Loading</p>;
+      return <Loader />;
     }
   }
   return (

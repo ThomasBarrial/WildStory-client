@@ -15,6 +15,7 @@ import OneFormation from './views/OneFormation';
 import Formations from './components/sidebar/Components/Formations';
 import Topics from './components/sidebar/Components/Topics';
 import Search from './views/Search';
+import ErrorPage from './views/ErrorPage';
 
 function Routes(): JSX.Element {
   return (
@@ -38,6 +39,7 @@ function Routes(): JSX.Element {
       <Route exact path="/topic/:id" component={OneTopic} />
       <Route exact path="/topics" component={Topics} />
       <Route exact path="/search" component={Search} />
+      <Route exact path="/error" component={ErrorPage} />
     </>
   );
 }
