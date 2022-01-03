@@ -20,14 +20,10 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
   return (
     <div className="w-full flex flex-col mt-5 items-end">
       {isLandingUpdate && (
-        <UserModal
-          name="landimageUrl"
-          label="landing"
-          isOpen={setIsLandingUpdate}
-        />
+        <UserModal label="landing" isOpen={setIsLandingUpdate} />
       )}
       {isAvatarUpdate && (
-        <UserModal name="avatarUrl" label="avatar" isOpen={setIsAvatarUpdate} />
+        <UserModal label="avatar" isOpen={setIsAvatarUpdate} />
       )}
       <div
         className="w-full flex p-3 rounded-md items-end h-44 lg:h-52 border-b lg:border border-pink"

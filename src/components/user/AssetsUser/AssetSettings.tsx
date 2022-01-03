@@ -39,19 +39,11 @@ function AssetSettings(): JSX.Element {
     <div className="w-sreen h-screen py-10 bg-black fixed inset-0 z-50 overflow-y-scroll">
       <HeaderUser userUpdateid={undefined} title="Add Nice Assets" />
       {isLandingUpdate && (
-        <UserModal
-          name="landimageUrl"
-          label="landing"
-          isOpen={setIsLandingUpdate}
-        />
+        <UserModal label="landing" isOpen={setIsLandingUpdate} />
       )}
       <div className="w-full flex flex-col lg:w-8/12 lg:mx-auto">
         {isAvatarUpdate && (
-          <UserModal
-            name="avatarUrl"
-            label="avatar"
-            isOpen={setIsAvatarUpdate}
-          />
+          <UserModal label="avatar" isOpen={setIsAvatarUpdate} />
         )}
         <Landing landing={userData?.landimageUrl} isOpen={setIsLandingUpdate} />
         <div className="w-full flex flex-col items-end">

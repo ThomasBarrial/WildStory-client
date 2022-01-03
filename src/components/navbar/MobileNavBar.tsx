@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import home from '../../assets/icons/home.svg';
 import search from '../../assets/icons/search.svg';
 import formations from '../../assets/icons/formations.svg';
-import topics from '../../assets/icons/topics.svg';
+import topics from '../../assets/icons/Topics.svg';
 
 function MobileNavBar(): JSX.Element {
   const icons = [

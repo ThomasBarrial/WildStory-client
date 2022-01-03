@@ -11,11 +11,11 @@ module.exports = {
         pink: '#EC6D6A',
         black: '#181818',
         lightblack: '#323232',
-        dark: '#010101',
+        dark: '#050505',
       },
       height: {
         desktop: '32rem',
-        tablet: '52rem',
+        tablet: '40rem',
         comment: '34rem',
         span: '0.25rem',
       },
