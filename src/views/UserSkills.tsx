@@ -4,14 +4,13 @@ import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { skills, userSkills } from '../API/request';
 import HeaderUser from '../components/formComponents/HeaderUser';
 import SkillInput from '../components/formComponents/SkillInput';
 import Skill from '../components/user/Skill';
-import useModal from '../hook/useModal';
-import Modal from '../components/modal/Modal';
 import { useUserFromStore } from '../store/user.slice';
-import Loader from '../components/loader/Loader';
+import ErrorPageToast from '../components/errors/ErrorToast';
 
 interface INewSkill {
   skillId: string;
@@ -21,7 +20,6 @@ interface INewSkill {
 function UserSkills(): JSX.Element {
   const queryclient = useQueryClient();
   const { user } = useUserFromStore();
-  const { isModal, setIsModal, message, setMessage } = useModal();
   const { register, handleSubmit } = useForm();
 
   const {
@@ -30,18 +28,22 @@ function UserSkills(): JSX.Element {
     error,
   } = useQuery<ISkills[], AxiosError>(['skills'], () => skills.getAll());
 
-  const { mutateAsync: createData, error: postError } = useMutation(
-    userSkills.post,
-    {
-      onSuccess: () => {
-        queryclient.refetchQueries(['userSkills']);
-      },
-    }
-  );
+  const {
+    mutateAsync: createData,
+    isError: postError,
+    isLoading: postLoading,
+  } = useMutation(userSkills.post, {
+    onSuccess: () => {
+      queryclient.refetchQueries(['userSkills']);
+    },
+  });
 
-  const { data: skill } = useQuery<IUserSkills[], AxiosError>(
-    ['userSkills', user.id],
-    () => userSkills.getAll(user.id as string)
+  const {
+    data: skill,
+    isLoading: dataLoading,
+    isError: dataError,
+  } = useQuery<IUserSkills[], AxiosError>(['userSkills', user.id], () =>
+    userSkills.getAll(user.id as string)
   );
 
   const onSubmit: SubmitHandler<INewSkill> = (data: INewSkill) => {
@@ -54,57 +56,55 @@ function UserSkills(): JSX.Element {
     };
 
     if (skillfilter?.length !== 0) {
-      setIsModal(true);
-      setMessage(
-        'You already have this skill ! If you want to update it delete the skill before'
-      );
+      toast('You already have this skill, please delete the older one first', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else {
       createData({ skillData });
     }
   };
 
-  if (isLoading) {
-    return <Loader />;
+  if (isLoading || postLoading || dataLoading) {
+    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
-  if (error || postError) {
-    setIsModal(true);
-    setMessage(
-      'Sorry something bad happen please retry or contact a administrator'
+  if (error || postError || dataError) {
+    return (
+      <div className="pt-10">
+        <ErrorPageToast />
+      </div>
     );
   }
   return (
     <div className="py-5">
-      {isModal && (
-        <Modal
-          title="Ouups"
-          buttons={[{ text: 'ok', handleClick: () => setIsModal(false) }]}
-        >
-          {message}
-        </Modal>
-      )}
       <HeaderUser userUpdateid={undefined} title="Edit your skills" />
+      {skill?.map((item) => {
+        return (
+          <div key={item.id}>
+            <Skill isForm skill={item} />
+          </div>
+        );
+      })}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className=""
         action="getuserskills"
       >
-        {skill?.map((item) => {
-          return (
-            <div key={item.id}>
-              <Skill isForm skill={item} />
-            </div>
-          );
-        })}
         <SkillInput register={register} skillsData={skillsData} />
-        <div className="flex items-center mt-12 justify-between">
+        <div className="flex flex-col items-center lg:items-end mt-7 justify-between">
           <button
-            className="font-bold rounded-sm font-lexend w-full lg:w-3/12 p-2 text-pink  border border-pink bg-pink bg-opacity-0 hover:bg-opacity-30 duration-300"
+            className="font-bold rounded-sm font-lexend w-full lg:w-3/12 p-2 text-black  border border-pink bg-pink transform  hover:scale-90  duration-300"
             type="submit"
           >
             Add skill
           </button>
           <Link to={`/profil/${user.id}`}>
-            <p className="font-bold font-lexend rounded-sm w-full text-center  mt-5 lg:mt-0 lg:w-80 p-2  border border-pink text-pink bg-pink bg-opacity-0 hover:bg-opacity-30 duration-300 ">
+            <p className="font-bold font-lexend  rounded-sm w-full text-center  mt-5 lg:mt-10 lg:w-80 p-2  border border-pink text-pink transform hover:scale-95 bg-pink bg-opacity-0 duration-300 ">
               Done
             </p>
           </Link>

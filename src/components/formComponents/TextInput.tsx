@@ -21,7 +21,6 @@ function TextInput({
   error,
   id,
 }: IProps): JSX.Element {
-  console.log(error);
   return (
     <label htmlFor={id} className="flex w-full mt-5 flex-col font-bold">
       {label}

@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { formation, mediaLinks, user, userSkills } from '../API/request';
+import { formation, mediaLinks, user } from '../API/request';
 import Header from '../components/user/Header';
 import Info from '../components/user/Info';
 import MediaIcon from '../components/user/MediaIcon';
-import Skill from '../components/user/Skill';
 import UserPost from '../components/user/UserPost';
 import { useUserFromStore } from '../store/user.slice';
 import edit from '../assets/icons/edit.svg';
+import ErrorPageToast from '../components/errors/ErrorToast';
+import UserSkillDisplay from '../components/userProfil/UserSkillDisplay';
 
 function UserProfil(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -37,21 +38,23 @@ function UserProfil(): JSX.Element {
     () => formation.getOne(userData.idFormation as string)
   );
 
-  const { data: userSkillsData } = useQuery<IUserSkills[], AxiosError>(
-    ['userSkills', userData.id],
-    () => userSkills.getAll(userData.id as string)
-  );
-
-  const { data: userMediaLinksData } = useQuery<IMediaLink[], AxiosError>(
-    ['userMediaLinks', userData.id],
-    () => mediaLinks.getUsersMediaLink(userData.id as string)
+  const {
+    data: userMediaLinksData,
+    // isLoading: userMediaLinkLoad,
+    // error: userMediaLinkError,
+  } = useQuery<IMediaLink[], AxiosError>(['userMediaLinks', userData.id], () =>
+    mediaLinks.getUsersMediaLink(userData.id as string)
   );
 
   if (formationLoad || userLoad) {
-    return <p>Loading</p>;
+    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (formationError || !formationData || userError) {
-    return <p>Error..</p>;
+    return (
+      <div className="pt-10">
+        <ErrorPageToast />
+      </div>
+    );
   }
 
   return (
@@ -86,32 +89,7 @@ function UserProfil(): JSX.Element {
           </div>
           <Info name="City">{userData.city}</Info>
           <Info name="BithDate">{userData.birthDate}</Info>
-          {userSkillsData?.length !== 0 && (
-            <div className="mt-10 border-b border-pink pb-2 flex items-center justify-between">
-              <p className="font-bold text-xl">Skills</p>
-              {id === userStore.id && (
-                <Link to={`/edituserskills/${userData.id}`}>
-                  <p className=" text-sm underline">Edit your skills</p>
-                </Link>
-              )}
-            </div>
-          )}
-          {userSkillsData?.length === 0 && userStore.id === id && (
-            <p className="text-pink font-thin my-2 w-full flex items-center">
-              There is no skill for now{' '}
-              <Link to={`/edituserskills/${userData.id}`}>
-                <p className="ml-2 text-sm underline">Edit your skills</p>
-              </Link>
-            </p>
-          )}
-
-          {userSkillsData?.map((skill) => {
-            return (
-              <div key={skill.id}>
-                <Skill isForm={false} skill={skill} />
-              </div>
-            );
-          })}
+          <UserSkillDisplay userId={userData.id} />
 
           <div className="w-full flex items-end justify-between">
             <div className="flex">

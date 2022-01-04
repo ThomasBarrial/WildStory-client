@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router';
 import { toast } from 'react-toastify';
 import { topics } from '../../../API/request';
+import ErrorToast from '../../errors/ErrorToast';
 
 function Topics(): JSX.Element {
   const { data, isLoading, error } = useQuery<ITopics[]>(['getAllTopcis'], () =>
@@ -14,10 +15,10 @@ function Topics(): JSX.Element {
   const router = useHistory();
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <p className="text-pink animate-pulse">...Loading</p>;
   }
   if (error || !data) {
-    toast('404 Oops somthing went wrong', {
+    toast(<ErrorToast />, {
       position: 'bottom-right',
       autoClose: 5000,
       hideProgressBar: false,
@@ -26,6 +27,7 @@ function Topics(): JSX.Element {
       draggable: true,
       progress: undefined,
     });
+    return <p className="text-sm text-pink">...Oops something went wrong</p>;
   }
   return (
     <div className="mt-2 lg:mt-0 p-4 lg:p-0">
