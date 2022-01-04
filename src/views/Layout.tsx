@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Switch, useLocation, useHistory, useParams } from 'react-router-dom';
 import { auth } from '../API/request';
+import Loader from '../components/loader/Loader';
 import MobileNavBar from '../components/navbar/MobileNavBar';
 import Navabar from '../components/navbar/Navabar';
 import SideBarDesktop from '../components/sidebar/SideBarDesktop';
@@ -30,10 +31,10 @@ function Layout(): JSX.Element {
     },
   });
 
-  if (isLoading) return <p>...Loading</p>;
+  if (isLoading) return <Loader />;
 
   return (
-    <div className=" w-screen min-h-screen bg-black flex pb-3 lg:pb-2 font-lexend text-white  md:w-12/12 max-w-6xl md:mx-auto">
+    <div className=" w-screen min-h-screen flex pb-3 lg:pb-2 font-lexend text-white  md:w-12/12 max-w-6xl md:mx-auto">
       <Navabar />
 
       <div className="pt-14 lg:pt-12 w-full lg:w-feed lg:pl-5">

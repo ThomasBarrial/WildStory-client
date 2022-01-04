@@ -12,6 +12,7 @@ module.exports = {
         black: '#181818',
         lightblack: '#323232',
         dark: '#050505',
+        bg: 'linear-gradient(180deg, #181818 0%, #613939 100%)',
       },
       height: {
         desktop: '32rem',

@@ -4,6 +4,8 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { user } from '../../API/request';
 import defaultAvatar from '../../assets/defaultAvatar.png';
+import ErrorPage from '../../views/ErrorPage';
+import Loader from '../loader/Loader';
 
 interface IProps {
   userId: string | undefined;
@@ -16,10 +18,10 @@ function AvatarUser({ userId }: IProps): JSX.Element {
   );
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <Loader />;
   }
   if (error || !data) {
-    return <p>Error..</p>;
+    return <ErrorPage />;
   }
   return (
     <Link to={`/profil/${data.id}`}>

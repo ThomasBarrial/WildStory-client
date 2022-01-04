@@ -2,6 +2,8 @@ import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { mediaIcons } from '../../API/request';
+import ErrorPage from '../../views/ErrorPage';
+import Loader from '../loader/Loader';
 
 interface IProps {
   media: IMediaLink;
@@ -14,10 +16,10 @@ function MediaIcon({ media }: IProps): JSX.Element {
   );
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <Loader />;
   }
   if (error) {
-    return <p>Error..</p>;
+    return <ErrorPage />;
   }
 
   return (

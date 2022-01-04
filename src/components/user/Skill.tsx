@@ -3,8 +3,6 @@ import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { skills, userSkills } from '../../API/request';
 import trash from '../../assets/icons/trash.svg';
-import useModal from '../../hook/useModal';
-import Modal from '../modal/Modal';
 
 interface IProps {
   skill: IUserSkills;
@@ -12,17 +10,16 @@ interface IProps {
 }
 
 function Skill({ skill, isForm }: IProps): JSX.Element {
-  const { isModal, setIsModal, message, setMessage } = useModal();
   const queryclient = useQueryClient();
   const {
     data: skillData,
     error: skillDataError,
-    isLoading,
+    isLoading: SkillDataLoading,
   } = useQuery<ISkills, AxiosError>(['skill', skill.skillId], () =>
     skills.getOne(skill.skillId)
   );
 
-  const { mutate, error } = useMutation(
+  const { mutate, error, isLoading } = useMutation(
     () => userSkills.delete(skill.id as string),
     {
       onSuccess: () => {
@@ -30,26 +27,14 @@ function Skill({ skill, isForm }: IProps): JSX.Element {
       },
     }
   );
-
-  if (error || skillDataError) {
-    setIsModal(true);
-    setMessage(
-      'Sorry something bad happen please retry or contact a administrator'
-    );
-    if (isLoading) {
-      return <p>...Loading</p>;
-    }
+  if (isLoading || SkillDataLoading) {
+    return <p className="text-pink animate-pulse pb-10">...Loading</p>;
+  }
+  if (skillDataError) {
+    return <p className="text-sm text-pink py-5">Error 404 not found..</p>;
   }
   return (
     <div className="flex text-sm justify-between border-b border-opacity-40 my-5 pb-2 border-pink">
-      {isModal && (
-        <Modal
-          title="Ouups"
-          buttons={[{ text: 'ok', handleClick: () => setIsModal(false) }]}
-        >
-          {message}
-        </Modal>
-      )}
       <p>{skillData?.name}</p>
       <div className="flex">
         <p>{skill.note}/10</p>
@@ -59,7 +44,13 @@ function Skill({ skill, isForm }: IProps): JSX.Element {
             className="ml-5 flex items-end"
             type="button"
           >
-            <img alt="delete" src={trash} />
+            {error ? (
+              <p className="text-sm text-pink ">
+                Error something went wrong...
+              </p>
+            ) : (
+              <img alt="delete" src={trash} />
+            )}
           </button>
         )}
       </div>

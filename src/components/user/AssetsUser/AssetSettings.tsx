@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router';
 import { user } from '../../../API/request';
 import { useUserFromStore } from '../../../store/user.slice';
 import HeaderUser from '../../formComponents/HeaderUser';
+import Loader from '../../loader/Loader';
 import UserModal from '../../modal/UserModal';
 import Avatar from './Avatar';
 import Landing from './Landing';
@@ -30,10 +31,10 @@ function AssetSettings(): JSX.Element {
   });
 
   if (userLoad) {
-    return <p>...Loading</p>;
+    return <Loader />;
   }
   if (userError) {
-    return <p>Error</p>;
+    router.push('/error');
   }
   return (
     <div className="w-sreen h-screen py-10 bg-black fixed inset-0 z-50 overflow-y-scroll">

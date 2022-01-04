@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { post, savePost } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
+import ErrorPageToast from '../errors/ErrorToast';
 import OnePost from '../post/OnePost';
 import SavedPost from './SavedPost';
 
@@ -25,11 +26,19 @@ function UserPost({ userId }: { userId: string | undefined }): JSX.Element {
 
   const { user: userStore } = useUserFromStore();
 
-  if (isLoading || savePostLoading || savePostError) {
-    return <p>Loading</p>;
+  if (isLoading || savePostLoading) {
+    return (
+      <div>
+        <p className="text-pink animate-pulse pb-10">...Loading</p>
+      </div>
+    );
   }
-  if (error || !data || !savedPostData) {
-    return <p>Error..</p>;
+  if (error || !data || !savedPostData || savePostError) {
+    return (
+      <div className="pb-10">
+        <ErrorPageToast />
+      </div>
+    );
   }
 
   return (
@@ -72,7 +81,7 @@ function UserPost({ userId }: { userId: string | undefined }): JSX.Element {
         </div>
       ) : (
         <div className="flex w-full flex-col">
-          {savedPostData.map((item) => {
+          {[...savedPostData].reverse().map((item) => {
             return (
               <div key={item.id}>
                 <SavedPost postId={item.postId} />

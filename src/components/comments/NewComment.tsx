@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { comment } from '../../API/request';
-import down from '../../assets/icons/down.svg';
+import up from '../../assets/icons/up.svg';
 import { useUserFromStore } from '../../store/user.slice';
 
 interface IProps {
@@ -40,14 +40,14 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
       <div className="w-full flex items-start justify-between">
         <button
           onClick={() => setIsNewComment(true)}
-          className="text-lg mb-2 font-bold text-white"
+          className="text-lg mb-2 text-pink underline font-bold "
           type="button"
         >
           Comment this post...
         </button>
         {isNewComment && (
           <button onClick={() => setIsNewComment(false)} type="button">
-            <img src={down} alt="down" />
+            <img className="h-3" src={up} alt="close" />
           </button>
         )}
       </div>
