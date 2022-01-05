@@ -3,6 +3,7 @@ import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { skills, userSkills } from '../../API/request';
 import trash from '../../assets/icons/trash.svg';
+import ErrorPageToast from '../errors/ErrorToast';
 
 interface IProps {
   skill: IUserSkills;
@@ -31,7 +32,7 @@ function Skill({ skill, isForm }: IProps): JSX.Element {
     return <p className="text-pink animate-pulse pb-10">...Loading</p>;
   }
   if (skillDataError) {
-    return <p className="text-sm text-pink py-5">Error 404 not found..</p>;
+    return <ErrorPageToast />;
   }
   return (
     <div className="flex text-sm justify-between border-b border-opacity-40 my-5 pb-2 border-pink">

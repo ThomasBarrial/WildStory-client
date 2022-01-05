@@ -8,13 +8,13 @@ import React, {
   useState,
 } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { user } from '../../API/request';
 import cross from '../../assets/icons/close.svg';
 import { useUserFromStore } from '../../store/user.slice';
 import defaultAvatar from '../../assets/defaultAvatar.png';
 import defaultLanding from '../../assets/defaultLanding.png';
-import Loader from '../loader/Loader';
+import ErrorPageToast from '../errors/ErrorToast';
 
 interface IProps {
   isOpen: Dispatch<SetStateAction<boolean>>;
@@ -30,7 +30,7 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
   const [deleteToken, setDeleteToken] = useState('');
   const [UserData, setUserData] = useState({});
   const [preview, setPreview] = useState('');
-  const router = useHistory();
+  const [isFileSelected, setIsFileSelected] = useState(false);
   const [defaultImage, setDefaultImage] = useState<string | undefined>();
 
   const formData = new FormData();
@@ -74,13 +74,15 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
 
   // ON CLICK CLANCEL DELETE THE IMAGE FROM THE CLOUDINARY LYBRARY
   const handleDeleteImage = async () => {
-    const deleteBody = {
-      token: deleteToken,
-    };
-    await axios.post(
-      'https://api.cloudinary.com/v1_1/dyxboy0zg/delete_by_token',
-      deleteBody
-    );
+    if (isFileSelected) {
+      const deleteBody = {
+        token: deleteToken,
+      };
+      await axios.post(
+        'https://api.cloudinary.com/v1_1/dyxboy0zg/delete_by_token',
+        deleteBody
+      );
+    }
     // WE CLOSE THE MODAL
     isOpen(false);
   };
@@ -117,20 +119,18 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
       .catch(() => setError(true));
   };
 
-  if (isLoading || Loading) {
-    return <Loader />;
-  }
-  if (putError || Error) {
-    router.push('/error');
+  if (isLoading) {
+    return <p className="text-pink animate-pulse">...Loading</p>;
   }
 
   return (
     <div className="w-screen fixed inset-0 z-50 h-full  bg-black bg-opacity-60 flex items-center justify-center">
-      <form className="w-11/12 lg:w-6/12 bg-black border rounded-md border-pink p-5 lg:p-8">
+      <form className="w-11/12 lg:w-6/12 bg-dark  rounded-md p-5 lg:p-8">
         <div className="w-full">
           <button
             onClick={() => {
-              isOpen(false);
+              setIsFileSelected(true);
+              handleDeleteImage();
             }}
             className="w-full flex justify-end"
             type="button"
@@ -151,7 +151,23 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
             }}
-          />
+          >
+            {Loading && (
+              <p
+                className={`text-pink animate-pulse ${
+                  label === 'landing' ? ' p-2 lg:p-5' : 'text-xs pt-6 pl-4'
+                } `}
+              >
+                ...Loading
+              </p>
+            )}
+            {Error ||
+              (putError && (
+                <div className="p-5">
+                  <ErrorPageToast />
+                </div>
+              ))}
+          </div>
           <label htmlFor="Landing" className="flex w-full flex-col font-bold">
             Update {label} Image
             <input
@@ -168,14 +184,17 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
           <button
             type="button"
             onClick={() => OnClick()}
-            className="border rounded-sm  border-pink text-pink py-2 w-6/12 lg:w-4/12"
+            className="border rounded-sm  border-pink text-pink  py-2 w-6/12 lg:w-4/12 transform hover:scale-95 duration-500"
           >
             ok
           </button>{' '}
           <button
             type="button"
-            onClick={() => handleDeleteImage()}
-            className="border rounded-sm  border-white text-white py-2  w-4/12 lg:w-4/12"
+            onClick={() => {
+              setIsFileSelected(true);
+              handleDeleteImage();
+            }}
+            className="border rounded-sm  border-white text-white py-2  w-4/12 lg:w-4/12 transform hover:scale-95 duration-500"
           >
             Cancel
           </button>

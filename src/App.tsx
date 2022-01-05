@@ -5,6 +5,7 @@ import Layout from './views/Layout';
 
 function App(): JSX.Element {
   const queryClient = new QueryClient();
+
   return (
     <QueryClientProvider client={queryClient}>
       <Router>

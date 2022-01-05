@@ -26,7 +26,7 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
         <UserModal label="avatar" isOpen={setIsAvatarUpdate} />
       )}
       <div
-        className="w-full flex p-3 rounded-md items-end h-44 lg:h-52 border-b lg:border border-pink"
+        className="w-full flex p-3 rounded-t-md  items-end h-44 lg:h-52 border-b lg:border-none"
         style={{
           backgroundImage: `url(${
             userLanding === null || userLanding === undefined
@@ -41,7 +41,7 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
         {id === user.id && (
           <button type="button" onClick={() => setIsLandingUpdate(true)}>
             <img
-              className="h-6 w-6 transform translate-y-7  duration-500 hover:scale-125"
+              className="h-6 w-6 transform translate-y-6  duration-500 hover:scale-125"
               src={edit}
               alt="edit"
             />

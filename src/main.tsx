@@ -11,7 +11,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer
-        position="bottom-right"
+        position="bottom-left"
         theme="dark"
         autoClose={5000}
         hideProgressBar={false}

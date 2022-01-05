@@ -42,8 +42,11 @@ function UserPost({ userId }: { userId: string | undefined }): JSX.Element {
   }
 
   return (
-    <div className="mt-5 transform -translate-y-16">
-      <div className="flex items-center border-b pb-2 px-4 lg:px-0 border-pink">
+    <div className="my-5 mb-20">
+      <div
+        className="flex items-center border-b pb-2 px-4 lg:px-0 border-pink"
+        id="topBar"
+      >
         <button
           type="button"
           onClick={() => setIsRecentStories(true)}

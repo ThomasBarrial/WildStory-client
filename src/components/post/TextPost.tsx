@@ -163,7 +163,7 @@ function TextPost({ item }: IProps): JSX.Element {
   return (
     <div className="mx-3 lg:mx-0 pb-5">
       <div className="flex justify-between">
-        <div className="flex">
+        <div className="flex items-center">
           <button
             type="button"
             onClick={() => {

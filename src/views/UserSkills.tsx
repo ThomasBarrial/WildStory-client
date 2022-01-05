@@ -56,15 +56,7 @@ function UserSkills(): JSX.Element {
     };
 
     if (skillfilter?.length !== 0) {
-      toast('You already have this skill, please delete the older one first', {
-        position: 'bottom-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast('You already have this skill, please delete the older one first');
     } else {
       createData({ skillData });
     }
@@ -104,7 +96,7 @@ function UserSkills(): JSX.Element {
             Add skill
           </button>
           <Link to={`/profil/${user.id}`}>
-            <p className="font-bold font-lexend  rounded-sm w-full text-center  mt-5 lg:mt-10 lg:w-80 p-2  border border-pink text-pink transform hover:scale-95 bg-pink bg-opacity-0 duration-300 ">
+            <p className="font-bold font-lexend  rounded-sm w-full text-center  mt-5 lg:mt-5 lg:w-80 p-2  border border-pink text-pink transform hover:scale-95 bg-pink bg-opacity-0 duration-300 ">
               Done
             </p>
           </Link>

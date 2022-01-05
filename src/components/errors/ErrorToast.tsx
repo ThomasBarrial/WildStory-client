@@ -1,8 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 
 function ErrorPageToast(): JSX.Element {
-  const router = useHistory();
   return (
     <div>
       <h4 className="text-pink text-sm font-bold">
@@ -17,14 +15,6 @@ function ErrorPageToast(): JSX.Element {
       >
         contact.wildstory@gmail.com
       </a>
-      <br />
-      <button
-        className="text-pink text-xs mt-2"
-        type="button"
-        onClick={() => router.push('/')}
-      >
-        back home
-      </button>
     </div>
   );
 }
