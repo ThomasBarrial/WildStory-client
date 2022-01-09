@@ -1,11 +1,13 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import { comment, user } from '../../API/request';
 import useModal from '../../hook/useModal';
 import { useUserFromStore } from '../../store/user.slice';
 import Modal from '../modal/Modal';
 import defaultAvatar from '../../assets/defaultAvatar.png';
+import ErrorPageToast from '../errors/ErrorToast';
 
 interface IProps {
   item: IComments;
@@ -14,38 +16,49 @@ interface IProps {
 function Comment({ item }: IProps): JSX.Element {
   const queryclient = useQueryClient();
   const { isModal, setIsModal, message } = useModal();
-  const { mutate } = useMutation(() => comment.delete(item.id), {
+
+  const { user: userFromStore } = useUserFromStore();
+  const idUser = userFromStore.id;
+  const {
+    mutateAsync,
+    isLoading: deleteLoading,
+    isError: deleteError,
+  } = useMutation(() => comment.delete(item.id), {
     onSuccess: () => {
       queryclient.refetchQueries(['getComments']);
       setIsModal(false);
     },
   });
 
-  const { data: userData, error } = useQuery<IUser, AxiosError>(
-    ['Oneuser', item.userId],
-    () => user.getOne(item.userId)
+  const {
+    data: userData,
+    isError,
+    isLoading: userLoading,
+  } = useQuery<IUser, AxiosError>(['Oneuser', item.userId], () =>
+    user.getOne(item.userId)
   );
 
-  const { user: userFromStore } = useUserFromStore();
-
-  const idUser = userFromStore.id;
+  if (deleteLoading || userLoading) {
+    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
+  }
+  if (deleteError || !userData || isError) {
+    toast(<ErrorPageToast />);
+  }
   return (
     <div className="flex my-5 border-b border-pink pb-3">
       {isModal && (
         <Modal
-          title={
-            !error
-              ? 'Do you want to delete your comment ?'
-              : 'Something goes wrong :('
-          }
-          buttons={
-            !error
-              ? [
-                  { text: 'Yes', handleClick: () => mutate() },
-                  { text: 'No', handleClick: () => setIsModal(false) },
-                ]
-              : [{ text: 'ok', handleClick: () => setIsModal(false) }]
-          }
+          title="delete your comment"
+          buttons={[
+            {
+              text: 'Yes',
+              handleClick: () => {
+                mutateAsync();
+                setIsModal(false);
+              },
+            },
+            { text: 'No', handleClick: () => setIsModal(false) },
+          ]}
         >
           {message}
         </Modal>
@@ -63,7 +76,7 @@ function Comment({ item }: IProps): JSX.Element {
           backgroundPosition: 'center',
         }}
       />
-      <div className="ml-4 w-10/12 lg:w-11/12">
+      <div className="ml-4 h-full w-10/12 lg:w-11/12">
         <p className="text-sm">{userData?.username}</p>
         <p className="text-sm font-thin">{item.text}</p>
         {item.userId === idUser && (

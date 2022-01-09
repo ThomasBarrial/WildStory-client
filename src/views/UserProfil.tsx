@@ -77,9 +77,9 @@ function UserProfil(): JSX.Element {
           </div>
           <div className="w-full mt-8 lg:mt-10">
             <Info name="Formation">{formationData.formationName}</Info>
+            <Info name="City">{userData.city}</Info>
+            <Info name="BithDate">{userData.birthDate}</Info>
           </div>
-          <Info name="City">{userData.city}</Info>
-          <Info name="BithDate">{userData.birthDate}</Info>
           <UserSkillDisplay userId={userData.id} />
           <UserMediaLinksDisplay userId={userData.id} />
         </div>

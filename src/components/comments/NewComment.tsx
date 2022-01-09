@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import { comment } from '../../API/request';
-import up from '../../assets/icons/up.svg';
 import { useUserFromStore } from '../../store/user.slice';
+import ErrorPageToast from '../errors/ErrorToast';
 
 interface IProps {
   idPost: string | undefined;
 }
 
 export default function NewComment({ idPost }: IProps): JSX.Element {
-  const [isNewComment, setIsNewComment] = useState(false);
   const { register, handleSubmit } = useForm();
   const queryclient = useQueryClient();
   const { user } = useUserFromStore();
 
-  const { mutate: postComment } = useMutation(comment.post, {
+  const {
+    mutate: postComment,
+    isLoading,
+    isError,
+  } = useMutation(comment.post, {
     onSuccess: () => {
       queryclient.refetchQueries(['getComments']);
     },
@@ -35,40 +39,33 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
     };
     return postComment({ commentData });
   };
+
+  if (isLoading) {
+    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
+  }
+  if (isError) {
+    toast(<ErrorPageToast />);
+  }
   return (
     <div className=" lg:pb-3 w-full">
-      <div className="w-full flex items-start justify-between">
-        <button
-          onClick={() => setIsNewComment(true)}
-          className="text-lg mb-2 text-pink underline font-bold "
-          type="button"
-        >
-          Comment this post...
-        </button>
-        {isNewComment && (
-          <button onClick={() => setIsNewComment(false)} type="button">
-            <img className="h-3" src={up} alt="close" />
-          </button>
-        )}
-      </div>
-      {isNewComment && (
-        <div className="w-full">
-          <form onSubmit={handleSubmit(onSubmit)} action="postComment">
+      <div className="w-full">
+        <form onSubmit={handleSubmit(onSubmit)} action="postComment">
+          <div className="flex">
             <textarea
-              className="bg-black rounded-sm font-thin text-base text-white border border-pink w-full focus:outline-none h-24 px-3 py-3"
+              className="bg-black rounded-sm font-thin text-base text-white border border-pink w-full focus:outline-none h-14 lg:h-16  px-3 py-3"
               id="text"
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...register('text')}
             />
-            <button
-              className="text-lg rounded-sm my-5 border text-pink border-pink w-6/12 py-1"
-              type="submit"
-            >
-              Comment
-            </button>
-          </form>
-        </div>
-      )}
+          </div>
+          <button
+            className="text-lg rounded-sm my-5 border text-pink border-pink w-6/12 py-1"
+            type="submit"
+          >
+            Comment
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

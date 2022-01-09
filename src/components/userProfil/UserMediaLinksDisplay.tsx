@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { mediaLinks } from '../../API/request';
+import { useUserFromStore } from '../../store/user.slice';
 import ErrorPageToast from '../errors/ErrorToast';
 import MediaIcon from '../user/MediaIcon';
 
@@ -13,6 +14,7 @@ function UserMediaLinksDisplay({
   userId: string | undefined;
 }): JSX.Element {
   const { id } = useParams<{ id: string }>();
+  const { user } = useUserFromStore();
   const {
     data: userMediaLinksData,
     isLoading: userMediaLinkLoad,
@@ -43,7 +45,7 @@ function UserMediaLinksDisplay({
           );
         })}
       </div>
-      {userId === id && userMediaLinksData?.length !== 0 && (
+      {userId === user.id && userMediaLinksData?.length !== 0 && (
         <Link to={`/editsocialmedia/${userId}`}>
           <p className="underline mt-3 lg:mt-5 text-sm">Edit your links</p>
         </Link>

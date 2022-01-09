@@ -29,7 +29,7 @@ function ImageSlider({ item }: IProps): JSX.Element {
       <button
         type="button"
         onClick={handleClick}
-        className="w-screen h-80 lg:rounded-md md:h-tablet xl:h-desktop md:w-full lg:border-none border-t border-b  border-pink"
+        className="w-screen h-80 lg:rounded-md md:h-tablet xl:h-desktop md:w-full "
         style={{
           backgroundImage: `url(${item?.imageUrl[imageIndex]})`,
           backgroundPosition: 'center',

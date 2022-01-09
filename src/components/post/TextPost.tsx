@@ -1,14 +1,13 @@
 import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 import { likes, post, savePost } from '../../API/request';
 import like from '../../assets/icons/like.svg';
 import unlike from '../../assets/icons/unlike.svg';
 import { useUserFromStore } from '../../store/user.slice';
 import save from '../../assets/icons/save.svg';
 import saved from '../../assets/icons/saved.svg';
-import Loader from '../loader/Loader';
 
 interface IProps {
   item: IPost;
@@ -16,7 +15,6 @@ interface IProps {
 
 function TextPost({ item }: IProps): JSX.Element {
   const [isLike, setIsLike] = useState(false);
-  const router = useHistory();
   const [isSaved, setIsSaved] = useState(false);
   const [savedPostId, setSavedPostId] = useState('');
   const [istext, setIsText] = useState(true);
@@ -26,7 +24,11 @@ function TextPost({ item }: IProps): JSX.Element {
   const { user } = useUserFromStore();
 
   // CREATE A NEW LIKE
-  const { mutateAsync: createLike } = useMutation(likes.post, {
+  const {
+    mutateAsync: createLike,
+    isLoading: createLikeLoading,
+    isError: createLikeError,
+  } = useMutation(likes.post, {
     onSuccess: () => {
       queryclient.refetchQueries(['getLikes']);
       setIsLike(true);
@@ -34,7 +36,11 @@ function TextPost({ item }: IProps): JSX.Element {
   });
 
   // UPDATE EXISTING LIKE
-  const { mutateAsync: updateLike } = useMutation(likes.update, {
+  const {
+    mutateAsync: updateLike,
+    isLoading: updateLikeLoading,
+    isError: updateLikeError,
+  } = useMutation(likes.update, {
     onSuccess: () => {
       queryclient.refetchQueries(['getLikes']);
       setIsLike((prev) => !prev);
@@ -42,7 +48,11 @@ function TextPost({ item }: IProps): JSX.Element {
   });
 
   // CREATE A NEW SAVEDPOST
-  const { mutateAsync: createSavePost } = useMutation(savePost.post, {
+  const {
+    mutateAsync: createSavePost,
+    isLoading: createSavePostLoading,
+    isError: createSavePostError,
+  } = useMutation(savePost.post, {
     onSuccess: () => {
       setIsSaved(true);
       queryclient.refetchQueries(['getUsersSavedPost']);
@@ -70,15 +80,16 @@ function TextPost({ item }: IProps): JSX.Element {
   );
 
   // DELETE THE SAVEDPOST
-  const { mutateAsync: deleteSavedPost } = useMutation(
-    () => savePost.delete(savedPostId),
-    {
-      onSuccess: () => {
-        setIsSaved(false);
-        queryclient.refetchQueries(['getUsersSavedPost']);
-      },
-    }
-  );
+  const {
+    mutateAsync: deleteSavedPost,
+    isLoading: deleteSavePostLoading,
+    isError: deleteSavePostError,
+  } = useMutation(() => savePost.delete(savedPostId), {
+    onSuccess: () => {
+      setIsSaved(false);
+      queryclient.refetchQueries(['getUsersSavedPost']);
+    },
+  });
 
   // FECTH ALL THE POST'S LIKES
   const {
@@ -153,11 +164,24 @@ function TextPost({ item }: IProps): JSX.Element {
     }
   };
 
-  if (likesIsLoading || savePostLoading || savePostError) {
-    return <Loader />;
+  if (
+    likesIsLoading ||
+    savePostLoading ||
+    createLikeLoading ||
+    updateLikeLoading ||
+    createSavePostLoading ||
+    deleteSavePostLoading
+  ) {
+    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
-  if (likesError || !data) {
-    router.push('/error');
+  if (
+    likesError ||
+    createLikeError ||
+    updateLikeError ||
+    createSavePostError ||
+    deleteSavePostError
+  ) {
+    toast(<p className="text-sm text-pink">...Oops something went wrong</p>);
   }
 
   return (
@@ -188,7 +212,11 @@ function TextPost({ item }: IProps): JSX.Element {
             }
           }}
         >
-          <img className="h-5" src={isSaved ? saved : save} alt="Save" />
+          {!data || savePostError ? (
+            <p className="text-sm text-pink">...Oops something went wrong</p>
+          ) : (
+            <img className="h-5" src={isSaved ? saved : save} alt="Save" />
+          )}
         </button>
       </div>
       <p className="text-xs font-bold mt-3">

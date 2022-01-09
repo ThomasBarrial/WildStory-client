@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 import back from '../assets/icons/back.svg';
 import TextArea from '../components/formComponents/TextArea';
 import { useUserFromStore } from '../store/user.slice';
 import { post } from '../API/request';
-import useModal from '../hook/useModal';
-import Modal from '../components/modal/Modal';
 import UploadImages from '../components/post/UploadImages';
 import SelectTopics from '../components/formComponents/SelectTopics';
+import ErrorPageToast from '../components/errors/ErrorToast';
 
 interface IFormData {
   topicsId: string;
@@ -28,35 +28,44 @@ function CreateUpdatePost(): JSX.Element {
   } = useForm();
   const { user } = useUserFromStore();
   const IdUserFormStore = user.id;
-  const { isModal, setIsModal, message, setMessage } = useModal();
+
   const router = useHistory();
 
   // FETCH THE POST'S DATA (ONLY IF POSTID IS DEFINED)
-  useQuery<IPost>(['post', postId], () => post.getOne(postId as string), {
-    enabled: Boolean(postId),
-    onSuccess: (data) => {
-      setUploadImages(data.imageUrl);
-      setValue('topicsId', data.topicsId);
-      setValue('text', data.text);
-    },
-  });
+  const { isLoading: postLoading, isError: postError } = useQuery<IPost>(
+    ['post', postId],
+    () => post.getOne(postId as string),
+    {
+      enabled: Boolean(postId),
+      onSuccess: (data) => {
+        setUploadImages(data.imageUrl);
+        setValue('topicsId', data.topicsId);
+        setValue('text', data.text);
+      },
+    }
+  );
 
   // CREATE A NEW POST
-  const { mutateAsync: createData, error: postError } = useMutation(post.post, {
+  const {
+    mutateAsync: createData,
+    isLoading: createPostLoading,
+    isError: createPostError,
+  } = useMutation(post.post, {
     onSuccess: () => {
-      setIsModal(true);
-      setMessage('Your post has been created');
+      toast('your story has been successfully created');
+      router.push('/');
     },
   });
 
   // UPDATE THE CURRENT POST (ONLY IF ID IN THE ROUTPATH)
-  const { mutateAsync: editData, error: putError } = useMutation(post.put, {
-    onSuccess: (data) => {
-      setIsModal(true);
-      setMessage('Your post has been edit');
-      setUploadImages(data.imageUrl);
-      setValue('topicsId', data.topicsId);
-      setValue('text', data.text);
+  const {
+    mutateAsync: editData,
+    isError: updatePostError,
+    isLoading: updatePostLoading,
+  } = useMutation(post.put, {
+    onSuccess: () => {
+      toast('your story has been successfully edited');
+      router.push(`/comments/${postId}`);
     },
   });
 
@@ -73,21 +82,19 @@ function CreateUpdatePost(): JSX.Element {
     return editData({ id: postId, postData });
   };
 
-  const error = postError || putError;
+  if (postLoading || createPostLoading || updatePostLoading) {
+    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
+  }
+  if (postError || createPostError || updatePostError) {
+    return (
+      <div className="pt-10">
+        <ErrorPageToast />
+      </div>
+    );
+  }
+
   return (
     <div className="text-white w-full min-h-screen  mt-10 px-4 pb-20 lg:px-0">
-      {isModal && (
-        <Modal
-          title="Every things geos well"
-          buttons={
-            !error
-              ? [{ text: 'ok', handleClick: () => router.push('/') }]
-              : [{ text: 'New try', handleClick: () => setIsModal(false) }]
-          }
-        >
-          {message}
-        </Modal>
-      )}
       <div className="flex w-full items-center justify-between">
         <Link to="/">
           <img src={back} alt="goBack" />

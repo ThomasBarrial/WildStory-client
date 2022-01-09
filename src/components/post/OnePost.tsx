@@ -15,8 +15,8 @@ function OnePost({ item }: IProps): JSX.Element {
   const IdUserFormStore = user.id;
 
   return (
-    <div className="my-5 mt-5 lg:bg-dark rounded-lg lg:p-7">
-      <div className="border-b border-pink">
+    <div className="my-5 lg:mt-5 mt-10 pb-5  border-b border-pink lg:border-none  lg:bg-dark lg:rounded-lg lg:p-7">
+      <div className="lg:border-b border-pink">
         <div className="flex w-full justify-between items-end">
           <AvatarUser userId={item.userId} />
           {IdUserFormStore === item.userId && <Dot postId={item.id} />}
@@ -26,7 +26,7 @@ function OnePost({ item }: IProps): JSX.Element {
       </div>
       <Link to={`/comments/${item.id}`}>
         <button
-          className="text-sm mx-3 lg:mx-0 transform underline cursor-pointer mt-5"
+          className="text-sm mx-3 lg:mx-0 transform underline cursor-pointer lg:mt-5"
           type="button"
         >
           see {item.comments.length} comments{' '}

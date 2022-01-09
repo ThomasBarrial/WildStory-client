@@ -10,12 +10,14 @@ import ImageSlider from '../components/post/ImageSlider';
 import NewComment from '../components/comments/NewComment';
 import TextPost from '../components/post/TextPost';
 import AvatarUser from '../components/post/AvatarUser';
+import ErrorPageToast from '../components/errors/ErrorToast';
 
 function Comments(): JSX.Element {
   const [isComment, setIsComment] = useState(false);
   const { id } = useParams<{ id: string }>();
   const { user } = useUserFromStore();
   const IdUserFormStore = user.id;
+
   const { isLoading, error, data } = useQuery<IComments[], AxiosError>(
     ['getComments', id],
     () => post.getComments(id),
@@ -33,15 +35,21 @@ function Comments(): JSX.Element {
     }
   );
 
-  const { data: postData } = useQuery<IPost, AxiosError>(['post', id], () =>
-    post.getOne(id)
-  );
+  const {
+    data: postData,
+    isLoading: postLoading,
+    isError: postError,
+  } = useQuery<IPost, AxiosError>(['post', id], () => post.getOne(id));
 
-  if (isLoading) {
-    return <p>Loading</p>;
+  if (isLoading || postLoading) {
+    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
-  if (error || !data) {
-    return <p>Error..</p>;
+  if (error || !data || postError) {
+    return (
+      <div className="pt-10">
+        <ErrorPageToast />
+      </div>
+    );
   }
 
   return (
