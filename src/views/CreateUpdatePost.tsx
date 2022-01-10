@@ -9,7 +9,7 @@ import { useUserFromStore } from '../store/user.slice';
 import { post } from '../API/request';
 import UploadImages from '../components/post/UploadImages';
 import SelectTopics from '../components/formComponents/SelectTopics';
-import ErrorPageToast from '../components/errors/ErrorToast';
+import Error404 from '../components/errors/Error404';
 
 interface IFormData {
   topicsId: string;
@@ -86,11 +86,7 @@ function CreateUpdatePost(): JSX.Element {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (postError || createPostError || updatePostError) {
-    return (
-      <div className="pt-10">
-        <ErrorPageToast />
-      </div>
-    );
+    return <Error404 />;
   }
 
   return (

@@ -8,6 +8,7 @@ import unlike from '../../assets/icons/unlike.svg';
 import { useUserFromStore } from '../../store/user.slice';
 import save from '../../assets/icons/save.svg';
 import saved from '../../assets/icons/saved.svg';
+import SignInError from '../errors/SignInError';
 
 interface IProps {
   item: IPost;
@@ -193,6 +194,8 @@ function TextPost({ item }: IProps): JSX.Element {
             onClick={() => {
               if (user.logged === true) {
                 onLike();
+              } else {
+                toast(<SignInError />);
               }
             }}
           >
@@ -209,6 +212,8 @@ function TextPost({ item }: IProps): JSX.Element {
           onClick={() => {
             if (user.logged === true) {
               onSavePost();
+            } else {
+              toast(<SignInError />);
             }
           }}
         >

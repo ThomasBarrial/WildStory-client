@@ -11,6 +11,7 @@ import TextInput from '../components/formComponents/TextInput';
 import MediaLink from '../components/user/MediaLink';
 import { useUserFromStore } from '../store/user.slice';
 import ErrorPageToast from '../components/errors/ErrorToast';
+import Error404 from '../components/errors/Error404';
 
 function SocialeMedia(): JSX.Element {
   const { id }: { id: string } = useParams();
@@ -72,11 +73,7 @@ function SocialeMedia(): JSX.Element {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (isError || ErrMedLi) {
-    return (
-      <div className="pt-10">
-        <ErrorPageToast />
-      </div>
-    );
+    return <Error404 />;
   }
   if (postError) {
     toast(<ErrorPageToast />);

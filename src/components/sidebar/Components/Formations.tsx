@@ -2,8 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router';
 import { formation } from '../../../API/request';
-import ErrorPage from '../../../views/ErrorPage';
-import Loader from '../../loader/Loader';
+import ErrorPageToast from '../../errors/ErrorToast';
 
 function Formations(): JSX.Element {
   const { data, isLoading, error } = useQuery<IFormation[]>(
@@ -16,10 +15,10 @@ function Formations(): JSX.Element {
   const router = useHistory();
 
   if (isLoading) {
-    return <Loader />;
+    return <p className="text-pink animate-pulse">...Loading</p>;
   }
   if (error || !data) {
-    return <ErrorPage />;
+    return <ErrorPageToast />;
   }
 
   return (

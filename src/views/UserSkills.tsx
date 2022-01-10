@@ -10,7 +10,7 @@ import HeaderUser from '../components/formComponents/HeaderUser';
 import SkillInput from '../components/formComponents/SkillInput';
 import Skill from '../components/user/Skill';
 import { useUserFromStore } from '../store/user.slice';
-import ErrorPageToast from '../components/errors/ErrorToast';
+import Error404 from '../components/errors/Error404';
 
 interface INewSkill {
   skillId: string;
@@ -66,11 +66,7 @@ function UserSkills(): JSX.Element {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (error || postError || dataError) {
-    return (
-      <div className="pt-10">
-        <ErrorPageToast />
-      </div>
-    );
+    return <Error404 />;
   }
   return (
     <div className="py-5">

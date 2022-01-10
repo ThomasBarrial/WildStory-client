@@ -1,9 +1,8 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router';
-import { toast } from 'react-toastify';
 import { topics } from '../../../API/request';
-import ErrorToast from '../../errors/ErrorToast';
+import ErrorPageToast from '../../errors/ErrorToast';
 
 function Topics(): JSX.Element {
   const { data, isLoading, error } = useQuery<ITopics[]>(['getAllTopcis'], () =>
@@ -18,16 +17,7 @@ function Topics(): JSX.Element {
     return <p className="text-pink animate-pulse">...Loading</p>;
   }
   if (error || !data) {
-    toast(<ErrorToast />, {
-      position: 'bottom-right',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    return <p className="text-sm text-pink">...Oops something went wrong</p>;
+    return <ErrorPageToast />;
   }
   return (
     <div className="mt-2 lg:mt-0 p-4 lg:p-0">

@@ -38,6 +38,13 @@ function Header({ userAvatar, userLanding }: IProps): JSX.Element {
           backgroundRepeat: 'no-repeat',
         }}
       >
+        <div
+          className="h-full w-full  inset-0 absolute"
+          style={{
+            backgroundColor:
+              'linear-gradient(360deg, #404040 -19.25%, rgba(255, 255, 255, 0) 73.95%)',
+          }}
+        />
         {id === user.id && (
           <button type="button" onClick={() => setIsLandingUpdate(true)}>
             <img

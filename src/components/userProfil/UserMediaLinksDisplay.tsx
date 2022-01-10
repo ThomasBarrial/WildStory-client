@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { mediaLinks } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
-import ErrorPageToast from '../errors/ErrorToast';
+import Error404 from '../errors/Error404';
 import MediaIcon from '../user/MediaIcon';
 
 function UserMediaLinksDisplay({
@@ -27,11 +27,7 @@ function UserMediaLinksDisplay({
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (userMediaLinkError) {
-    return (
-      <div className="pt-10">
-        <ErrorPageToast />
-      </div>
-    );
+    return <Error404 />;
   }
 
   return (

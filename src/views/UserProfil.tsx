@@ -9,9 +9,9 @@ import Info from '../components/user/Info';
 import UserPost from '../components/user/UserPost';
 import { useUserFromStore } from '../store/user.slice';
 import edit from '../assets/icons/edit.svg';
-import ErrorPageToast from '../components/errors/ErrorToast';
 import UserSkillDisplay from '../components/userProfil/UserSkillDisplay';
 import UserMediaLinksDisplay from '../components/userProfil/UserMediaLinksDisplay';
+import Error404 from '../components/errors/Error404';
 
 function UserProfil(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -42,11 +42,7 @@ function UserProfil(): JSX.Element {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (formationError || !formationData || userError) {
-    return (
-      <div className="pt-10">
-        <ErrorPageToast />
-      </div>
-    );
+    return <Error404 />;
   }
 
   return (

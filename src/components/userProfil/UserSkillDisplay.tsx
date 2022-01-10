@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import { userSkills } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
-import ErrorPageToast from '../errors/ErrorToast';
 import Skill from '../user/Skill';
+import Error404 from '../errors/Error404';
 
 interface IProps {
   userId: string | undefined;
@@ -28,11 +28,7 @@ function UserSkillDisplay({ userId }: IProps): JSX.Element {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (userSkillError) {
-    return (
-      <div className="pt-10">
-        <ErrorPageToast />
-      </div>
-    );
+    return <Error404 />;
   }
 
   return (

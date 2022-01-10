@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useQuery, useQueryClient } from 'react-query';
 import { post } from '../API/request';
-import ErrorPageToast from '../components/errors/ErrorToast';
+import Error404 from '../components/errors/Error404';
 import OnePost from '../components/post/OnePost';
 
 function ListPost(): JSX.Element {
@@ -40,16 +40,12 @@ function ListPost(): JSX.Element {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (error || !data) {
-    return (
-      <div className="pt-10">
-        <ErrorPageToast />
-      </div>
-    );
+    return <Error404 />;
   }
   if (data.length === 0) return <p className="mt-10">No post</p>;
 
   return (
-    <div className="w-full pt-3 lg:pt-0 pb-20">
+    <div className="w-full pt-3 lg:pt-5 pb-20">
       {listPost.map((p, index) => {
         return (
           <div id={index.toString()} key={p.id}>
@@ -57,10 +53,11 @@ function ListPost(): JSX.Element {
           </div>
         );
       })}
-
-      {/* <div ref={ref} className="h-52 w-full bg-pink">
-        hello
-      </div> */}
+      {/* {listPost.length !== 0 && (
+        <div ref={ref} className="h-52 w-full bg-pink">
+          hello
+        </div>
+      )} */}
     </div>
   );
 }

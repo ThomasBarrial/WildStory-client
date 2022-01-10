@@ -10,7 +10,7 @@ import ImageSlider from '../components/post/ImageSlider';
 import NewComment from '../components/comments/NewComment';
 import TextPost from '../components/post/TextPost';
 import AvatarUser from '../components/post/AvatarUser';
-import ErrorPageToast from '../components/errors/ErrorToast';
+import Error404 from '../components/errors/Error404';
 
 function Comments(): JSX.Element {
   const [isComment, setIsComment] = useState(false);
@@ -45,11 +45,7 @@ function Comments(): JSX.Element {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (error || !data || postError) {
-    return (
-      <div className="pt-10">
-        <ErrorPageToast />
-      </div>
-    );
+    return <Error404 />;
   }
 
   return (

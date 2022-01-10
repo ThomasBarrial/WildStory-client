@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { formation } from '../API/request';
 import AvatarUser from '../components/post/AvatarUser';
 import back from '../assets/icons/back.svg';
+import Error404 from '../components/errors/Error404';
 
 function OneFormation(): JSX.Element {
   // TAKE THE FORMATION ID IN THE PARAMS
@@ -31,7 +32,7 @@ function OneFormation(): JSX.Element {
   );
 
   if (isFormationLoading || isFormationUsersLoading) {
-    return <p>Loading</p>;
+    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (
     formationError ||
@@ -39,7 +40,7 @@ function OneFormation(): JSX.Element {
     formationUsersError ||
     !dataFormationUsers
   ) {
-    return <p>Error..</p>;
+    return <Error404 />;
   }
 
   return (
