@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import SocialeMedia from './views/SocialeMedia';
 import Comments from './views/Comments';
 import CreateUpdatePost from './views/CreateUpdatePost';
@@ -16,7 +16,6 @@ import Formations from './components/sidebar/Components/Formations';
 import Topics from './components/sidebar/Components/Topics';
 import Search from './views/Search';
 import { useUserFromStore } from './store/user.slice';
-import Error404 from './components/errors/Error404';
 
 function Routes(): JSX.Element {
   const { user } = useUserFromStore();
@@ -35,8 +34,6 @@ function Routes(): JSX.Element {
           <Route exact path="/topic/:id" component={OneTopic} />
           <Route exact path="/topics" component={Topics} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/404" component={Error404} />
-          <Redirect to="/404" />
         </div>
       ) : (
         <div>
@@ -56,8 +53,6 @@ function Routes(): JSX.Element {
           <Route exact path="/topic/:id" component={OneTopic} />
           <Route exact path="/topics" component={Topics} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/404" component={Error404} />
-          <Redirect to="/404" />
         </div>
       )}
     </>
