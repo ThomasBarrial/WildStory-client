@@ -62,7 +62,7 @@ function Comments(): JSX.Element {
             IdUserFormStore !== postData?.userId &&
             user.logged === true && <NewComment idPost={id} />}
           {data.length === 0 && (
-            <p className="font-thin text-pink">No comments</p>
+            <p className="font-thin text-opacity-50 text-pink">No comments</p>
           )}
           {data.map((item) => {
             return (

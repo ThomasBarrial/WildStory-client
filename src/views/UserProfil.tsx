@@ -2,19 +2,19 @@ import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import { formation, user } from '../API/request';
-import Header from '../components/user/Header';
-import Info from '../components/user/Info';
-import UserPost from '../components/user/UserPost';
+import UserAssets from '../components/userProfil/UserAssets';
+import UserPost from '../components/userProfil/UserPost';
 import { useUserFromStore } from '../store/user.slice';
-import edit from '../assets/icons/edit.svg';
-import UserSkillDisplay from '../components/userProfil/UserSkillDisplay';
-import UserMediaLinksDisplay from '../components/userProfil/UserMediaLinksDisplay';
 import Error404 from '../components/errors/Error404';
+import Header from '../components/user/Header';
+import UserSavedPost from '../components/userProfil/UserSavedPost';
+import UserInfo from '../components/userProfil/UserInfo';
+import UserCollection from '../components/userProfil/UserCollection';
 
 function UserProfil(): JSX.Element {
   const { id } = useParams<{ id: string }>();
+  const [navItem, setNavItem] = useState('RS');
   const { user: userStore } = useUserFromStore();
   const [userData, setUserData] = useState(userStore);
 
@@ -41,46 +41,36 @@ function UserProfil(): JSX.Element {
   if (formationLoad || userLoad) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
-  if (formationError || !formationData || userError) {
+  if (formationError || !formationData || userError || !userData) {
     return <Error404 />;
   }
 
   return (
-    <div className="w-full" id="e">
+    <div className="w-full mb-10">
       <div className="lg:bg-dark rounded-md lg:px-0 lg:pt-0 mt-5 ">
-        <Header
+        <UserAssets
           userAvatar={userData?.avatarUrl}
           userLanding={userData?.landimageUrl}
         />
-        <div className="px-4 lg:px-7 h-full transform -translate-y-16 ">
-          <div className="border-b border-pink">
-            <p className="font-bold mt-2 text-2xl lg:text-2xl">
-              {userData.username}
-            </p>
-            <div className="w-full flex justify-between">
-              <p className="text-md mb-2 lg:mb-2 font-thin">
-                {userData.profilTitle}
-              </p>
-              {id === userStore.id && (
-                <Link to={`/settings/${userData.id}`}>
-                  <p className="text-sm w-full  justify-end flex text-right underline">
-                    <img className="mr-2" src={edit} alt="" />
-                    Edit your profil
-                  </p>
-                </Link>
-              )}
-            </div>
-          </div>
-          <div className="w-full mt-8 lg:mt-10">
-            <Info name="Formation">{formationData.formationName}</Info>
-            <Info name="City">{userData.city}</Info>
-            <Info name="BithDate">{userData.birthDate}</Info>
-          </div>
-          <UserSkillDisplay userId={userData.id} />
-          <UserMediaLinksDisplay userId={userData.id} />
+        <div className=" h-full transform -translate-y-24 ">
+          <Header
+            navItem={navItem}
+            setNavItem={setNavItem}
+            userData={userData}
+          />
+          {navItem === 'Info' && (
+            <UserInfo
+              formationName={formationData.formationName}
+              city={userData.city}
+              birthDate={userData.birthDate}
+              id={userData.id}
+            />
+          )}
+          {navItem === 'Collection' && <UserCollection userId={userData.id} />}
+          {navItem === 'RS' && <UserPost userId={userData.id} />}
+          {navItem === 'SS' && <UserSavedPost userId={userData.id} />}
         </div>
       </div>
-      <UserPost userId={userData.id} />
     </div>
   );
 }

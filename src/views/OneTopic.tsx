@@ -33,8 +33,8 @@ function OneTopic(): JSX.Element {
   }
 
   return (
-    <div className="mt-5 bg-dark  lg:mt-0 mb-20  rounded-md lg:px-0">
-      <h4 className="text-2xl mt-2 lg:pt-5 px-4 lg:px-4">
+    <div className="mt-5 LG:bg-dark  lg:mt-0 mb-20  rounded-md lg:px-0">
+      <h4 className="text-2xl mt-2 pt-5 px-4 lg:px-4">
         <p className="text-base">Topics</p>
         <p className="mt-5">{topicsData.topicsName}</p>
         {postsData.length === 0 && (
