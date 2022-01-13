@@ -25,14 +25,14 @@ function UserSkillDisplay({ userId }: IProps): JSX.Element {
   );
 
   if (userSkillLoading) {
-    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
+    return <p className="text-pink animate-pulse p-5">...Loading</p>;
   }
   if (userSkillError) {
     return <Error404 />;
   }
 
   return (
-    <div>
+    <div className="px-4 lg:px-7">
       {' '}
       {userSkillsData?.length !== 0 && (
         <div className="mt-10 border-b border-pink pb-2 flex items-center justify-between">

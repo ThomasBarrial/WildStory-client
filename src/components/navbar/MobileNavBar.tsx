@@ -18,7 +18,7 @@ function MobileNavBar(): JSX.Element {
         {icons.map((item) => {
           return (
             <Link
-              className="mx-7 md:mx-12 flex flex-col items-center"
+              className="mx-9 md:mx-12 flex flex-col items-center"
               key={item.path}
               to={item.path}
             >
@@ -27,7 +27,6 @@ function MobileNavBar(): JSX.Element {
                 src={item.icon}
                 alt={item.alt}
               />
-              <p className="text-xs text-pink mt-2">{item.alt}</p>
             </Link>
           );
         })}

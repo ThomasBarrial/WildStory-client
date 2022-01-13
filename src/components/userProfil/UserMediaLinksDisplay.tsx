@@ -31,7 +31,7 @@ function UserMediaLinksDisplay({
   }
 
   return (
-    <div className="w-full flex items-end justify-between">
+    <div className="w-full flex items-end justify-between px-4 lg:px-7">
       <div className="flex">
         {userMediaLinksData?.map((media) => {
           return (
