@@ -2,7 +2,6 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Switch, useLocation, useHistory, useParams } from 'react-router-dom';
 import { auth } from '../API/request';
-import Loader from '../components/loader/Loader';
 import MobileNavBar from '../components/navbar/MobileNavBar';
 import Navabar from '../components/navbar/Navabar';
 import SideBarDesktop from '../components/sidebar/SideBarDesktop';
@@ -31,7 +30,8 @@ function Layout(): JSX.Element {
     },
   });
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return <p className="text-pink animate-pulse p-10">...Loading</p>;
 
   return (
     <div className=" w-screen min-h-screen flex pb-3 lg:pb-2 font-lexend text-white  md:w-12/12 max-w-6xl md:mx-auto">

@@ -36,7 +36,7 @@ function OneTopic(): JSX.Element {
     <div className="mt-5 LG:bg-dark  lg:mt-0 mb-20  rounded-md lg:px-0">
       <h4 className="text-2xl mt-2 pt-5 px-4 lg:px-4">
         <p className="text-base">Topics</p>
-        <p className="mt-5">{topicsData.topicsName}</p>
+        <p className="my-5">{topicsData.topicsName}</p>
         {postsData.length === 0 && (
           <p className="py-5 text-lg text-pink">
             There is no story for this topic...

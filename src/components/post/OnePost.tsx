@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { useUserFromStore } from '../../store/user.slice';
 import AvatarUser from './AvatarUser';
 import ImageSlider from './ImageSlider';
+import Likes from './Likes';
 import Dot from './Options/Dot';
+import SavePost from './SavePost';
 import TextPost from './TextPost';
+import comments from '../../assets/icons/commentpink.svg';
 
 interface IProps {
   item: IPost;
@@ -24,14 +27,19 @@ function OnePost({ item }: IProps): JSX.Element {
         {item.imageUrl.length !== 0 && <ImageSlider item={item} />}
         <TextPost item={item} />
       </div>
-      <Link to={`/comments/${item.id}`}>
-        <button
-          className="text-sm mx-3 lg:mx-0 transform underline cursor-pointer lg:mt-5"
-          type="button"
-        >
-          see {item.comments.length} comments{' '}
-        </button>
-      </Link>
+      <div className="flex items-center mx-4 lg:mx-0 lg:w-full justify-between mt-5">
+        <Likes item={item} />
+        <Link to={`/comments/${item.id}`}>
+          <button
+            className="text-sm flex items-center  transform  cursor-pointer"
+            type="button"
+          >
+            <img src={comments} className="h-5 mr-2" alt="" />
+            <p className="text-sm">{item.comments.length} Replies</p>
+          </button>
+        </Link>
+        <SavePost item={item} />
+      </div>
     </div>
   );
 }
