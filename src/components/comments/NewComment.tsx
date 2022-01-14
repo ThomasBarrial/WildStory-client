@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
@@ -13,6 +13,7 @@ interface IProps {
 export default function NewComment({ idPost }: IProps): JSX.Element {
   const { register, handleSubmit } = useForm();
   const queryclient = useQueryClient();
+  const [isEmptyText, setIsEmptyText] = useState(false);
   const { user } = useUserFromStore();
 
   const {
@@ -37,6 +38,7 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
       userId: user.id,
       postId,
     };
+    if (formData.text === '') return setIsEmptyText(true);
     return postComment({ commentData });
   };
 
@@ -58,6 +60,9 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
               {...register('text')}
             />
           </div>
+          {isEmptyText && (
+            <p className="text-sm text-pink mt-2">Please write something</p>
+          )}
           <button
             className="text-lg rounded-sm my-5 border text-pink border-pink w-6/12 py-1"
             type="submit"

@@ -42,11 +42,11 @@ function UserCollection({ userId }: IProps): JSX.Element {
     );
   }
   return (
-    <div className="flex flex-wrap lg:px-2 lg:pt-5  justify-center">
+    <div className="flex flex-wrap mx-auto lg:px-2 lg:pt-3">
       {collection.map((item) => {
         return (
           <div
-            className="lg:w-60 lg:h-60 w-1/3 h-36 "
+            className="lg:w-60  lg:ml-2  lg:m-1 lg:h-60 w-1/3 h-36 "
             style={{
               backgroundImage: `url(${item.imageUrl[0]})`,
               backgroundPosition: 'center',
@@ -68,14 +68,14 @@ function UserCollection({ userId }: IProps): JSX.Element {
               }}
             >
               {isHover === item.id && (
-                <div className="h-full  items-center justify-center flex w-full bg-pink bg-opacity-0 hover:bg-opacity-30 duration-500">
+                <div className="h-full  items-center justify-center flex w-full bg-white bg-opacity-0 hover:bg-opacity-50 duration-500">
                   <div className="flex w-8 mx-4 items-center">
                     <img className="mr-1" src={likeblack} alt="Likes" />
-                    <p>{item.imageUrl.length}</p>
+                    <p className="text-black">{item.imageUrl.length}</p>
                   </div>
                   <div className="flex w-8 mx-4 items-center">
                     <img className="mr-1" src={comments} alt="Comments" />
-                    <p>{item.comments.length}</p>
+                    <p className="text-black">{item.comments.length}</p>
                   </div>
                 </div>
               )}
