@@ -2,8 +2,8 @@
 import AXIOS from './axios';
 
 export const post = {
-  getAll: (limit?: number): Promise<IPost[]> =>
-    AXIOS.get(`/post/?limit=${limit}`).then((res) => res.data),
+  getAll: (offset?: number): Promise<IPost[]> =>
+    AXIOS.get(`/post/?limit=5&offset=${offset}`).then((res) => res.data),
   getOne: (id: string): Promise<IPost> =>
     AXIOS.get(`/post/${id}`).then((res) => res.data),
   getComments: (id: string): Promise<IComments[]> =>

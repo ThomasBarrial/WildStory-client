@@ -46,28 +46,26 @@ function Likes({ item }: IProps): JSX.Element {
   });
 
   // UPDATE EXISTING LIKE
-  const {
-    mutateAsync: updateLike,
-    isLoading: updateLikeLoading,
-    isError: updateLikeError,
-  } = useMutation(likes.update, {
-    onSuccess: () => {
-      queryclient.refetchQueries(['getLikes']);
-      setIsLike((prev) => !prev);
-    },
-  });
+  const { mutateAsync: updateLike, isError: updateLikeError } = useMutation(
+    likes.update,
+    {
+      onSuccess: () => {
+        queryclient.refetchQueries(['getLikes']);
+        setIsLike((prev) => !prev);
+      },
+    }
+  );
 
   // CREATE A NEW LIKE
-  const {
-    mutateAsync: createLike,
-    isLoading: createLikeLoading,
-    isError: createLikeError,
-  } = useMutation(likes.post, {
-    onSuccess: () => {
-      queryclient.refetchQueries(['getLikes']);
-      setIsLike(true);
-    },
-  });
+  const { mutateAsync: createLike, isError: createLikeError } = useMutation(
+    likes.post,
+    {
+      onSuccess: () => {
+        queryclient.refetchQueries(['getLikes']);
+        setIsLike(true);
+      },
+    }
+  );
 
   const onLike = () => {
     // IF THE USER NEVER LIKE THE POST CREATE A NEW LIKE
@@ -97,7 +95,7 @@ function Likes({ item }: IProps): JSX.Element {
     }
   };
 
-  if (likesIsLoading || createLikeLoading || updateLikeLoading) {
+  if (likesIsLoading) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (likesError || createLikeError || updateLikeError) {
