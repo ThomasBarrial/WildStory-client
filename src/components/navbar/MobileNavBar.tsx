@@ -13,7 +13,7 @@ function MobileNavBar(): JSX.Element {
     { path: `/topics`, icon: topics, alt: 'topics' },
   ];
   return (
-    <div className="lg:hidden fixed bottom-0 w-full z-30 flex items-center justify-center bg-black h-20">
+    <div className="lg:hidden fixed bottom-0 w-full z-50 flex items-center justify-center bg-black h-20">
       <div className="flex lg:hidden">
         {icons.map((item) => {
           return (

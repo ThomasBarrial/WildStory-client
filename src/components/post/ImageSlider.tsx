@@ -1,57 +1,39 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState } from 'react';
+import React from 'react';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { responsive } from '../../style/responsiveCaroussel';
 
 interface IProps {
   item: IPost | undefined;
 }
 
 function ImageSlider({ item }: IProps): JSX.Element {
-  const [imageIndex, setImageIndex] = useState(0);
-
-  const handleClick = () => {
-    const imageArray = item?.imageUrl.length;
-    if (imageArray !== undefined) {
-      switch (imageIndex) {
-        case imageArray - 1:
-          setImageIndex(0);
-          break;
-        case 0:
-          setImageIndex((c) => c + 1);
-          break;
-        default:
-          setImageIndex((c) => c + 1);
-      }
-    }
-  };
-
   return (
     <div className="flex flex-col overflow-x-scroll lg:w-full mb-5">
-      <button
-        type="button"
-        onClick={handleClick}
-        className="w-screen h-80 lg:rounded-md md:h-tablet xl:h-desktop md:w-full "
-        style={{
-          backgroundImage: `url(${item?.imageUrl[imageIndex]})`,
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-        }}
+      <Carousel
+        ssr
+        className="scroll-snap-x w-full"
+        responsive={responsive}
+        showDots={false}
+        swipeable
+        draggable
       >
-        <div className="flex h-full justify-center items-end pb-2">
-          {item?.imageUrl.map((image) => {
-            return (
-              <div
-                key={image}
-                className={`h-3 w-3 mx-1 ${
-                  imageIndex === item?.imageUrl.indexOf(image)
-                    ? `bg-pink`
-                    : `bg-black`
-                } rounded-full`}
-              />
-            );
-          })}
-        </div>
-      </button>
+        {item?.imageUrl.map((image) => {
+          return (
+            <div
+              key={image}
+              className="w-screen h-80 lg:rounded-md md:h-tablet xl:h-desktop md:w-full "
+              style={{
+                backgroundImage: `url(${image})`,
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+              }}
+            />
+          );
+        })}
+      </Carousel>
     </div>
   );
 }

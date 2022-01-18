@@ -7,6 +7,9 @@ module.exports = {
       fontFamily: {
         lexend: ['Lexend Deca', 'sans-serif'],
       },
+      fontSize: {
+        xxs: '0.25rem',
+      },
       colors: {
         pink: '#EC6D6A',
         black: '#181818',
@@ -22,6 +25,7 @@ module.exports = {
       },
       width: {
         feed: '69%',
+        uploadImage: '98%',
         comments: '47%',
       },
       margin: {

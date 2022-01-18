@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import 'react-multi-carousel/lib/styles.css';
 import AXIOS from '../API/axios';
 import Error404 from '../components/errors/Error404';
 import OnePost from '../components/post/OnePost';
+import endScroll2 from '../assets/icons/endscroll.svg';
 
 function ListPost(): JSX.Element {
   const [listPost, setListPost] = useState<IPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setError] = useState('');
+  const [endScroll, setIsEndScroll] = useState(false);
 
   // NUMBER OF POST ALREADY FETCH
   let offset = 0;
@@ -18,6 +21,11 @@ function ListPost(): JSX.Element {
         const newListPost: IPost[] = [];
         // PUT EACH POST IN THE NEW ARRAY
         res.data.forEach((po: IPost) => newListPost.push(po));
+
+        if (newListPost.length === 0) {
+          setIsEndScroll(true);
+        }
+        console.log(newListPost);
         // UPDATE THE OLD LIST
         setListPost((oldListPost) => [...oldListPost, ...newListPost]);
         // STOP LOADER
@@ -60,6 +68,12 @@ function ListPost(): JSX.Element {
           </div>
         );
       })}
+      {endScroll && (
+        <div className="w-full bg-dark rounded-md p-5 flex animate-pulse items-center mt-10">
+          <img className="h-10  w-10 mr-3" src={endScroll2} alt="" />
+          <p className=" text-pink text-xl">Everythings uptodate</p>
+        </div>
+      )}
     </div>
   );
 }

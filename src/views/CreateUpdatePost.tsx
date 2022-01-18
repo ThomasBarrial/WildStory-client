@@ -90,7 +90,7 @@ function CreateUpdatePost(): JSX.Element {
   }
 
   return (
-    <div className="text-white w-full min-h-screen  mt-10 px-4 pb-20 lg:px-0">
+    <div className="text-white w-full min-h-screen  lg:bg-dark lg:p-7 lg:my-5  my-10 rounded-md px-4 pb-20 ">
       <div className="flex w-full items-center justify-between">
         <Link to="/">
           <img src={back} alt="goBack" />
