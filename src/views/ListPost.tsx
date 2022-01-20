@@ -25,7 +25,6 @@ function ListPost(): JSX.Element {
         if (newListPost.length === 0) {
           setIsEndScroll(true);
         }
-        console.log(newListPost);
         // UPDATE THE OLD LIST
         setListPost((oldListPost) => [...oldListPost, ...newListPost]);
         // STOP LOADER

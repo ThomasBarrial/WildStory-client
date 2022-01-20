@@ -52,7 +52,7 @@ function CreateUpdatePost(): JSX.Element {
     isError: createPostError,
   } = useMutation(post.post, {
     onSuccess: () => {
-      toast('your story has been successfully created');
+      toast('Story successfully created');
       router.push('/');
     },
   });

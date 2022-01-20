@@ -46,6 +46,7 @@ function UserCollection({ userId }: IProps): JSX.Element {
       {collection.map((item) => {
         return (
           <div
+            key={item.id}
             className="lg:w-60  lg:ml-2  lg:m-1 lg:h-60 w-1/3 h-36 "
             style={{
               backgroundImage: `url(${item.imageUrl[0]})`,

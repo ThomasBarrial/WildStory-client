@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
 import { user } from '../../API/request';
 import cross from '../../assets/icons/close.svg';
 import { useUserFromStore } from '../../store/user.slice';
@@ -31,7 +32,7 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
   const [UserData, setUserData] = useState({});
   const [preview, setPreview] = useState('');
   const [isFileSelected, setIsFileSelected] = useState(false);
-  const [defaultImage, setDefaultImage] = useState<string | undefined>();
+  const [defaultImage, setDefaultImage] = useState<string | undefined>('');
 
   const formData = new FormData();
 
@@ -47,6 +48,7 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
     }
     if (label === 'landing') {
       // IF THE USER D'ONT HAVE ANY ASSETS SET THE DEFAULT ONE
+
       if (userFromStore.landimageUrl === undefined || null) {
         setDefaultImage(defaultLanding);
       } else {
@@ -120,13 +122,13 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
   };
 
   if (isLoading) {
-    return <p className="text-pink animate-pulse">...Loading</p>;
+    toast('loading...');
   }
 
   return (
     <div className="w-screen fixed inset-0 z-50 h-full  bg-black bg-opacity-60 flex items-center justify-center">
       <form className="w-11/12 lg:w-6/12 bg-dark  rounded-md p-5 lg:p-8">
-        <div className="w-full">
+        <div className="w-full flex flex-col justify-center items-center">
           <button
             onClick={() => {
               setIsFileSelected(true);
@@ -137,10 +139,14 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
           >
             <img src={cross} alt="isOpen" />
           </button>
+          <h2 className="text-xl">Update your {label} Image</h2>
+          <h2 className="text-base mt-2 text-pink">
+            Click on the image to change it
+          </h2>
           <div
             className={`${
               label === 'avatar'
-                ? 'w-24 h-24 rounded-full'
+                ? 'w-52 h-52 rounded-full'
                 : 'h-36 lg:h-52 w-full rounded-sm'
             }  border bg-black border-pink my-5`}
             style={{
@@ -154,9 +160,7 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
           >
             {Loading && (
               <p
-                className={`text-pink animate-pulse ${
-                  label === 'landing' ? ' p-2 lg:p-5' : 'text-xs pt-6 pl-4'
-                } `}
+                className={`text-pink animate-pulse w-full text-center mt-24  `}
               >
                 ...Loading
               </p>
@@ -167,37 +171,27 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
                   <ErrorPageToast />
                 </div>
               ))}
-          </div>
-          <label htmlFor="Landing" className="flex w-full flex-col font-bold">
-            Update {label} Image
+
             <input
               id="landing"
               type="file"
               placeholder="image..."
               defaultValue=""
               onChange={(e) => handleImageSubmit(e)}
-              className="bg-black mt-2 border rounded-sm focus:outline-none p-2 border-white"
+              className={`bg-black h-52 ${
+                label === 'landing' ? 'w-6/12' : 'w-2/12'
+              } opacity-0  absolute cursor-pointer border rounded-sm focus:outline-none p-2 border-white`}
             />
-          </label>
+          </div>
         </div>
-        <div className="mt-10 flex w-full justify-between">
+        <div className="mt- flex w-full items-center justify-center">
           <button
             type="button"
             onClick={() => OnClick()}
-            className="border rounded-sm  border-pink text-pink  py-2 w-6/12 lg:w-4/12 transform hover:scale-95 duration-500"
+            className="border rounded-sm  border-pink text-pink  py-2 w-full lg:w-4/12 transform hover:scale-95 duration-500"
           >
             ok
           </button>{' '}
-          <button
-            type="button"
-            onClick={() => {
-              setIsFileSelected(true);
-              handleDeleteImage();
-            }}
-            className="border rounded-sm  border-white text-white py-2  w-4/12 lg:w-4/12 transform hover:scale-95 duration-500"
-          >
-            Cancel
-          </button>
         </div>
       </form>
     </div>

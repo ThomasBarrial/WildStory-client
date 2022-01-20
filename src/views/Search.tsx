@@ -19,7 +19,7 @@ function Search(): JSX.Element {
   }
 
   return (
-    <div className="p-4 pt-6">
+    <div className="p-4 mt-5 lg:bg-dark rounded-md">
       <div className="flex items-center">
         <img className="h-5 w-5" src={search} alt="" />
         <p className="font-bold text-pink ml-2">
@@ -31,7 +31,7 @@ function Search(): JSX.Element {
         className="bg-black w-full mt-5 border rounded-sm focus:outline-none p-2 border-white"
         onChange={(e) => setSearchValue(e.target.value)}
       />
-      <div className="lg:bg-dark lg:p-4 lg:rounded-md mt-5">
+      <div className=" lg:p-4 lg:rounded-md mt-5">
         {searchValue === '' ? (
           <div>
             {data.map((item) => {
