@@ -67,9 +67,8 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
             theme="dark"
             style={{
               position: 'fixed',
-              bottom: '20px',
-
-              right: '250px',
+              bottom: '50px',
+              right: '200px',
               maxWidth: '300px',
               width: '100%',
               outline: 'none',

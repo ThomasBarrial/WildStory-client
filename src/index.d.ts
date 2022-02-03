@@ -127,3 +127,9 @@ interface ISavePost {
   userId: string;
   postId: string;
 }
+
+interface IFollow {
+  id?: string;
+  followerId: string;
+  followingId: string;
+}

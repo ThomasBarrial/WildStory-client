@@ -12,6 +12,7 @@ function ImageSlider({ item }: IProps): JSX.Element {
   return (
     <div className="flex flex-col overflow-x-scroll lg:w-full mb-5">
       <Carousel
+        // eslint-disable-next-line no-console
         ssr
         className="scroll-snap-x w-full"
         responsive={responsive}
