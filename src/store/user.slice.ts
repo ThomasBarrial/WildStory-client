@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './index';
+import { RootState } from '.';
 
 export interface UserState {
   id?: string;
