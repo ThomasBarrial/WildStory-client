@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { toast } from 'react-toastify';
 import AlerteMessage from '../formComponents/AlerteMessage';
 import FileInput from '../formComponents/FileInput';
 import { responsive } from '../../style/responsiveCaroussel';
@@ -36,6 +37,12 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
         setUploadImages([...uploadImages, res.data.secure_url]);
         // DESACTIVATE THE LOADER
         setIsLoading(false);
+      })
+      .catch((err) => {
+        if (err.toJSON().status === 400) {
+          setIsLoading(false);
+          toast('⚠️ Files size too large');
+        }
       });
   };
 

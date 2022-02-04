@@ -67,9 +67,8 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
             theme="dark"
             style={{
               position: 'fixed',
-              bottom: '20px',
-
-              right: '250px',
+              bottom: '50px',
+              right: '200px',
               maxWidth: '300px',
               width: '100%',
               outline: 'none',
@@ -104,11 +103,11 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
 
               onChange={(e) => setText(e.target.value)}
             />
-            <div className="absolute w-5/12 flex items-end justify-end mt-5 ml-10">
-              <button onClick={() => setShow(true)} type="button">
-                <img src={emoji} alt="emoji" className="h-7 w-7" />
-              </button>
-            </div>
+          </div>
+          <div className="mt-5">
+            <button onClick={() => setShow(true)} type="button">
+              <img src={emoji} alt="emoji" className="h-7 w-7" />
+            </button>
           </div>
 
           {isEmptyText && (

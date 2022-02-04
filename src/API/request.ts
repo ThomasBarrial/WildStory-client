@@ -148,3 +148,14 @@ export const savePost = {
   delete: (id: string): Promise<ISavePost> =>
     AXIOS.delete(`/savepost/${id}`).then((res) => res.data),
 };
+
+export const follows = {
+  post: ({ followsData }: { followsData: IFollow }): Promise<IFollow> =>
+    AXIOS.post(`/follows`, followsData).then((res) => res.data),
+  getUserFollowers: (id: string): Promise<IFollow[]> =>
+    AXIOS.get(`/follows/followers/${id}`).then((res) => res.data),
+  getUserFollowings: (id: string): Promise<IFollow[]> =>
+    AXIOS.get(`/follows/followings/${id}`).then((res) => res.data),
+  delete: (id: string): Promise<IFollow> =>
+    AXIOS.delete(`/follows/${id}`).then((res) => res.data),
+};

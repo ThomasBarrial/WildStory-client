@@ -16,6 +16,7 @@ import Formations from './components/sidebar/Components/Formations';
 import Topics from './components/sidebar/Components/Topics';
 import Search from './views/Search';
 import { useUserFromStore } from './store/user.slice';
+import UserFollowers from './views/UserFollowers';
 
 function Routes(): JSX.Element {
   const { user } = useUserFromStore();
@@ -53,6 +54,8 @@ function Routes(): JSX.Element {
           <Route exact path="/topic/:id" component={OneTopic} />
           <Route exact path="/topics" component={Topics} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/userfollowers/:id" component={UserFollowers} />
+          <Route exact path="/userfollowings/:id" component={UserFollowers} />
         </div>
       )}
     </>

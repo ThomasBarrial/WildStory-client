@@ -34,6 +34,9 @@ function UserSavedPost({
   }
   return (
     <div className="flex w-full flex-col">
+      {savedPostData.length === 0 && (
+        <p className="p-4 text-pink">There is no stories...</p>
+      )}
       {[...savedPostData].reverse().map((item) => {
         return (
           <div key={item.id}>
