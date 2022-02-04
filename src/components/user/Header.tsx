@@ -50,14 +50,14 @@ function Header({ userData, navItem, setNavItem }: IProps): JSX.Element {
     <div className="pt-5 border-b lg:bg-dark bg-black border-pink">
       <div className="w-full flex items-end mb-5">
         <div>
-          <p className="font-bold mt-2  text-2xl lg:text-2xl px-4 lg:px-7">
-            {userData.username}
-          </p>
-          <p className="text-mdn font-thin px-4 lg:px-7">
+          <div className="font-bold mt-2 flex items-end  text-2xl lg:text-2xl px-4 lg:px-7">
+            <p className="mr-5">{userData.username}</p>
+            <Follow id={userData.id} />
+          </div>
+          <p className="text-sm mt-2 font-thin px-4 lg:px-7">
             {userData.profilTitle}
           </p>
         </div>
-        <Follow id={userData.id} />
       </div>
       <div className="w-full  flex flex-col-reverse lg:flex-row lg:items-center justify-between">
         <div className="w-full  flex  justify-between mt-2 lg:mt-2 lg:w-9/12">

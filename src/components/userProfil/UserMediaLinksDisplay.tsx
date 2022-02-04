@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { mediaLinks } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
@@ -13,7 +12,6 @@ function UserMediaLinksDisplay({
 }: {
   userId: string | undefined;
 }): JSX.Element {
-  const { id } = useParams<{ id: string }>();
   const { user } = useUserFromStore();
   const {
     data: userMediaLinksData,
@@ -46,13 +44,13 @@ function UserMediaLinksDisplay({
           <p className="underline mt-3 lg:mt-5 text-sm">Edit your links</p>
         </Link>
       )}
-      {userMediaLinksData?.length === 0 && userId === id && (
-        <p className="text-pink font-thin my-2 w-full flex items-center">
+      {userMediaLinksData?.length === 0 && userId === user.id && (
+        <div className="text-pink font-thin my-2 w-full flex items-center">
           There is no social media links for now{' '}
           <Link to={`/editsocialmedia/${userId}`}>
             <p className="ml-2 text-sm underline">Edit your links</p>
           </Link>
-        </p>
+        </div>
       )}
     </div>
   );

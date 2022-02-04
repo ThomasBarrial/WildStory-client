@@ -52,7 +52,7 @@ function UserProfil(): JSX.Element {
           userAvatar={userData?.avatarUrl}
           userLanding={userData?.landimageUrl}
         />
-        <div className=" h-full transform -translate-y-24 ">
+        <div className=" h-full transform -translate-y-24 mt-5 ">
           <Header
             navItem={navItem}
             setNavItem={setNavItem}

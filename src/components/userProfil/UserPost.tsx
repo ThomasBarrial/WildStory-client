@@ -45,6 +45,9 @@ function UserPost({ userId }: IProps): JSX.Element {
           </Link>
         </div>
       )}
+      {data.length === 0 && (
+        <p className="px-4 text-pink">There is no stories...</p>
+      )}
       <div className="flex w-full flex-col">
         {data.map((item) => {
           return (

@@ -39,9 +39,8 @@ function AvatarUser({ userId }: IProps): JSX.Element {
             backgroundPosition: 'center',
           }}
         />
-        <div className="flex ml-3 flex-col items-start">
+        <div className="flex ml-3 w-6/12 flex-col items-start">
           <p className="">{data?.username}</p>
-          <p className="text-xs font-thin">{data?.profilTitle}</p>
         </div>
       </div>
     </Link>

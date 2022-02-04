@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { follows, post } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
@@ -12,15 +13,16 @@ interface IProps {
 function Follow({ id }: IProps): JSX.Element {
   const { user: userStore } = useUserFromStore();
   const [isFollowed, setIsFollowed] = useState(false);
-  const [followId, setFollowId] = useState('');
 
   const queryclient = useQueryClient();
 
+  // GET THE NUMBERS OF THE USER'S STORIES
   const { data: userPost } = useQuery<IPost[], AxiosError>(
     ['userPost', id],
     () => post.getUserPost(id as string)
   );
 
+  // GET THE USERS FOLLOWERS
   const {
     data: userFollowers,
     isLoading: followersLoading,
@@ -30,26 +32,20 @@ function Follow({ id }: IProps): JSX.Element {
     () => follows.getUserFollowers(id as string),
     {
       onSuccess: (d) => {
+        // CHECK IF THE LOGGED USER ALREADY FOLLOW THIS USER
         const checkFollowed = d.filter(
           (item) => item.followerId === userStore.id
         );
+        // IF CHECKFOLLOWED AS UNLESS 1 OBJECT THE LOGGED USER FOLLOW THIS PROFIL
         if (checkFollowed.length > 0) {
+          // WE SET FOLLOW STATE TO TRUE
           setIsFollowed(true);
-          setFollowId(checkFollowed[0].id as string);
         }
       },
     }
   );
 
-  const { mutateAsync: deleteFollow } = useMutation(
-    () => follows.delete(followId),
-    {
-      onSuccess: () => {
-        setIsFollowed(false);
-      },
-    }
-  );
-
+  // GET USER'S FOLLOWINGS
   const {
     data: userFollowings,
     isLoading: followingsLoading,
@@ -58,6 +54,7 @@ function Follow({ id }: IProps): JSX.Element {
     follows.getUserFollowings(id as string)
   );
 
+  // CREATE A FOLLOW BETWEEN THE LOGGED USER AND THE PROFIL
   const {
     mutateAsync: postFollow,
     isLoading: postFollowLoading,
@@ -68,6 +65,7 @@ function Follow({ id }: IProps): JSX.Element {
     },
   });
 
+  // ONCLICK OF THE FOLLOW BUTTON
   const onSubmit = () => {
     const followsData = {
       followerId: userStore.id as string,
@@ -86,10 +84,11 @@ function Follow({ id }: IProps): JSX.Element {
 
   return (
     <div>
+      {/* IF THE USER IS ALREADY FOLLOW RENDER THIS  */}
       {isFollowed && userStore.id !== id && (
         <div className="flex">
           <div className="flex items-end">
-            <div className="flex items-center mx-2">
+            <div className="flex items-center mr-2">
               <p className="text-xs mr-2">Followers </p>
               {userFollowers?.length}
             </div>
@@ -102,23 +101,17 @@ function Follow({ id }: IProps): JSX.Element {
               {userPost?.length}
             </div>
           </div>
-          <div className="flex ml-16 items-end">
+          <div className="flex  items-end ml-5">
             <button
               type="button"
               className="border rounded-sm py-1 px-8 text-sm transform hover:text-pink hover:border-pink duration-300"
             >
               Contact
             </button>
-            <button
-              onClick={() => deleteFollow()}
-              className="text-xs ml-4"
-              type="button"
-            >
-              unfollow
-            </button>
           </div>
         </div>
       )}
+      {/* IF THE USER ISN'T FOLLOW RENDER THIS  */}
       {userStore.id !== id && !isFollowed && (
         <button
           onClick={() => onSubmit()}
@@ -127,6 +120,39 @@ function Follow({ id }: IProps): JSX.Element {
         >
           follow
         </button>
+      )}
+      {/* IF THE USER IS ON HIS OWN PROFIL RENDER THIS  */}
+      {userStore.id === id && (
+        <div className="flex items-end mr-4">
+          <div className="flex items-center mr-2">
+            <Link
+              to={`/userfollowers/${userStore.id}`}
+              className="text-xs mr-2"
+            >
+              Followers{' '}
+            </Link>
+            <p className="text-xs font-bold lg:text-base">
+              {userFollowers?.length}
+            </p>
+          </div>
+          <div className="flex items-center mx-2">
+            <Link
+              to={`/userfollowings/${userStore.id}`}
+              className="text-xs mr-2"
+            >
+              Followings{' '}
+            </Link>
+            <p className="text-xs font-bold lg:text-base">
+              {userFollowings?.length}
+            </p>
+          </div>
+          <div className="flex items-center mx-2">
+            <p className="text-xs mr-1 lg:mr-2">stories</p>
+            <p className="text-xs font-bold lg:font-normal lg:text-base">
+              {userPost?.length}
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

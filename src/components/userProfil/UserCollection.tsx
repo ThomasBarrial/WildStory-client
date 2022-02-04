@@ -43,6 +43,9 @@ function UserCollection({ userId }: IProps): JSX.Element {
   }
   return (
     <div className="flex flex-wrap mx-auto lg:px-2 lg:pt-3">
+      {collection.length === 0 && (
+        <p className="p-4 text-pink">There is no stories...</p>
+      )}
       {collection.map((item) => {
         return (
           <div
