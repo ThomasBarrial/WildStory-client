@@ -1,33 +1,34 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { user } from '../../API/request';
+import { useUserFromStore } from '../../store/user.slice';
 import defaultAvatar from '../../assets/defaultAvatar.png';
-import ErrorPageToast from '../errors/ErrorToast';
 
 interface IProps {
-  userId: string | undefined;
+  conversation: IConversation;
 }
 
-function AvatarUser({ userId }: IProps): JSX.Element {
-  const { data, isLoading, error } = useQuery<IUser, AxiosError>(
-    ['oneUser', userId],
-    () => user.getOne(userId)
-  );
+function OneConversation({ conversation }: IProps): JSX.Element {
+  const { user: userStore } = useUserFromStore();
 
+  const friendId = conversation.members.find((m) => m.id !== userStore.id);
+
+  const { data, isLoading, error } = useQuery<IUser, AxiosError>(
+    ['oneUser', friendId?.id],
+    () => user.getOne(friendId?.id)
+  );
   if (isLoading) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
   if (error || !data) {
-    toast(<ErrorPageToast />);
+    return <p className="text-pink animate-pulse pt-10">...Error</p>;
   }
   return (
-    <Link to={`/profil/${data?.id}`}>
-      <div className="flex items-center mx-3 lg:mx-0 pb-3">
+    <div className="my-3 border-b border-pink border-opacity-50">
+      <div className="flex items-center mx-3 lg:mx-0 pb-2">
         <div
-          className="h-12 w-12 rounded-full border border-pink"
+          className="h-10 w-10 rounded-full border border-pink"
           style={{
             backgroundImage: `url(${
               data?.avatarUrl === null || data?.avatarUrl === undefined
@@ -40,11 +41,11 @@ function AvatarUser({ userId }: IProps): JSX.Element {
           }}
         />
         <div className="flex ml-3 w-6/12 flex-col items-start">
-          <p className="">{data?.username}</p>
+          <p className="text-sm">{data?.username}</p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
-export default AvatarUser;
+export default OneConversation;

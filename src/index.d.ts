@@ -133,3 +133,18 @@ interface IFollow {
   followerId: string;
   followingId: string;
 }
+
+interface IConversation {
+  id?: string;
+  members: IUser[];
+  messages: IMessage[];
+}
+
+interface IMessage {
+  id?: string;
+  conversationId: string;
+  senderId: string;
+  text: string;
+  createdAt?: string;
+  sender?: IUser;
+}

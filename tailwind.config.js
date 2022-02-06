@@ -21,6 +21,9 @@ module.exports = {
         desktop: '32rem',
         tablet: '40rem',
         comment: '34rem',
+        messenger: '86%',
+        message: '70%',
+        newmessage: '62%',
         span: '0.25rem',
       },
       width: {
