@@ -32,7 +32,7 @@ function Chat({
   //   const queryClient = useQueryClient();
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const friendId = currentChat.members.find((m) => m.id !== userStore.id);
+  const friendId = currentChat.members?.find((m) => m.id !== userStore.id);
 
   const { data, isLoading, isError } = useQuery<IMessage[], AxiosError>(
     ['getConversationMessages', currentChat.id],

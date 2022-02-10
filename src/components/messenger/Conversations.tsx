@@ -1,9 +1,10 @@
 import { AxiosError } from 'axios';
 import React, { Dispatch, SetStateAction } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { conversations } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
 import OneConversation from './OneConversation';
+import trash from '../../assets/icons/trash.svg';
 
 interface IProps {
   setCurrentChat: Dispatch<SetStateAction<IConversation | null>>;
@@ -11,17 +12,28 @@ interface IProps {
 
 function Conversations({ setCurrentChat }: IProps): JSX.Element {
   const { user } = useUserFromStore();
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useQuery<IConversation[], AxiosError>(
     ['getUserConversation', user.id],
     () => conversations.getUserConversations(user.id as string)
   );
 
-  if (isLoading) {
+  const {
+    mutateAsync,
+    isLoading: isDeleteLoading,
+    isError: IsDeleteLoading,
+  } = useMutation((id: string) => conversations.delete(id), {
+    onSuccess: () => {
+      queryClient.refetchQueries(['getUserConversation']);
+    },
+  });
+
+  if (isLoading || isDeleteLoading) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
 
-  if (isError) {
+  if (isError || IsDeleteLoading) {
     return (
       <p className="text-pink animate-pulse pt-10">
         Ooops something went wrong...
@@ -35,14 +47,25 @@ function Conversations({ setCurrentChat }: IProps): JSX.Element {
       <div className="mt-2">
         {data?.map((item) => {
           return (
-            <button
-              className="w-full"
-              type="button"
-              onClick={() => setCurrentChat(item)}
+            <div
+              className="w-full border-b border-pink border-opacity-50 my-3"
               key={item.id}
             >
-              <OneConversation conversation={item} />
-            </button>
+              <button
+                className="w-11/12"
+                type="button"
+                onClick={() => setCurrentChat(item)}
+              >
+                <OneConversation item={item} />
+              </button>
+              <button
+                className="w-1/12"
+                onClick={() => mutateAsync(item.id as string)}
+                type="button"
+              >
+                <img src={trash} alt="delete" />
+              </button>
+            </div>
           );
         })}
       </div>

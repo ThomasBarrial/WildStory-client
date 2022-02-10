@@ -163,6 +163,14 @@ export const follows = {
 export const conversations = {
   getUserConversations: (id: string): Promise<IConversation[]> =>
     AXIOS.get(`/conversation/${id}`).then((res) => res.data),
+  post: ({
+    conversationData,
+  }: {
+    conversationData: IConversation;
+  }): Promise<IConversation> =>
+    AXIOS.post(`/conversation`, conversationData).then((res) => res.data),
+  delete: (id: string): Promise<IConversation> =>
+    AXIOS.delete(`/conversation/${id}`).then((res) => res.data),
 };
 
 export const messages = {
