@@ -96,7 +96,7 @@ function Chat({
         />
         <button
           onClick={(e) => handleSubmit(e)}
-          className="text-pink ml-3 mb-3 px-4 py-1 text-xs  border border-pink rounded-sm"
+          className="text-pink ml-3 mt-1 px-4 py-1 text-xs bg-pink bg-opacity-0  border border-pink rounded-sm transform hover:scale-105 hover:bg-opacity-100 hover:text-black duration-500"
           type="button"
         >
           send Message

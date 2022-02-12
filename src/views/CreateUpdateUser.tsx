@@ -180,6 +180,7 @@ function CreateUpdateUser(): JSX.Element {
     <div className="px-4 lg:px-0 pb-28 lg:pb-14 bg-black">
       {isModal && (
         <Modal
+          setIsModal={setIsModal}
           title="Every things geos well"
           buttons={
             !error

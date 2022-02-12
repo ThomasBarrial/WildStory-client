@@ -140,6 +140,9 @@ interface IConversation {
   receiverId: string;
   members?: IUser[];
   messages?: IMessage[];
+  user2Id?: string;
+  user1Id?: string;
+  isMessage?: boolean;
 }
 
 interface IMessage {

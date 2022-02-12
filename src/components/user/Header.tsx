@@ -49,14 +49,14 @@ function Header({ userData, navItem, setNavItem }: IProps): JSX.Element {
   return (
     <div className="pt-5 border-b lg:bg-dark bg-black border-pink">
       <div className="w-full flex items-end mb-5">
-        <div>
-          <div className="font-bold mt-2 flex items-end  text-2xl lg:text-2xl px-4 lg:px-7">
+        <div className="w-full">
+          <div className="font-bold ext-2xl lg:text-2xl px-4 lg:px-7 w-full ">
             <p className="mr-5">{userData.username}</p>
+          </div>
+          <div className="text-sm font-thin px-4 lg:px-7 flex items-end justify-between ">
+            {userData.profilTitle}
             <Follow id={userData.id} />
           </div>
-          <p className="text-sm mt-2 font-thin px-4 lg:px-7">
-            {userData.profilTitle}
-          </p>
         </div>
       </div>
       <div className="w-full  flex flex-col-reverse lg:flex-row lg:items-center justify-between">

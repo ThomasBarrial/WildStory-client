@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import io from 'socket.io-client';
 import { conversations, messages } from '../API/request';
 import Chat from '../components/messenger/Chat';
@@ -17,6 +18,9 @@ function Messenger(): JSX.Element {
   const { user } = useUserFromStore();
   const [currentChat, setCurrentChat] = useState<IConversation | null>(null);
   const [arrivalMessage, setArrivalMessage] = useState<IMessage | null>(null);
+  const [userConversation, setUserConversation] = useState<
+    IConversation[] | null
+  >([]);
   const [newMessage, setNewMessage] = useState('');
   useState<IConversation | null>();
   const queryClient = useQueryClient();
@@ -61,10 +65,10 @@ function Messenger(): JSX.Element {
   } = useMutation(conversations.post, {
     onSuccess: (d) => {
       const receiver = d.members?.filter((item) => item.id !== user.id)[0];
-
       socket.emit('createConversation', {
         receiverId: receiver?.id,
       });
+      setCurrentChat(d);
     },
   });
 
@@ -86,21 +90,26 @@ function Messenger(): JSX.Element {
   if (sendMessageLoading || createConversationLoading) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
-  if (sendMessageError || createConversationError) {
+  if (sendMessageError) {
     return <p className="text-pink animate-pulse pt-10">...Error</p>;
   }
 
+  if (createConversationError) {
+    toast('This conversation already exist');
+  }
+
   return (
-    <div className="mt-5 h-screen  ">
+    <div className="mt-5">
       {isModal && (
-        <Modal title="User's suggestions" buttons={[]}>
+        <Modal setIsModal={setIsModal} title="User's suggestions" buttons={[]}>
           <ConversationModal
+            userConversation={userConversation}
             setIsModal={setIsModal}
             createConversation={createConversation}
           />
         </Modal>
       )}
-      <div className="lg:p-4 lg:bg-dark rounded-md h-messenger flex">
+      <div className="lg:p-4 lg:bg-dark rounded-md mb-10 h-messenger flex">
         {currentChat ? (
           <div
             className={`lg:w-9/12  w-full ${
@@ -120,7 +129,12 @@ function Messenger(): JSX.Element {
           </div>
         )}
         <div className={`lg:w-3/12 w-full ${currentChat && 'hidden lg:flex'}`}>
-          <Conversations setCurrentChat={setCurrentChat} />
+          <Conversations
+            setUserConversation={setUserConversation}
+            setIsModal={setIsModal}
+            currentChat={currentChat}
+            setCurrentChat={setCurrentChat}
+          />
         </div>
       </div>
     </div>

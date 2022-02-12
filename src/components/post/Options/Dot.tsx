@@ -32,6 +32,7 @@ function Dot({ postId }: { postId: string }): JSX.Element {
 
       {isModal && (
         <Modal
+          setIsModal={setIsModal}
           title={
             isConfirmationMessage
               ? 'do you really want to delete this story'

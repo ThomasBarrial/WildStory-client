@@ -12,8 +12,10 @@ function PlaceHolder({ setIsModal }: IProps): JSX.Element {
       <p className="font-bold text-xl text-pink mt-5">Your conversations</p>
       <p className="text-pink mt-2">Send private messages to your friends </p>
       <button
-        onClick={() => setIsModal(true)}
-        className="mt-5 bg-pink text-dark rounded-sm px-10 py-1 text-md font-thin"
+        onClick={() => {
+          setIsModal(true);
+        }}
+        className="mt-5  bg-pink text-dark rounded-sm px-10 py-1 text-md font-thin"
         type="button"
       >
         send message

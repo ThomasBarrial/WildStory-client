@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 
 interface Iprops {
   title: string;
   buttons: IButton[];
   children: React.ReactNode;
+  setIsModal: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IButton {
@@ -14,10 +15,13 @@ interface IButton {
   textColor?: string;
 }
 
-function Modal({ title, buttons, children }: Iprops): JSX.Element {
+function Modal({ title, buttons, children, setIsModal }: Iprops): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
-  const handleClose = (): void => setIsOpen(false);
+  const handleClose = (): void => {
+    setIsOpen(false);
+    setIsModal(false);
+  };
   return (
     <Dialog
       open={isOpen}

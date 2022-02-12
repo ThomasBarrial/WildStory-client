@@ -88,26 +88,18 @@ function Follow({ id }: IProps): JSX.Element {
       {isFollowed && userStore.id !== id && (
         <div className="flex">
           <div className="flex items-end">
-            <div className="flex items-center mr-2">
-              <p className="text-xs mr-2">Followers </p>
-              {userFollowers?.length}
+            <div className="flex items-center  mr-2">
+              <p className="text-sm mr-2">Followers </p>
+              <p className="text-sm font-bold">{userFollowers?.length}</p>
             </div>
-            <div className="flex items-center mx-2">
-              <p className="text-xs mr-2">Followings </p>
-              {userFollowings?.length}
+            <div className="flex items-center  mx-2">
+              <p className="text-sm mr-2">Followings </p>
+              <p className="text-sm font-bold">{userFollowings?.length}</p>
             </div>
-            <div className="flex items-center mx-2">
-              <p className="text-xs mr-2">stories</p>
-              {userPost?.length}
+            <div className="flex items-center  mx-2">
+              <p className="text-sm mr-2">stories</p>
+              <p className="text-sm font-bold">{userPost?.length}</p>
             </div>
-          </div>
-          <div className="flex  items-end ml-5">
-            <button
-              type="button"
-              className="border rounded-sm py-1 px-8 text-sm transform hover:text-pink hover:border-pink duration-300"
-            >
-              Contact
-            </button>
           </div>
         </div>
       )}

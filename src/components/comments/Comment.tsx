@@ -48,6 +48,7 @@ function Comment({ item }: IProps): JSX.Element {
     <div className="flex my-5 border-b border-pink pb-3">
       {isModal && (
         <Modal
+          setIsModal={setIsModal}
           title="Are you sur that you want to delete your comment ?"
           buttons={[
             {

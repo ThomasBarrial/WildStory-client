@@ -7,7 +7,7 @@ interface IProps {
 
 function User({ item }: IProps): JSX.Element {
   return (
-    <div className="flex items-center mx-3 lg:mx-0 pb-3">
+    <div className="flex w-full mt-3 items-center mx-3 lg:mx-0 pb-3 border-b border-pink border-opacity-50">
       <div
         className="h-12 w-12 rounded-full border border-pink"
         style={{

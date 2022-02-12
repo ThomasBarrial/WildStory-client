@@ -41,7 +41,7 @@ function Message({ item }: IProps): JSX.Element {
         <p className="text-sm border border-pink border-opacity-40 bg-black  rounded-xl p-4 mt-1">
           {item.text}
         </p>
-        <p className="text-xs font-thin mt-1">
+        <p className="text-xss text-white text-opacity-50 font-thin mt-1">
           {format(item.createdAt as string)}
         </p>
       </div>

@@ -26,7 +26,7 @@ function OneConversation({ item }: IProps): JSX.Element {
     return <p className="text-pink animate-pulse pt-10">...Error</p>;
   }
   return (
-    <div className="flex items-center mx-3 lg:mx-0 pb-2">
+    <div className="flex  items-center mx-3 lg:mx-0">
       <div
         className="h-10 w-10 rounded-full border border-pink"
         style={{
@@ -40,8 +40,17 @@ function OneConversation({ item }: IProps): JSX.Element {
           backgroundPosition: 'center',
         }}
       />
-      <div className="flex ml-3 w-9/12  justify-between items-start">
+      <div className="flex flex-col text-left ml-3 w-9/12  justify-between items-start">
         <p className="text-sm">{data?.username}</p>
+        {data.idFormation === userStore.idFormation ? (
+          <p className="text-xs text-opacity-70 mt-1">
+            You made the same formation
+          </p>
+        ) : (
+          <p className="text-xs h-4 text-white text-opacity-50 max-w-xl overflow-hidden">
+            {data.profilTitle}
+          </p>
+        )}
       </div>
     </div>
   );
