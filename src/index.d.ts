@@ -136,13 +136,13 @@ interface IFollow {
 
 interface IConversation {
   id?: string;
-  senderId: string;
-  receiverId: string;
+  senderId?: string;
+  receiverId?: string;
   members?: IUser[];
   messages?: IMessage[];
   user2Id?: string;
   user1Id?: string;
-  isMessage?: boolean;
+  isNewMessage?: string;
 }
 
 interface IMessage {

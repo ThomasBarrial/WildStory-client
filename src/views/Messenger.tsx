@@ -26,6 +26,16 @@ function Messenger(): JSX.Element {
   const queryClient = useQueryClient();
   const { isModal, setIsModal } = useModal();
 
+  const {
+    mutateAsync: updateConversation,
+    isLoading: updateConversationLoading,
+    isError: updateConversationError,
+  } = useMutation(conversations.update, {
+    onSuccess: () => {
+      queryClient.refetchQueries(['getUserConversation']);
+    },
+  });
+
   useEffect(() => {
     socket.emit('addUser', user.id).removeListener();
     socket.on('getMessage', (data: IMessage) => {
@@ -34,6 +44,8 @@ function Messenger(): JSX.Element {
         senderId: data.senderId,
         text: data.text,
       });
+      const body = { isNewMessage: data.senderId };
+      updateConversation({ id: data.conversationId, body });
     });
     socket.on('getConversation', () => {
       queryClient.refetchQueries(['getUserConversation']);
@@ -87,12 +99,14 @@ function Messenger(): JSX.Element {
     },
   });
 
-  console.log(arrivalMessage);
-
-  if (sendMessageLoading || createConversationLoading) {
+  if (
+    sendMessageLoading ||
+    createConversationLoading ||
+    updateConversationLoading
+  ) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
-  if (sendMessageError) {
+  if (sendMessageError || updateConversationError) {
     return <p className="text-pink animate-pulse pt-10">...Error</p>;
   }
 
@@ -133,8 +147,7 @@ function Messenger(): JSX.Element {
         )}
         <div className={`lg:w-3/12 w-full ${currentChat && 'hidden lg:flex'}`}>
           <Conversations
-            setArrivalMessage={setArrivalMessage}
-            arrivalMessage={arrivalMessage}
+            updateConversation={updateConversation}
             setUserConversation={setUserConversation}
             setIsModal={setIsModal}
             currentChat={currentChat}

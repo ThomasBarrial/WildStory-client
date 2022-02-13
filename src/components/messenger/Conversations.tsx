@@ -1,6 +1,11 @@
 import { AxiosError } from 'axios';
 import React, { Dispatch, SetStateAction } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import {
+  UseMutateAsyncFunction,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from 'react-query';
 import { conversations } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
 import OneConversation from './OneConversation';
@@ -11,17 +16,23 @@ interface IProps {
   setCurrentChat: Dispatch<SetStateAction<IConversation | null>>;
   setIsModal: Dispatch<SetStateAction<boolean>>;
   setUserConversation: Dispatch<SetStateAction<IConversation[] | null>>;
-  arrivalMessage: IMessage | null;
-  setArrivalMessage: Dispatch<SetStateAction<IMessage | null>>;
+  updateConversation: UseMutateAsyncFunction<
+    IConversation,
+    unknown,
+    {
+      id: string | undefined;
+      body: IConversation;
+    },
+    unknown
+  >;
 }
 
 function Conversations({
   setCurrentChat,
-  arrivalMessage,
+  updateConversation,
   currentChat,
   setIsModal,
   setUserConversation,
-  setArrivalMessage,
 }: IProps): JSX.Element {
   const { user } = useUserFromStore();
   const queryClient = useQueryClient();
@@ -35,6 +46,8 @@ function Conversations({
       },
     }
   );
+
+  console.log(data);
 
   const {
     mutateAsync,
@@ -74,14 +87,17 @@ function Conversations({
               }`}
                 key={item.id}
               >
-                {arrivalMessage?.conversationId === item.id && (
-                  <div className="h-3 w-3 bg-pink rounded-full absolute inset-0 transform translate-x-2 translate-y-2" />
-                )}
+                {item.isNewMessage !== user.id &&
+                  item.isNewMessage !== '' &&
+                  item.id !== currentChat?.id && (
+                    <div className="h-3 w-3 bg-pink rounded-full absolute inset-0 transform translate-x-2 translate-y-2" />
+                  )}
                 <button
                   className="w-11/12"
                   type="button"
                   onClick={() => {
-                    setArrivalMessage(null);
+                    const body = { isNewMessage: '' };
+                    updateConversation({ id: item.id, body });
                     setCurrentChat(item);
                   }}
                 >
