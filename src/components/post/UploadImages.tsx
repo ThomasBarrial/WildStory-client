@@ -1,12 +1,10 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 import axios from 'axios';
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { toast } from 'react-toastify';
 import AlerteMessage from '../formComponents/AlerteMessage';
 import FileInput from '../formComponents/FileInput';
-import { responsive } from '../../style/responsiveCaroussel';
 import ImageUploaded from '../uploadImage/ImageUploaded';
 
 interface IProps {
@@ -56,7 +54,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
             handleImageSubmit={handleImageSubmit}
           />
         )}
-        <Carousel
+        {/* <Carousel
           ssr
           className="scroll-snap-x w-full"
           responsive={responsive}
@@ -77,7 +75,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
               </div>
             );
           })}
-        </Carousel>
+        </Carousel> */}
       </div>
 
       <form

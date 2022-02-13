@@ -45,7 +45,7 @@ function Comment({ item }: IProps): JSX.Element {
     toast(<ErrorPageToast />);
   }
   return (
-    <div className="flex my-5 border-b border-pink pb-3">
+    <div className="flex mt-7 border-b border-opacity-50 border-pink pb-2">
       {isModal && (
         <Modal
           setIsModal={setIsModal}
@@ -79,7 +79,7 @@ function Comment({ item }: IProps): JSX.Element {
       />
       <div className="ml-4 h-full w-10/12 lg:w-11/12">
         <p className="text-sm">{userData?.username}</p>
-        <p className="text-sm font-thin">{item.text}</p>
+        <p className="text-sm mt-1 font-thin">{item.text}</p>
         {item.userId === idUser && (
           <button
             className="text-xl h-3 flex items-end w-full justify-end"

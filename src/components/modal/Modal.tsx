@@ -30,12 +30,12 @@ function Modal({ title, buttons, children, setIsModal }: Iprops): JSX.Element {
     >
       <Dialog.Overlay className="fixed inset-0 z-50 " />
 
-      <div className="py-10 pr-4 pl-7 md:px-7 lg:px-10 w-11/12 lg:w-6/12 flex flex-col z-50 text-white bg-dark rounded-md break-all">
+      <div className="py-10 pr-4 pl-4 md:px-7 lg:px-10 w-11/12 lg:w-6/12 flex flex-col z-50 text-white bg-dark rounded-md break-all">
         <Dialog.Title className="sm:text-xl text-base mb-1 font-bold">
           {title}
         </Dialog.Title>
 
-        {children && <div className="mb-6 text-base">{children}</div>}
+        {children && <div className="text-base">{children}</div>}
 
         <div className="flex mt-5">
           {buttons.map((button, index) => (

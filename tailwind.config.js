@@ -23,7 +23,7 @@ module.exports = {
         tablet: '40rem',
         comment: '37rem',
         messenger: '750px',
-        message: '70%',
+        message: '78%',
         newmessage: '62%',
         span: '0.25rem',
       },

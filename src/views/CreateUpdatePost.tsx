@@ -90,7 +90,7 @@ function CreateUpdatePost(): JSX.Element {
   }
 
   return (
-    <div className="text-white w-full min-h-screen  lg:bg-dark lg:p-7 lg:my-5  my-10 rounded-md px-4 pb-20 ">
+    <div className="text-white w-full   lg:bg-dark lg:p-10 lg:my-5  my-10 rounded-md px-4 pb-20 ">
       <div className="flex w-full items-center justify-between">
         <Link to="/">
           <img src={back} alt="goBack" />
@@ -125,7 +125,7 @@ function CreateUpdatePost(): JSX.Element {
         />
         <button
           type="submit"
-          className="mt-5 border rounded-sm border-pink text-pink py-2 w-6/12"
+          className="mt-5 border rounded-sm border-pink bg-pink bg-opacity-0 text-pink py-2 w-6/12 transform hover:scale-105 hover:bg-opacity-100 hover:text-black duration-500"
         >
           {postId ? 'Edit your post' : 'Create post'}
         </button>

@@ -87,6 +87,8 @@ function Messenger(): JSX.Element {
     },
   });
 
+  console.log(arrivalMessage);
+
   if (sendMessageLoading || createConversationLoading) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
@@ -101,7 +103,7 @@ function Messenger(): JSX.Element {
   return (
     <div className="mt-5">
       {isModal && (
-        <Modal setIsModal={setIsModal} title="User's suggestions" buttons={[]}>
+        <Modal setIsModal={setIsModal} title="Users suggestions" buttons={[]}>
           <ConversationModal
             userConversation={userConversation}
             setIsModal={setIsModal}
@@ -117,6 +119,7 @@ function Messenger(): JSX.Element {
             }`}
           >
             <Chat
+              setCurrentChat={setCurrentChat}
               newMessage={newMessage}
               sendMessage={sendMessage}
               setNewMessage={setNewMessage}
@@ -130,6 +133,8 @@ function Messenger(): JSX.Element {
         )}
         <div className={`lg:w-3/12 w-full ${currentChat && 'hidden lg:flex'}`}>
           <Conversations
+            setArrivalMessage={setArrivalMessage}
+            arrivalMessage={arrivalMessage}
             setUserConversation={setUserConversation}
             setIsModal={setIsModal}
             currentChat={currentChat}

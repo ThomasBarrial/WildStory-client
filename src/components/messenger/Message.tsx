@@ -22,7 +22,7 @@ function Message({ item }: IProps): JSX.Element {
     return <p className="text-pink animate-pulse pt-10">...Error</p>;
   }
   return (
-    <div className="lg:w-5/12 w-8/12 p-2 flex">
+    <div className="lg:w-7/12 w-10/12 p-2 flex">
       <div
         className="h-12 w-12 rounded-full border border-pink"
         style={{

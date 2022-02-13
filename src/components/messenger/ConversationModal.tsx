@@ -86,12 +86,12 @@ function ConversationModal({
         onChange={(e) => setSearchValue(e.target.value)}
       />
       {searchValue === '' ? (
-        <div className="mt-5 w-full  h-80 overflow-y-scroll">
+        <div className="mt-5 w-full h-80 overflow-y-scroll">
           {userList?.map((item) => {
             return (
               <div
                 key={item.id}
-                className="flex flex-col w-full bg-black bg-opacity-0 transform scale-95 hover:bg-opacity-100 hover:scale-100 duration-500"
+                className="flex flex-col w-full bg-black bg-opacity-0 transform  lg:scale-95 hover:bg-opacity-100 hover:scale-100 duration-500"
               >
                 <button
                   type="button"
@@ -116,7 +116,7 @@ function ConversationModal({
               return (
                 <div
                   key={item.id}
-                  className="flex flex-col w-full bg-black bg-opacity-0 transform scale-95 hover:bg-opacity-100 hover:scale-100 duration-500"
+                  className="flex flex-col w-full bg-black bg-opacity-0 transform lg:scale-95 hover:bg-opacity-100 hover:scale-100 duration-500"
                 >
                   <button
                     type="button"

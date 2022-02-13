@@ -11,13 +11,17 @@ interface IProps {
   setCurrentChat: Dispatch<SetStateAction<IConversation | null>>;
   setIsModal: Dispatch<SetStateAction<boolean>>;
   setUserConversation: Dispatch<SetStateAction<IConversation[] | null>>;
+  arrivalMessage: IMessage | null;
+  setArrivalMessage: Dispatch<SetStateAction<IMessage | null>>;
 }
 
 function Conversations({
   setCurrentChat,
+  arrivalMessage,
   currentChat,
   setIsModal,
   setUserConversation,
+  setArrivalMessage,
 }: IProps): JSX.Element {
   const { user } = useUserFromStore();
   const queryClient = useQueryClient();
@@ -56,10 +60,10 @@ function Conversations({
   }
 
   return (
-    <div className="mt-2 w-full lg:mt-0 p-4 h-full inset-0 rounded-md bg-black flex flex-col justify-between">
+    <div className="mt-2 w-full lg:mt-0 p-4   lg:h-full inset-0 rounded-md bg-black flex flex-col justify-between">
       <div>
         <h3 className="border-b border-pink pb-2">Conversations</h3>
-        <div className=" h-comment overflow-y-scroll overflow-x-hidden">
+        <div className="lg:h-comment overflow-y-scroll overflow-x-hidden">
           {data?.map((item) => {
             return (
               <div
@@ -70,10 +74,16 @@ function Conversations({
               }`}
                 key={item.id}
               >
+                {arrivalMessage?.conversationId === item.id && (
+                  <div className="h-3 w-3 bg-pink rounded-full absolute inset-0 transform translate-x-2 translate-y-2" />
+                )}
                 <button
                   className="w-11/12"
                   type="button"
-                  onClick={() => setCurrentChat(item)}
+                  onClick={() => {
+                    setArrivalMessage(null);
+                    setCurrentChat(item);
+                  }}
                 >
                   <OneConversation item={item} />
                 </button>
@@ -89,7 +99,7 @@ function Conversations({
           })}
         </div>
       </div>
-      <div className="bg-dark p-2 text-sm text-pink rounded-md transform hover:scale-105 duration-500">
+      <div className="bg-dark  text-center  lg:flex w-11/12 lg:w-60 mt-10 lg:mt-0 p-2 text-sm text-pink rounded-md transform hover:scale-105 duration-500">
         <button type="button" onClick={() => setIsModal(true)}>
           Create new conversation
         </button>
