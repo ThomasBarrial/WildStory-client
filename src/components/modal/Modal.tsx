@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 
 interface Iprops {
   title: string;
   buttons: IButton[];
   children: React.ReactNode;
+  setIsModal: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IButton {
@@ -14,10 +15,13 @@ interface IButton {
   textColor?: string;
 }
 
-function Modal({ title, buttons, children }: Iprops): JSX.Element {
+function Modal({ title, buttons, children, setIsModal }: Iprops): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
-  const handleClose = (): void => setIsOpen(false);
+  const handleClose = (): void => {
+    setIsOpen(false);
+    setIsModal(false);
+  };
   return (
     <Dialog
       open={isOpen}
@@ -26,12 +30,12 @@ function Modal({ title, buttons, children }: Iprops): JSX.Element {
     >
       <Dialog.Overlay className="fixed inset-0 z-50 " />
 
-      <div className="py-10 pr-4 pl-7 md:px-7 lg:px-10 w-11/12 lg:w-6/12 flex flex-col z-50 text-white bg-dark rounded-sm break-all">
+      <div className="py-10 pr-4 pl-4 md:px-7 lg:px-10 w-11/12 lg:w-6/12 flex flex-col z-50 text-white bg-dark rounded-md break-all">
         <Dialog.Title className="sm:text-xl text-base mb-1 font-bold">
           {title}
         </Dialog.Title>
 
-        {children && <div className="mb-6 text-base">{children}</div>}
+        {children && <div className="text-base">{children}</div>}
 
         <div className="flex mt-5">
           {buttons.map((button, index) => (

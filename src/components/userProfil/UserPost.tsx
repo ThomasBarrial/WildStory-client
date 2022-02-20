@@ -36,7 +36,7 @@ function UserPost({ userId }: IProps): JSX.Element {
   }
 
   return (
-    <div className="my-5 mb-20">
+    <div className="my-5 mb-20 px-4">
       {data.length === 0 && userStore.id === userId && (
         <div className="text-pink flex text-sm mt-2">
           <p>{`You don't post any stories for now.`}</p>
@@ -45,7 +45,7 @@ function UserPost({ userId }: IProps): JSX.Element {
           </Link>
         </div>
       )}
-      {data.length === 0 && (
+      {data.length === 0 && userStore.id !== userId && (
         <p className="px-4 text-pink">There is no stories...</p>
       )}
       <div className="flex w-full flex-col">

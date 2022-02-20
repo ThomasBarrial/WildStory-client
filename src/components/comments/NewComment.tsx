@@ -52,6 +52,13 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
     setText(text + emojiText);
   };
 
+  const handleUserKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      // e.preventDefault();
+      handleSubmit(onSubmit)(); // this won't be triggered
+    }
+  };
+
   if (isLoading) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
@@ -96,6 +103,7 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
         <form onSubmit={handleSubmit(onSubmit)} action="postComment">
           <div className="flex inset-0">
             <textarea
+              onKeyPress={(e) => handleUserKeyPress(e)}
               className="bg-black rounded-sm font-thin text-base text-white border border-pink w-full focus:outline-none h-14 lg:h-16  px-3 py-3"
               id="text"
               value={text}
@@ -105,7 +113,11 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
             />
           </div>
           <div className="mt-5">
-            <button onClick={() => setShow(true)} type="button">
+            <button
+              className="hidden lg:flex"
+              onClick={() => setShow(true)}
+              type="button"
+            >
               <img src={emoji} alt="emoji" className="h-7 w-7" />
             </button>
           </div>
