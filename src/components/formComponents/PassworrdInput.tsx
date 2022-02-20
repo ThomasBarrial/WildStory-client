@@ -26,7 +26,7 @@ function PassworrdInput({
       <label htmlFor="confirmmdp" className="w-full mt-10">
         {label}
         <input
-          className="bg-black rounded-md w-full border p-2 mt-2 focus:outline-none"
+          className="bg-black rounded-sm w-full border p-2 mt-2 focus:outline-none"
           type="password"
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...register(name, {

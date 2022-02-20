@@ -27,6 +27,8 @@ function Layout(): JSX.Element {
       if (pathname !== '/signup' && id === undefined) {
         history.push('/');
       }
+      // eslint-disable-next-line no-console
+      console.clear();
     },
   });
 
