@@ -113,7 +113,7 @@ function Conversations({
           })}
         </div>
       </div>
-      <div className="bg-dark  text-center  lg:flex w-11/12 lg:w-60 mt-10 lg:mt-0 p-2 text-sm text-pink rounded-md transform hover:scale-105 duration-500">
+      <div className="bg-dark  text-center lg:flex w-11/12 lg:w-60 mt-10 lg:mt-0 p-2 text-sm text-pink rounded-md transform hover:scale-105 duration-500">
         <button type="button" onClick={() => setIsModal(true)}>
           Create new conversation
         </button>

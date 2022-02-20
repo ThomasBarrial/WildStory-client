@@ -47,13 +47,13 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
   return (
     <div>
       <div className="flex flex-wrap mt-2 w-full">
-        {uploadImages.length === 0 && (
+        {/* {uploadImages.length === 0 && (
           <FileInput
             isLoading={isLoading}
             isPreview
             handleImageSubmit={handleImageSubmit}
           />
-        )}
+        )} */}
         {/* <Carousel
           ssr
           className="scroll-snap-x w-full"
@@ -76,6 +76,7 @@ function UploadImages({ setUploadImages, uploadImages }: IProps): JSX.Element {
             );
           })}
         </Carousel> */}
+        <p>Upload Medias</p>
       </div>
 
       <form

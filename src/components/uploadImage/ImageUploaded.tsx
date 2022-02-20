@@ -38,7 +38,7 @@ function ImageUploaded({
           isCaroussel
             ? 'h-60 lg:h-desktop w-uploadImage  mt-4'
             : 'h-32 w-32 mr-3'
-        }  overflow-hidden   border border-pink rounded-sm`}
+        }  overflow-hidden   border border-pink rounded-md`}
         style={{
           backgroundImage: `url(${image})`,
           backgroundPosition: 'center',

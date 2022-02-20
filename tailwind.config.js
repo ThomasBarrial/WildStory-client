@@ -21,8 +21,8 @@ module.exports = {
       height: {
         desktop: '32rem',
         tablet: '40rem',
-        comment: '37rem',
-        messenger: '750px',
+        comment: '35rem',
+        messenger: '700px',
         message: '78%',
         newmessage: '62%',
         span: '0.25rem',

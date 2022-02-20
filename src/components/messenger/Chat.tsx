@@ -31,11 +31,9 @@ interface IProps {
   >;
   newMessage: string;
   setCurrentChat: Dispatch<SetStateAction<IConversation | null>>;
-  writing: string;
 }
 
 function Chat({
-  writing,
   currentChat,
   setNewMessage,
   sendMessage,
@@ -157,11 +155,6 @@ function Chat({
           })}
         </div>
       </div>
-      {writing !== '' && (
-        <p className="text-white mt-3 text-sm animate-pulse text-opacity-75">
-          {writing} is writing....
-        </p>
-      )}
       <form
         className="h-16 lg:h-20 text-sm flex mt-2 border-pink border rounded-md max-h-52"
         action="sendMessage"
