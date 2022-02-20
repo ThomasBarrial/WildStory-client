@@ -47,8 +47,6 @@ function Conversations({
     }
   );
 
-  console.log(data);
-
   const {
     mutateAsync,
     isLoading: isDeleteLoading,
