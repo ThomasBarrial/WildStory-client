@@ -12,7 +12,7 @@ import Modal from '../components/modal/Modal';
 import useModal from '../hook/useModal';
 import { useUserFromStore } from '../store/user.slice';
 
-const socket = io(import.meta.env.VITE_API_URL);
+const socket = io(import.meta.env.VITE_SOCKET_URL as string);
 
 function Messenger(): JSX.Element {
   const { user } = useUserFromStore();
