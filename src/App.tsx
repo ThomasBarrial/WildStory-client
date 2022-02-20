@@ -8,7 +8,9 @@ function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <Layout />
+        <div className="bg-black">
+          <Layout />
+        </div>
       </Router>
     </QueryClientProvider>
   );

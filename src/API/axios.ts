@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const AXIOS = axios.create({
-  baseURL: 'https://wilderstory.herokuapp.com/api',
-  withCredentials: false,
+  baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
 });
 
 export default AXIOS;

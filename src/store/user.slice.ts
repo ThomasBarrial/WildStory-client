@@ -1,9 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '.';
+import type { RootState } from '.';
 
 export interface UserState {
-  id: string;
+  id?: string;
+  profilTitle?: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  city?: string;
+  birthDate?: string | undefined;
+  avatarUrl?: string;
+  landimageUrl?: string;
+  idFormation?: string;
+  logged?: boolean;
 }
 
 interface UserStateWithLogged extends UserState {
@@ -27,7 +37,6 @@ interface ReturnUseUserFromStore {
 }
 
 const initialState: UserStateWithLogged = {
-  id: '094cf4ae-4648-4a76-a745-d7d7412537da',
   logged: false,
 };
 
@@ -55,6 +64,7 @@ export const useUserFromStore = (): ReturnUseUserFromStore => {
   const dispatchLogin = (payload: UserState) => dispatch(login(payload));
   const dispatchLogout = () => dispatch(logout());
   const dispatchUser = (payload: UserState) => dispatch(update(payload));
+
   return {
     user,
     dispatchLogin,

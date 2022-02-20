@@ -1,0 +1,75 @@
+import React, { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { useHistory } from 'react-router';
+import { post } from '../../../API/request';
+import useModal from '../../../hook/useModal';
+import Modal from '../../modal/Modal';
+
+function Dot({ postId }: { postId: string }): JSX.Element {
+  const { isModal, setIsModal, message } = useModal();
+  const [isConfirmationMessage, setIsConfirmationMessage] = useState(false);
+  const router = useHistory();
+  const queryclient = useQueryClient();
+  const { mutateAsync, error } = useMutation(() => post.delete(postId), {
+    onSuccess: () => {
+      queryclient.refetchQueries(['posts']);
+    },
+  });
+
+  if (error) {
+    return <p>Sorry something bad happen try later</p>;
+  }
+
+  return (
+    <div>
+      <button
+        onClick={() => setIsModal(true)}
+        type="button"
+        className="h-full mb-3 mr-4 lg:mr-0 text-2xl font-bold"
+      >
+        ...
+      </button>
+
+      {isModal && (
+        <Modal
+          setIsModal={setIsModal}
+          title={
+            isConfirmationMessage
+              ? 'do you really want to delete this story'
+              : 'Story settings'
+          }
+          buttons={
+            isConfirmationMessage
+              ? [
+                  {
+                    text: 'Yes',
+                    handleClick: () => {
+                      mutateAsync();
+                      setIsModal(false);
+                    },
+                  },
+                  {
+                    text: 'No',
+                    handleClick: () => setIsConfirmationMessage(false),
+                  },
+                ]
+              : [
+                  {
+                    text: 'Edit post',
+                    handleClick: () => router.push(`/editpost/${postId}`),
+                  },
+                  {
+                    text: 'delete post',
+                    handleClick: () => setIsConfirmationMessage(true),
+                  },
+                ]
+          }
+        >
+          {message}
+        </Modal>
+      )}
+    </div>
+  );
+}
+
+export default Dot;
