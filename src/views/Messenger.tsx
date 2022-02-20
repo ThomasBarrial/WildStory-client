@@ -8,7 +8,7 @@ import Conversations from '../components/messenger/Conversations';
 import PlaceHolder from '../components/messenger/PlaceHolder';
 import { useUserFromStore } from '../store/user.slice';
 
-const socket = io('http://localhost:5000');
+const socket = io(import.meta.env.VITE_API_URL);
 
 function Messenger(): JSX.Element {
   const { user } = useUserFromStore();
