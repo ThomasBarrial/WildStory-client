@@ -6,7 +6,6 @@ import { post } from '../API/request';
 import { useUserFromStore } from '../store/user.slice';
 import Comment from '../components/comments/Comment';
 import Header from '../components/comments/Header';
-import ImageSlider from '../components/post/ImageSlider';
 import NewComment from '../components/comments/NewComment';
 import TextPost from '../components/post/TextPost';
 import AvatarUser from '../components/post/AvatarUser';
@@ -54,7 +53,7 @@ function Comments(): JSX.Element {
       <div className="pb-20 w-full">
         <div className="lg:bg-dark rounded-md lg:p-7">
           <AvatarUser userId={postData?.userId} />
-          {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />}
+          {/* {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />} */}
           {postData && <TextPost item={postData} />}
         </div>
         <div className="lg:bg-dark rounded-md mt-2 lg:p-7 mx-3 lg:mx-0">

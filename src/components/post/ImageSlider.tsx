@@ -9,7 +9,7 @@ interface IProps {
 }
 
 function ImageSlider({ item }: IProps): JSX.Element {
-  console.log(item);
+  console.log(item.imageUrl);
   return (
     <div className="flex flex-col overflow-x-scroll lg:w-full mb-5">
       <Carousel
@@ -22,6 +22,7 @@ function ImageSlider({ item }: IProps): JSX.Element {
         draggable
       >
         {item.imageUrl.map((image) => {
+          console.log(image);
           return (
             <div
               key={image}
