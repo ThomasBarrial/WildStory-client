@@ -17,8 +17,6 @@ function OnePost({ item }: IProps): JSX.Element {
   const { user } = useUserFromStore();
   const IdUserFormStore = user.id;
 
-  console.log(item);
-
   return (
     <div className="my-5 lg:mt-0 mt-5 pb-5  border-b border-pink lg:border-none  lg:bg-dark lg:rounded-lg lg:p-7">
       <div className="lg:border-b border-pink">

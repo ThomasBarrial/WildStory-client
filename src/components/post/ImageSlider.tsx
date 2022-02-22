@@ -5,10 +5,11 @@ import 'react-multi-carousel/lib/styles.css';
 import { responsive } from '../../style/responsiveCaroussel';
 
 interface IProps {
-  item: IPost | undefined;
+  item: IPost;
 }
 
 function ImageSlider({ item }: IProps): JSX.Element {
+  console.log(item);
   return (
     <div className="flex flex-col overflow-x-scroll lg:w-full mb-5">
       <Carousel
@@ -20,7 +21,7 @@ function ImageSlider({ item }: IProps): JSX.Element {
         swipeable
         draggable
       >
-        {item?.imageUrl.map((image) => {
+        {item.imageUrl.map((image) => {
           return (
             <div
               key={image}
