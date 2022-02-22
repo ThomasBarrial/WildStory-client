@@ -10,6 +10,7 @@ import NewComment from '../components/comments/NewComment';
 import TextPost from '../components/post/TextPost';
 import AvatarUser from '../components/post/AvatarUser';
 import Error404 from '../components/errors/Error404';
+import ImageSlider from '../components/post/ImageSlider';
 
 function Comments(): JSX.Element {
   const [isComment, setIsComment] = useState(false);
@@ -53,7 +54,7 @@ function Comments(): JSX.Element {
       <div className="pb-20 w-full">
         <div className="lg:bg-dark rounded-md lg:p-7">
           <AvatarUser userId={postData?.userId} />
-          {/* {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />} */}
+          {postData?.imageUrl.length !== 0 && <ImageSlider item={postData} />}
           {postData && <TextPost item={postData} />}
         </div>
         <div className="lg:bg-dark rounded-md mt-2 lg:p-7 mx-3 lg:mx-0">
