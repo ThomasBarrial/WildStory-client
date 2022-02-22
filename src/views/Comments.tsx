@@ -44,7 +44,7 @@ function Comments(): JSX.Element {
   if (isLoading || postLoading) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
-  if (error || !data || postError) {
+  if (error || !data || postError || !postData) {
     return <Error404 />;
   }
 
