@@ -60,9 +60,9 @@ function ListPost(): JSX.Element {
 
   return (
     <div className="w-full pt-3 lg:pt-5 pb-20">
-      {listPost.map((p, index) => {
+      {listPost.map((p) => {
         return (
-          <div id={index.toString()} key={p.id}>
+          <div key={p.id}>
             <OnePost item={p} />
           </div>
         );
