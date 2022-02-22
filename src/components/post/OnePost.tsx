@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useUserFromStore } from '../../store/user.slice';
 import AvatarUser from './AvatarUser';
+import ImageSlider from './ImageSlider';
 import Likes from './Likes';
 import Dot from './Options/Dot';
 import SavePost from './SavePost';
@@ -23,7 +24,7 @@ function OnePost({ item }: IProps): JSX.Element {
           <AvatarUser userId={item.userId} />
           {IdUserFormStore === item.userId && <Dot postId={item.id} />}
         </div>
-        {/* {item.imageUrl.length !== 0 && <ImageSlider item={item} />} */}
+        {item.imageUrl.length !== 0 && <ImageSlider item={item} />}
         <TextPost item={item} />
       </div>
       <div className="flex items-center mx-4 lg:mx-0 lg:w-full justify-between mt-5">
