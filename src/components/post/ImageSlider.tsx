@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import { responsive } from '../../style/responsiveCaroussel';
+// import Carousel from 'react-multi-carousel';
+// import 'react-multi-carousel/lib/styles.css';
+// import { responsive } from '../../style/responsiveCaroussel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 interface IProps {
   item: IPost;
@@ -10,16 +12,8 @@ interface IProps {
 
 function ImageSlider({ item }: IProps): JSX.Element {
   return (
-    <div className="flex flex-col overflow-x-scroll lg:w-full mb-5">
-      <Carousel
-        // eslint-disable-next-line no-console
-        ssr
-        className="scroll-snap-x w-full"
-        responsive={responsive}
-        showDots={false}
-        swipeable
-        draggable
-      >
+    <div className="mb-5">
+      <Carousel>
         {item.imageUrl.map((image) => {
           return (
             <div
