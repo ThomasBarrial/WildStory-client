@@ -51,7 +51,7 @@ function LogIn(): JSX.Element {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="w-sreen font-lexend flex items-center justify-center h-full  bg-black fixed inset-0 z-50 overflow-y-scroll">
+    <div className="font-lexend flex items-center justify-center h-full  bg-black fixed inset-0 z-50 overflow-y-scroll">
       <div className="flex flex-col lg:flex-row ">
         <img className="hidden lg:flex lg:mr-5" src={img} alt="" />
         <form
