@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 import axios from 'axios';
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import 'react-multi-carousel/lib/styles.css';
+// import 'react-multi-carousel/lib/styles.css';
 import { toast } from 'react-toastify';
 import AlerteMessage from '../formComponents/AlerteMessage';
 import FileInput from '../formComponents/FileInput';

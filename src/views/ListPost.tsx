@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import 'react-multi-carousel/lib/styles.css';
 import AXIOS from '../API/axios';
 import Error404 from '../components/errors/Error404';
 import OnePost from '../components/post/OnePost';

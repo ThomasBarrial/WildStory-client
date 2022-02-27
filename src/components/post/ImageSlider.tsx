@@ -23,7 +23,7 @@ function ImageSlider({ item }: IProps): JSX.Element {
           return (
             <div
               key={image}
-              className="w-screen h-80 lg:rounded-md md:h-tablet xl:h-desktop md:w-full"
+              className="w-screen h-80 lg:rounded-md md:h-tablet xl:h-desktop md:w-full "
               style={{
                 backgroundImage: `url(${image})`,
                 backgroundPosition: 'center',
