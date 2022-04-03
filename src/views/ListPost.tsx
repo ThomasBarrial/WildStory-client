@@ -15,7 +15,7 @@ function ListPost(): JSX.Element {
 
   const LoadPosts = () => {
     // FETCH THE LIST OF POSTS WITH THE NUMBER OF POST ALREADY FETCH
-    AXIOS.get(`/post/?limit=2&offset=${offset}`)
+    AXIOS.get(`/post/?limit=5&offset=${offset}`)
       .then((res) => {
         const newListPost: IPost[] = [];
         // PUT EACH POST IN THE NEW ARRAY
@@ -31,7 +31,7 @@ function ListPost(): JSX.Element {
       })
       .catch((err) => setError(err));
     // INCREMENT THE NUMBER OF POST ALREADY FETCH
-    offset += 2;
+    offset += 5;
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

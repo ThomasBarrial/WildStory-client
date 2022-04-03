@@ -8,13 +8,14 @@ import TextInput from '../components/formComponents/TextInput';
 import { auth, formation, user } from '../API/request';
 import DateInput from '../components/formComponents/DateInput';
 import { formInputs } from '../components/formComponents/FormInputs';
-import PasswordForm from './PasswordForm';
 import SelectInput from '../components/formComponents/SelectInput';
 import HeaderUser from '../components/formComponents/HeaderUser';
 import { useUserFromStore } from '../store/user.slice';
 import useModal from '../hook/useModal';
 import Modal from '../components/modal/Modal';
 import Loader from '../components/loader/Loader';
+import PassworrdInput from '../components/formComponents/PassworrdInput';
+import PasswordForm from './PasswordForm';
 
 interface IResMutation {
   message: string;
@@ -33,14 +34,13 @@ function CreateUpdateUser(): JSX.Element {
   const { setIsModal, setMessage, isModal, message } = useModal();
   const { dispatchLogin } = useUserFromStore();
   const router = useHistory();
-  const { dispatchUser, user: userFromStore } = useUserFromStore();
+  const { user: userFromStore } = useUserFromStore();
   const { id } = useParams<{ id: string }>();
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    setError,
   } = useForm();
 
   // FETCH ALL THE FORMATIONS FOR THE SELECT INPUT
@@ -114,25 +114,9 @@ function CreateUpdateUser(): JSX.Element {
     },
   });
 
-  // WE UPDATE THE USER'S PASSWORD
-  const { mutateAsync: passwordMutate } = useMutation(
-    'user',
-    user.updatePasword,
-    {
-      onSuccess: (data) => {
-        setMessage('Les données ont bien été modifiées');
-        setIsModal(true);
-        dispatchUser(data);
-      },
-      onError: () =>
-        setError('user.oldPassword', {
-          message: "L'ancien mot de passe est incorrect.",
-        }),
-    }
-  );
-
   const onSubmit: SubmitHandler<INewUser> = (data: INewUser) => {
     setPassword(data.password);
+
     const UserData = {
       profilTitle: data.profilTitle,
       username: data.username,
@@ -145,29 +129,10 @@ function CreateUpdateUser(): JSX.Element {
       idFormation: data.idFormation,
     };
 
-    const passwordsToCompare = {
-      oldPassword: data.oldPassword,
-      password: data.password,
-    };
-
-    // CHECK IF THE NEW PASSWORD IS DIFFERENT THAN THE OLDER
-    if (passwordsToCompare.oldPassword === passwordsToCompare.password) {
-      setError('password', {
-        message: 'The new password is the same as the older',
-      });
-      // SAME FOR THE CONFIRM PASSWORD
-    } else if (passwordsToCompare.password !== data.confirmPassword) {
-      setError('confirmPassword', {
-        message: 'You can not use the same password',
-      });
-    } else {
-      passwordMutate({
-        passwordsToCompare,
-      });
-    }
+    const { password: removedPassword, ...UserDataWithoutPassword } = UserData;
 
     if (!id) return createData({ UserData });
-    return updateData({ id, UserData });
+    return updateData({ id, UserData: UserDataWithoutPassword });
   };
 
   if (formationsLoad || isLoading || usertoUpdateLoad) {
@@ -206,7 +171,13 @@ function CreateUpdateUser(): JSX.Element {
         userUpdateid={id}
         title={!id ? `Create your profil` : `Edit your profil`}
       />
-
+      {id && (
+        <PasswordForm
+          isPassword={isPassword}
+          id={id}
+          setIsPassword={setIsPassword}
+        />
+      )}
       <form
         onSubmit={handleSubmit(onSubmit)}
         action="Create/Update Post"
@@ -237,18 +208,25 @@ function CreateUpdateUser(): JSX.Element {
             register={register}
           />
         </div>
-        {!id || isPassword ? (
-          <PasswordForm id={id} error={errors} register={register} />
-        ) : (
-          <button
-            onClick={() => setIsPassword(true)}
-            className="text-pink underline rounded-md mt-5"
-            type="button"
-          >
-            EditPassword
-          </button>
+        {!id && (
+          <>
+            {' '}
+            <PassworrdInput
+              label="Password"
+              register={register}
+              isRequired
+              error={errors}
+              name="password"
+            />
+            <PassworrdInput
+              label="Confirm password"
+              register={register}
+              isRequired
+              error={errors}
+              name="confirmPassword"
+            />
+          </>
         )}
-
         <button
           className="w-full p-2 rounded-sm mt-5 lg:mt-5  text-pink border border-pink"
           type="submit"

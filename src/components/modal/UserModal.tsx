@@ -9,7 +9,6 @@ import React, {
 } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useParams } from 'react-router';
-import { toast } from 'react-toastify';
 import { user } from '../../API/request';
 import cross from '../../assets/icons/close.svg';
 import { useUserFromStore } from '../../store/user.slice';
@@ -24,7 +23,7 @@ interface IProps {
 
 function UserModal({ isOpen, label }: IProps): JSX.Element {
   const { id } = useParams<{ id: string }>();
-  const { user: userFromStore } = useUserFromStore();
+  const { user: userFromStore, dispatchUser } = useUserFromStore();
   const queryclient = useQueryClient();
   const [Loading, setLoading] = useState(false);
   const [Error, setError] = useState(false);
@@ -63,7 +62,8 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
     isLoading,
     error: putError,
   } = useMutation('userUpdate', user.put, {
-    onSuccess: () => {
+    onSuccess: (d) => {
+      dispatchUser(d);
       // WE CLOSE THE MODAL
       isOpen(false);
       // REFETCH THE USER'S DATA
@@ -121,10 +121,6 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
       .catch(() => setError(true));
   };
 
-  if (isLoading) {
-    toast('loading...');
-  }
-
   return (
     <div className="w-screen fixed inset-0 z-50 h-full  bg-black bg-opacity-60 flex items-center justify-center">
       <form className="w-11/12 lg:w-6/12 bg-dark  rounded-md p-5 lg:p-8">
@@ -158,13 +154,14 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
               backgroundRepeat: 'no-repeat',
             }}
           >
-            {Loading && (
-              <p
-                className={`text-pink animate-pulse w-full text-center mt-24  `}
-              >
-                ...Loading
-              </p>
-            )}
+            {Loading ||
+              (isLoading && (
+                <p
+                  className={`text-pink animate-pulse w-full text-center mt-24  `}
+                >
+                  ...Loading
+                </p>
+              ))}
             {Error ||
               (putError && (
                 <div className="p-5">

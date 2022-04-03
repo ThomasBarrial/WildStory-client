@@ -30,12 +30,11 @@ function PassworrdInput({
           type="password"
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...register(name, {
-            minLength: 4,
+            minLength: 6,
             pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).+/,
             required: isRequired,
           })}
         />{' '}
-        {isRequired && <p className="text-xs text-pink mt-2">Fied required</p>}
         <p className="text-pink text-xs">
           {error?.confirmPassword?.type === 'pattern'
             ? 'Règle: une lettre majuscule, une lettre minuscule, un chiffre'
