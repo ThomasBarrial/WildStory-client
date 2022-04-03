@@ -58,9 +58,7 @@ function Comments(): JSX.Element {
           {postData && <TextPost item={postData} />}
         </div>
         <div className="lg:bg-dark rounded-md mt-2 lg:p-7 mx-3 lg:mx-0">
-          {!isComment &&
-            IdUserFormStore !== postData?.userId &&
-            user.logged === true && <NewComment idPost={id} />}
+          {!isComment && user.logged === true && <NewComment idPost={id} />}
           <p className="font-bold text-xl">Comments</p>
           {data.length === 0 && (
             <p className="font-thin mt-5 text-opacity-50 text-pink">

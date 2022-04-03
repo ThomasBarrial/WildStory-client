@@ -41,14 +41,12 @@ export const user = {
     id: string | undefined;
   }): Promise<INewUser> =>
     AXIOS.put(`/users/${id}`, UserData).then((res) => res.data),
-  updatePasword: ({
-    passwordsToCompare,
+  updatePassword: ({
+    updatePassword,
   }: {
-    passwordsToCompare: IPasswordMutate;
+    updatePassword: IPasswordMutate;
   }): Promise<IUser> =>
-    AXIOS.put(`/users/self/password`, passwordsToCompare).then(
-      (res) => res.data
-    ),
+    AXIOS.put(`/users/self/password`, updatePassword).then((res) => res.data),
 };
 
 export const likes = {

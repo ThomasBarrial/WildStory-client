@@ -14,10 +14,13 @@ function Layout(): JSX.Element {
   const { id } = useParams<{ id: string | undefined }>();
   const { dispatchLogin } = useUserFromStore();
 
+  const cookies = document.cookie;
+
   // ON THE REFRESH OF THE PAGE WHE CHECK IF THE USER WAS LOG OR NOT
   // IF THE USER WAS LOG WE REDISPATCH THE USER'S DATA IN REDUX
   const { isLoading } = useQuery<IUser>('userAuthenticated', () => auth.me(), {
     retry: false,
+    enabled: Boolean(cookies.split(';')[5] || cookies),
     onSuccess: (data) => {
       dispatchLogin(data);
 
@@ -33,7 +36,11 @@ function Layout(): JSX.Element {
   });
 
   if (isLoading)
-    return <p className="text-pink animate-pulse p-10">...Loading</p>;
+    return (
+      <p className="h-screen bg-black flex items-center justify-center w-screen text-pink animate-pulse p-10">
+        ...Loading
+      </p>
+    );
 
   return (
     <div className=" w-screen min-h-screen flex pb-3 lg:pb-2 font-lexend text-white  md:w-12/12 max-w-6xl md:mx-auto">

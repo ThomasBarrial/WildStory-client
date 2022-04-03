@@ -18,6 +18,7 @@ import Search from './views/Search';
 import { useUserFromStore } from './store/user.slice';
 import UserFollowers from './views/UserFollowers';
 import Messenger from './views/Messenger';
+import DeletePostConfirmation from './views/DeletePostConfirmation';
 
 function Routes(): JSX.Element {
   const { user } = useUserFromStore();
@@ -43,6 +44,11 @@ function Routes(): JSX.Element {
           <Route exact path="/newpost" component={CreateUpdatePost} />
           <Route exact path="/editpost/:id" component={CreateUpdatePost} />
           <Route exact path="/settings/:id" component={CreateUpdateUser} />
+          <Route
+            exact
+            path="/deletepost/:id"
+            component={DeletePostConfirmation}
+          />
           <Route exact path="/profil/:id" component={UserProfil} />
           <Route exact path="/comments/:id" component={Comments} />
           <Route exact path="/userassets/:id" component={AssetSettings} />

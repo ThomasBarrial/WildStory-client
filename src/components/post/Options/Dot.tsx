@@ -1,24 +1,12 @@
-import React, { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import React from 'react';
 import { useHistory } from 'react-router';
-import { post } from '../../../API/request';
 import useModal from '../../../hook/useModal';
 import Modal from '../../modal/Modal';
 
 function Dot({ postId }: { postId: string }): JSX.Element {
   const { isModal, setIsModal, message } = useModal();
-  const [isConfirmationMessage, setIsConfirmationMessage] = useState(false);
-  const router = useHistory();
-  const queryclient = useQueryClient();
-  const { mutateAsync, error } = useMutation(() => post.delete(postId), {
-    onSuccess: () => {
-      queryclient.refetchQueries(['posts']);
-    },
-  });
 
-  if (error) {
-    return <p>Sorry something bad happen try later</p>;
-  }
+  const router = useHistory();
 
   return (
     <div>
@@ -33,37 +21,17 @@ function Dot({ postId }: { postId: string }): JSX.Element {
       {isModal && (
         <Modal
           setIsModal={setIsModal}
-          title={
-            isConfirmationMessage
-              ? 'do you really want to delete this story'
-              : 'Story settings'
-          }
-          buttons={
-            isConfirmationMessage
-              ? [
-                  {
-                    text: 'Yes',
-                    handleClick: () => {
-                      mutateAsync();
-                      setIsModal(false);
-                    },
-                  },
-                  {
-                    text: 'No',
-                    handleClick: () => setIsConfirmationMessage(false),
-                  },
-                ]
-              : [
-                  {
-                    text: 'Edit post',
-                    handleClick: () => router.push(`/editpost/${postId}`),
-                  },
-                  {
-                    text: 'delete post',
-                    handleClick: () => setIsConfirmationMessage(true),
-                  },
-                ]
-          }
+          title="Story settings"
+          buttons={[
+            {
+              text: 'Edit post',
+              handleClick: () => router.push(`/editpost/${postId}`),
+            },
+            {
+              text: 'delete post',
+              handleClick: () => router.push(`/deletepost/${postId}`),
+            },
+          ]}
         >
           {message}
         </Modal>
