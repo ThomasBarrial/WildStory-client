@@ -22,7 +22,7 @@ function Layout(): JSX.Element {
   // IF THE USER WAS LOG WE REDISPATCH THE USER'S DATA IN REDUX
   const { isLoading } = useQuery<IUser>('userAuthenticated', () => auth.me(), {
     retry: false,
-    enabled: Boolean(cookies.split(';')[5] || cookies),
+
     onSuccess: (data) => {
       dispatchLogin(data);
 
