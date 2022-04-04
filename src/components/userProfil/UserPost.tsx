@@ -38,7 +38,7 @@ function UserPost({ userId }: IProps): JSX.Element {
   return (
     <div className="mb-20">
       {data.length === 0 && userStore.id === userId && (
-        <div className="text-pink flex text-sm mt-2">
+        <div className="text-pink flex text-sm mt-4 mx-4">
           <p>{`You don't post any stories for now.`}</p>
           <Link className="underline ml-2" to="/newpost">
             Create your first story

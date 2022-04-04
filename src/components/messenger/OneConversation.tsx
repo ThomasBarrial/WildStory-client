@@ -42,15 +42,9 @@ function OneConversation({ item }: IProps): JSX.Element {
       />
       <div className="flex flex-col text-left ml-3 w-9/12  justify-between items-start">
         <p className="text-sm">{data?.username}</p>
-        {data.idFormation === userStore.idFormation ? (
-          <p className="text-xs text-opacity-70 mt-1">
-            You made the same formation
-          </p>
-        ) : (
-          <p className="text-xs h-4 text-white text-opacity-50 max-w-xl overflow-hidden">
-            {data.profilTitle}
-          </p>
-        )}
+        <p className="text-xs h-4 text-white text-opacity-50 max-w-xl overflow-hidden">
+          {data.profilTitle}
+        </p>
       </div>
     </div>
   );

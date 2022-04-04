@@ -25,7 +25,7 @@ function MediaIcon({ media }: IProps): JSX.Element {
       {' '}
       <a href={media.link} target="_blank" rel="noreferrer">
         <img
-          className="mr-4 h-8 w-8 mt-5"
+          className="mr-4 h-6 w-6 mt-5"
           src={data?.iconUrl}
           alt={data?.name}
         />
