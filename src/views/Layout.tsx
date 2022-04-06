@@ -14,10 +14,6 @@ function Layout(): JSX.Element {
   const { id } = useParams<{ id: string | undefined }>();
   const { dispatchLogin } = useUserFromStore();
 
-  const cookies = document.cookie;
-
-  console.log(cookies);
-
   // ON THE REFRESH OF THE PAGE WHE CHECK IF THE USER WAS LOG OR NOT
   // IF THE USER WAS LOG WE REDISPATCH THE USER'S DATA IN REDUX
   const { isLoading } = useQuery<IUser>('userAuthenticated', () => auth.me(), {

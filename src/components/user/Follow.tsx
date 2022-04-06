@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { follows, post } from '../../API/request';
 import { useUserFromStore } from '../../store/user.slice';
+import UsersFollows from './UsersFollows';
 
 interface IProps {
   id: string | undefined;
@@ -83,68 +84,67 @@ function Follow({ id }: IProps): JSX.Element {
   }
 
   return (
-    <div>
-      {/* IF THE USER IS ALREADY FOLLOW RENDER THIS  */}
-      {isFollowed && userStore.id !== id && (
-        <div className="flex">
-          <div className="flex items-end">
-            <div className="flex items-center  mr-2">
-              <p className="text-sm mr-2">Followers </p>
-              <p className="text-sm font-bold">{userFollowers?.length}</p>
-            </div>
-            <div className="flex items-center  mx-2">
-              <p className="text-sm mr-2">Followings </p>
-              <p className="text-sm font-bold">{userFollowings?.length}</p>
-            </div>
-            <div className="flex items-center  mx-2">
-              <p className="text-sm mr-2">stories</p>
-              <p className="text-sm font-bold">{userPost?.length}</p>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* IF THE USER ISN'T FOLLOW RENDER THIS  */}
-      {userStore.id !== id && !isFollowed && (
-        <button
-          onClick={() => onSubmit()}
-          type="button"
-          className="border rounded-sm py-1 px-8 text-sm transform hover:text-pink hover:border-pink duration-300"
-        >
-          follow
-        </button>
-      )}
-      {/* IF THE USER IS ON HIS OWN PROFIL RENDER THIS  */}
-      {userStore.id === id && (
-        <div className="flex items-end mr-4">
-          <div className="flex items-center mr-2">
-            <Link
-              to={`/userfollowers/${userStore.id}`}
-              className="text-xs mr-2"
+    <div className="flex justify-start pl-4 my-2 lg:m-5 lg:p-0 lg:justify-end">
+      {userStore.logged === false ? (
+        <UsersFollows
+          followers={userFollowers?.length}
+          following={userFollowings?.length}
+          postsNumber={userPost?.length}
+        />
+      ) : (
+        <>
+          {/* IF THE USER IS ALREADY FOLLOW RENDER THIS  */}
+          {isFollowed && userStore.id !== id && (
+            <UsersFollows
+              followers={userFollowers?.length}
+              following={userFollowings?.length}
+              postsNumber={userPost?.length}
+            />
+          )}
+          {/* IF THE USER ISN'T FOLLOW RENDER THIS  */}
+          {userStore.id !== id && !isFollowed && (
+            <button
+              onClick={() => onSubmit()}
+              type="button"
+              className="border rounded-sm py-1 px-8 text-sm transform hover:text-pink hover:border-pink duration-300"
             >
-              Followers{' '}
-            </Link>
-            <p className="text-xs font-bold lg:text-base">
-              {userFollowers?.length}
-            </p>
-          </div>
-          <div className="flex items-center mx-2">
-            <Link
-              to={`/userfollowings/${userStore.id}`}
-              className="text-xs mr-2"
-            >
-              Followings{' '}
-            </Link>
-            <p className="text-xs font-bold lg:text-base">
-              {userFollowings?.length}
-            </p>
-          </div>
-          <div className="flex items-center mx-2">
-            <p className="text-xs mr-1 lg:mr-2">stories</p>
-            <p className="text-xs font-bold lg:font-normal lg:text-base">
-              {userPost?.length}
-            </p>
-          </div>
-        </div>
+              follow
+            </button>
+          )}
+          {/* IF THE USER IS ON HIS OWN PROFIL RENDER THIS  */}
+          {userStore.id === id && (
+            <div className="flex items-end mr-4">
+              <div className="flex items-center mr-2">
+                <Link
+                  to={`/userfollowers/${userStore.id}`}
+                  className="text-xs mr-2"
+                >
+                  Followers{' '}
+                </Link>
+                <p className="text-xs font-bold lg:text-base">
+                  {userFollowers?.length}
+                </p>
+              </div>
+              <div className="flex items-center mx-2">
+                <Link
+                  to={`/userfollowings/${userStore.id}`}
+                  className="text-xs mr-2"
+                >
+                  Followings{' '}
+                </Link>
+                <p className="text-xs font-bold lg:text-base">
+                  {userFollowings?.length}
+                </p>
+              </div>
+              <div className="flex items-center mx-2">
+                <p className="text-xs mr-1 lg:mr-2">stories</p>
+                <p className="text-xs font-bold lg:font-normal lg:text-base">
+                  {userPost?.length}
+                </p>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
