@@ -52,7 +52,7 @@ function LogIn(): JSX.Element {
 
   return (
     <div className="font-lexend flex items-center justify-center h-full  bg-black fixed inset-0 z-50 overflow-y-scroll">
-      <div className="flex flex-col lg:flex-row w-10/12 ">
+      <div className="flex flex-col w-full lg:flex-row sm:w-10/12 ">
         <div className="sm:w-6/12 flex justify-end">
           <img className="hidden lg:flex lg:mr-5" src={img} alt="" />
         </div>
