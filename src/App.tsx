@@ -2,6 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Layout from './views/Layout';
+import './style/global.css';
 
 function App(): JSX.Element {
   const queryClient = new QueryClient();

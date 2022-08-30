@@ -10,8 +10,8 @@ function Navabar(): JSX.Element {
   const { user } = useUserFromStore();
 
   return (
-    <div className="w-full  max-w-6xl flex justify-between fixed z-50 bg-black items-center px-4 py-5 lg:py-3">
-      <div className="flex lg:w-full justify-between w-full lg:justify-between items-center">
+    <div className="w-full left-0  flex justify-center fixed z-50 bg-black items-center px-4 py-5 lg:py-3">
+      <div className="flex  max-w-6xl justify-between w-full lg:justify-between items-center">
         <Link className="flex w-4/12 md:w-28 lg:w-32" to="/">
           <img src={logo} alt="logo" />
         </Link>

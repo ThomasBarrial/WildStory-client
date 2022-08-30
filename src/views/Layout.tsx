@@ -43,7 +43,6 @@ function Layout(): JSX.Element {
   return (
     <div className=" w-screen min-h-screen flex pb-3 lg:pb-2 font-lexend text-white  md:w-12/12 max-w-6xl md:mx-auto">
       <Navabar />
-
       <div
         className={`pt-14 lg:pt-12 w-full ${
           pathname === '/messenger' ? 'lg:w-full' : 'lg:w-feed'
