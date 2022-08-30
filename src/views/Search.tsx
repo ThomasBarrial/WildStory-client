@@ -28,7 +28,7 @@ function Search(): JSX.Element {
       </div>
       <input
         type="text"
-        className="bg-black w-full mt-5 border rounded-sm focus:outline-none p-2 border-white"
+        className="bg-black w-full mt-5 border rounded-md focus:outline-none p-2 border-white"
         onChange={(e) => setSearchValue(e.target.value)}
       />
       <div className=" lg:p-4 lg:rounded-md mt-5">

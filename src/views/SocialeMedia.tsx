@@ -91,7 +91,7 @@ function SocialeMedia(): JSX.Element {
         <label className="font-bold font-lexend" htmlFor="Foramtions">
           Select Social Media
           <select
-            className="bg-black w-full mt-2 h-12 p-2 rounded-sm  border"
+            className="bg-black w-full mt-2 h-12 p-2 rounded-md  border"
             {...register('iconId', { required: true })}
           >
             {icons?.map((item) => {
@@ -115,13 +115,13 @@ function SocialeMedia(): JSX.Element {
         />
         <div className="flex flex-col items-center lg:items-end mt-7 justify-between">
           <button
-            className="font-bold rounded-sm font-lexend w-full lg:w-3/12 p-2 text-black  border border-pink bg-pink transform  hover:scale-90  duration-300"
+            className="font-bold rounded-md font-lexend w-full lg:w-3/12 p-2 text-black  border border-pink bg-pink transform  hover:scale-90  duration-300"
             type="submit"
           >
             Add social link
           </button>
           <Link to={`/profil/${userStore.id}`}>
-            <p className="font-bold font-lexend  rounded-sm w-full text-center  mt-5 lg:mt-5 lg:w-80 p-2  border border-pink text-pink transform hover:scale-95 bg-pink bg-opacity-0 duration-300 ">
+            <p className="font-bold font-lexend  rounded-md w-full text-center  mt-5 lg:mt-5 lg:w-80 p-2  border border-pink text-pink transform hover:scale-95 bg-pink bg-opacity-0 duration-300 ">
               Done
             </p>
           </Link>

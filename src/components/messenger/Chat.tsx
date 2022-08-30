@@ -180,7 +180,7 @@ function Chat({
           <img src={emoji} alt="emoji" className="h-7 w-7" />
         </button>
         <button
-          className="text-pink flex items-center px-4 py-2 text-md rounded-sm transform hover:scale-105  duration-500"
+          className="text-pink flex items-center px-4 py-2 text-md rounded-md transform hover:scale-105  duration-500"
           type="submit"
         >
           <img className="h-6 transform -rotate-90" src={sendIcon} alt="Send" />

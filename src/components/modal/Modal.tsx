@@ -47,7 +47,7 @@ function Modal({ title, buttons, children, setIsModal }: Iprops): JSX.Element {
               } ${
                 button.backgroundColor ||
                 'text-pink  px-5 w-6/12 border border-pink'
-              } rounded-sm`}
+              } rounded-md`}
               onClick={() =>
                 button.handleClick
                   ? button.handleClick(handleClose)

@@ -29,7 +29,7 @@ function TextInput({
         type="text"
         placeholder={placeholder}
         {...register(name, { required })}
-        className="bg-black mt-2 border rounded-sm focus:outline-none p-2 border-white"
+        className="bg-black mt-2 border rounded-md focus:outline-none p-2 border-white"
       />
       <p className="text-red text-xs">{error}</p>
       {required && <p className="text-xs text-pink mt-2">Fieds required</p>}

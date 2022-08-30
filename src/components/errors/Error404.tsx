@@ -28,7 +28,7 @@ function Error404(): JSX.Element {
       </a>
       <br />
       <button
-        className="bg-pink text-black mt-5 font-bold rounded-sm p-2"
+        className="bg-pink text-black mt-5 font-bold rounded-md p-2"
         onClick={() => router.push('/')}
         type="button"
       >

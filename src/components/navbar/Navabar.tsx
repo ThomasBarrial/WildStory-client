@@ -18,13 +18,13 @@ function Navabar(): JSX.Element {
         {user.logged === false ? (
           <div>
             <Link
-              className="border mx-2 py-2 px-4 font-thin text-sm text-white hover:border-pink hover:text-pink rounded-sm"
+              className="border mx-2 py-2 px-4 font-thin text-sm text-white hover:border-pink hover:text-pink rounded-md"
               to="/login"
             >
               SignIn
             </Link>
             <Link
-              className="border ml-2 py-2 px-4 font-thin text-sm text-white hover:border-pink hover:text-pink rounded-sm"
+              className="border ml-2 py-2 px-4 font-thin text-sm text-white hover:border-pink hover:text-pink rounded-md"
               to="/signup"
             >
               SignUp

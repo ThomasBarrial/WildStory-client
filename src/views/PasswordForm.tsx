@@ -94,7 +94,7 @@ function PasswordForm({ id, setIsPassword, isPassword }: IMdp): JSX.Element {
           />
           <p className="mt-5 text-pink">{formError}</p>
           <button
-            className="w-full p-2 rounded-sm mt-2  text-pink border border-pink"
+            className="w-full p-2 rounded-md mt-2  text-pink border border-pink"
             type="submit"
           >
             {' '}
