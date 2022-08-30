@@ -36,7 +36,7 @@ function Search(): JSX.Element {
           <div>
             {data.map((item) => {
               return (
-                <div key={item.id} className="border-b border-pink my-4">
+                <div key={item.id} className="border-b border-lowBorder my-4">
                   <AvatarUser userId={item.id} />
                 </div>
               );
@@ -52,7 +52,7 @@ function Search(): JSX.Element {
               )
               .map((item) => {
                 return (
-                  <div key={item.id} className="border-b border-pink my-4">
+                  <div key={item.id} className="border-b border-lowBorder my-4">
                     <AvatarUser userId={item.id} />
                   </div>
                 );

@@ -48,7 +48,7 @@ function Header({ userData, navItem, setNavItem }: IProps): JSX.Element {
 
   return (
     <div className="pt-5 border-b lg:bg-dark bg-black border-pink">
-      <div className="w-full flex items-end mb-5">
+      <div className="w-full flex items-end mb-5 lg:mb-0">
         <div className="w-full">
           <div className="font-bold ext-2xl lg:text-2xl px-4 lg:px-7 w-full ">
             <p className="mr-5">{userData.username}</p>
@@ -68,7 +68,7 @@ function Header({ userData, navItem, setNavItem }: IProps): JSX.Element {
               <button
                 key={item.name}
                 onClick={() => setNavItem(item.state)}
-                className={`justify-center  lg:items-start flex flex-col items-center py-4 mx-5 w-1/4 ${
+                className={`justify-center  flex flex-col items-center py-4 mx-5 w-1/4 ${
                   navItem === item.state &&
                   `text-pink rounded-t-md bg-dark lg:bg-transparent`
                 }`}

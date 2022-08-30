@@ -14,6 +14,7 @@ module.exports = {
       colors: {
         pink: '#EC6D6A',
         black: '#181818',
+        lowBorder: 'rgba(236, 109, 106, 0.5)',
         lightblack: '#323232',
         dark: '#0F0F0F',
         bg: 'linear-gradient(180deg, #181818 0%, #613939 100%)',

@@ -38,10 +38,10 @@ function UserProfil(): JSX.Element {
     () => formation.getOne(userData.idFormation as string)
   );
 
-  if (formationLoad || userLoad) {
-    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
+  if (formationLoad || userLoad || !userData || !formationData) {
+    return <p className="text-pink animate-pulse p-10">...Loading</p>;
   }
-  if (formationError || !formationData || userError || !userData) {
+  if (formationError || userError) {
     return <Error404 />;
   }
 

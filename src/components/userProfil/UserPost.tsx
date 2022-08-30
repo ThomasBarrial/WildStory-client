@@ -46,7 +46,7 @@ function UserPost({ userId }: IProps): JSX.Element {
         </div>
       )}
       {data.length === 0 && userStore.id !== userId && (
-        <p className="px-4 text-pink">There is no stories...</p>
+        <p className="px-4 mt-5 text-pink">There is no stories...</p>
       )}
       <div className="flex w-full flex-col">
         {data.map((item) => {
