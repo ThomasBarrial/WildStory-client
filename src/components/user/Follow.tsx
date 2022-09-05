@@ -106,7 +106,7 @@ function Follow({ id }: IProps): JSX.Element {
             <button
               onClick={() => onSubmit()}
               type="button"
-              className="border rounded-sm py-1 px-8 text-sm transform hover:text-pink hover:border-pink duration-300"
+              className="border rounded-md py-1 px-8 text-sm transform hover:text-pink hover:border-pink duration-300"
             >
               follow
             </button>

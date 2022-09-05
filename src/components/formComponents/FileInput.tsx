@@ -40,7 +40,7 @@ function FileInput({
           )}
         </div>
         <input
-          className="rounded-sm w-full h-full opacity-0 border focus:outline-none p-2 cursor-pointer border-white"
+          className="rounded-md w-full h-full opacity-0 border focus:outline-none p-2 cursor-pointer border-white"
           type="file"
           name="file"
           onChange={(e) => handleImageSubmit(e)}

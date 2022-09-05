@@ -104,7 +104,7 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
           <div className="flex inset-0">
             <textarea
               onKeyPress={(e) => handleUserKeyPress(e)}
-              className="bg-black rounded-sm font-thin text-base text-white border border-pink w-full focus:outline-none h-14 lg:h-16  px-3 py-3"
+              className="bg-black rounded-md font-thin text-base text-white border border-pink w-full focus:outline-none h-14 lg:h-16  px-3 py-3"
               id="text"
               value={text}
               // eslint-disable-next-line react/jsx-props-no-spreading
@@ -126,7 +126,7 @@ export default function NewComment({ idPost }: IProps): JSX.Element {
             <p className="text-sm text-pink mt-2">Please write something</p>
           )}
           <button
-            className="text-lg rounded-sm my-5 border text-pink border-pink w-6/12 py-1"
+            className="text-lg rounded-md my-5 border text-pink border-pink w-6/12 py-1"
             type="submit"
           >
             Comment

@@ -16,7 +16,7 @@ function Layout(): JSX.Element {
 
   // ON THE REFRESH OF THE PAGE WHE CHECK IF THE USER WAS LOG OR NOT
   // IF THE USER WAS LOG WE REDISPATCH THE USER'S DATA IN REDUX
-  const { isLoading } = useQuery<IUser>('userAuthenticated', () => auth.me(), {
+  useQuery<IUser>('userAuthenticated', () => auth.me(), {
     retry: false,
 
     onSuccess: (data) => {
@@ -33,17 +33,9 @@ function Layout(): JSX.Element {
     },
   });
 
-  if (isLoading)
-    return (
-      <p className="h-screen bg-black flex items-center justify-center w-screen text-pink animate-pulse p-10">
-        ...Loading
-      </p>
-    );
-
   return (
     <div className=" w-screen min-h-screen flex pb-3 lg:pb-2 font-lexend text-white  md:w-12/12 max-w-6xl md:mx-auto">
       <Navabar />
-
       <div
         className={`pt-14 lg:pt-12 w-full ${
           pathname === '/messenger' ? 'lg:w-full' : 'lg:w-feed'

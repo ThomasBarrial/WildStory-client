@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import home from '../../assets/icons/home.svg';
 import search from '../../assets/icons/search.svg';
 import formations from '../../assets/icons/formations.svg';
 import topics from '../../assets/icons/Topics.svg';
 
 function MobileNavBar(): JSX.Element {
+  const { pathname } = useLocation();
+
   const icons = [
     { path: '/', icon: home, alt: 'home' },
     { path: `/search`, icon: search, alt: 'search' },
@@ -14,7 +16,7 @@ function MobileNavBar(): JSX.Element {
   ];
   return (
     <div className="lg:hidden fixed bottom-0 w-full z-50 flex items-center justify-center bg-black h-20">
-      <div className="flex lg:hidden">
+      <div className={`${pathname === '/login' ? 'hidden' : 'flex'}`}>
         {icons.map((item) => {
           return (
             <Link

@@ -143,7 +143,7 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
             className={`${
               label === 'avatar'
                 ? 'w-52 h-52 rounded-full'
-                : 'h-36 lg:h-52 w-full rounded-sm'
+                : 'h-36 lg:h-52 w-full rounded-md'
             }  border bg-black border-pink my-5`}
             style={{
               backgroundImage: `url(${
@@ -177,7 +177,7 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
               onChange={(e) => handleImageSubmit(e)}
               className={`bg-black h-52 ${
                 label === 'landing' ? 'w-6/12' : 'w-2/12'
-              } opacity-0  absolute cursor-pointer border rounded-sm focus:outline-none p-2 border-white`}
+              } opacity-0  absolute cursor-pointer border rounded-md focus:outline-none p-2 border-white`}
             />
           </div>
         </div>
@@ -185,7 +185,7 @@ function UserModal({ isOpen, label }: IProps): JSX.Element {
           <button
             type="button"
             onClick={() => OnClick()}
-            className="border rounded-sm  border-pink text-pink  py-2 w-full lg:w-4/12 transform hover:scale-95 duration-500"
+            className="border rounded-md  border-pink text-pink  py-2 w-full lg:w-4/12 transform hover:scale-95 duration-500"
           >
             ok
           </button>{' '}

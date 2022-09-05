@@ -52,7 +52,7 @@ function UserAssets({ userAvatar, userLanding }: IProps): JSX.Element {
             onClick={() => setIsLandingUpdate(true)}
           >
             <img
-              className="h-6 w-6  transform translate-y-6  duration-500 hover:scale-125"
+              className="h-6 w-6  transform translate-y-6 lg:translate-x-4  duration-500 hover:scale-125"
               src={edit}
               alt="edit"
             />

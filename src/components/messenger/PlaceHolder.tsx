@@ -15,7 +15,7 @@ function PlaceHolder({ setIsModal }: IProps): JSX.Element {
         onClick={() => {
           setIsModal(true);
         }}
-        className="mt-5  bg-pink text-dark rounded-sm px-10 py-1 text-md font-thin"
+        className="mt-5  bg-pink text-dark rounded-md px-10 py-1 text-md font-thin"
         type="button"
       >
         send message

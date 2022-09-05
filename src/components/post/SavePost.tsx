@@ -18,22 +18,16 @@ function SavePost({ item }: IProps): JSX.Element {
   const queryclient = useQueryClient();
   const { user } = useUserFromStore();
   // CREATE A NEW SAVEDPOST
-  const {
-    mutateAsync: createSavePost,
-    isLoading: createSavePostLoading,
-    isError: createSavePostError,
-  } = useMutation(savePost.post, {
-    onSuccess: () => {
-      setIsSaved(true);
-      queryclient.refetchQueries(['getUsersSavedPost']);
-    },
-  });
+  const { mutateAsync: createSavePost, isError: createSavePostError } =
+    useMutation(savePost.post, {
+      onSuccess: () => {
+        setIsSaved(true);
+        queryclient.refetchQueries(['getUsersSavedPost']);
+      },
+    });
 
   // FETCH ALL USER'S SAVEDPOST
-  const { isLoading: savePostLoading, error: savePostError } = useQuery<
-    ISavePost[],
-    AxiosError
-  >(
+  const { error: savePostError } = useQuery<ISavePost[], AxiosError>(
     ['getUsersSavedPost', user.id],
     () => savePost.getUserSavedPost(user.id as string),
     {
@@ -49,16 +43,13 @@ function SavePost({ item }: IProps): JSX.Element {
     }
   );
   // DELETE THE SAVEDPOST
-  const {
-    mutateAsync: deleteSavedPost,
-    isLoading: deleteSavePostLoading,
-    isError: deleteSavePostError,
-  } = useMutation(() => savePost.delete(savedPostId), {
-    onSuccess: () => {
-      setIsSaved(false);
-      queryclient.refetchQueries(['getUsersSavedPost']);
-    },
-  });
+  const { mutateAsync: deleteSavedPost, isError: deleteSavePostError } =
+    useMutation(() => savePost.delete(savedPostId), {
+      onSuccess: () => {
+        setIsSaved(false);
+        queryclient.refetchQueries(['getUsersSavedPost']);
+      },
+    });
   const onSavePost = () => {
     // IF THE POST IS ALREADY SAVE BY THE USER WE DELETE THE RELATED SAVED POST
     if (isSaved) {
@@ -73,9 +64,6 @@ function SavePost({ item }: IProps): JSX.Element {
     }
   };
 
-  if (savePostLoading || createSavePostLoading || deleteSavePostLoading) {
-    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
-  }
   if (createSavePostError || deleteSavePostError) {
     toast(<p className="text-sm text-pink">...Oops something went wrong</p>);
   }

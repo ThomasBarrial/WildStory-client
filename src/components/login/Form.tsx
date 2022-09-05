@@ -13,7 +13,7 @@ function Form({ register, isError, required }: IProps): JSX.Element {
     <div className="w-full">
       {' '}
       <label
-        className="mt-5 lg:mt-5  w-full  text-sm flex flex-col"
+        className="mt-5 lg:mt-10  w-full  text-sm flex flex-col"
         htmlFor="username"
       >
         Username

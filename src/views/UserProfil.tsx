@@ -11,6 +11,7 @@ import Header from '../components/user/Header';
 import UserSavedPost from '../components/userProfil/UserSavedPost';
 import UserInfo from '../components/userProfil/UserInfo';
 import UserCollection from '../components/userProfil/UserCollection';
+import UserPageLoader from '../components/skelotonLoaders/UserPageLoader';
 
 function UserProfil(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -38,10 +39,10 @@ function UserProfil(): JSX.Element {
     () => formation.getOne(userData.idFormation as string)
   );
 
-  if (formationLoad || userLoad) {
-    return <p className="text-pink animate-pulse pt-10">...Loading</p>;
+  if (formationLoad || userLoad || !userData || !formationData) {
+    return <UserPageLoader />;
   }
-  if (formationError || !formationData || userError || !userData) {
+  if (formationError || userError) {
     return <Error404 />;
   }
 

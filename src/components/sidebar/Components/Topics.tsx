@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router';
 import { topics } from '../../../API/request';
 import ErrorPageToast from '../../errors/ErrorToast';
+import SidebarLoader from '../../skelotonLoaders/SideBarLoader';
 
 function Topics(): JSX.Element {
   const { data, isLoading, error } = useQuery<ITopics[]>(['getAllTopcis'], () =>
@@ -14,7 +15,7 @@ function Topics(): JSX.Element {
   const router = useHistory();
 
   if (isLoading) {
-    return <p className="text-pink animate-pulse">...Loading</p>;
+    return <SidebarLoader />;
   }
   if (error || !data) {
     return <ErrorPageToast />;

@@ -16,6 +16,7 @@ function Comments(): JSX.Element {
   const [isComment, setIsComment] = useState(false);
   const { id } = useParams<{ id: string }>();
   const { user } = useUserFromStore();
+  const [commentsList, setCommentsList] = useState<IComments[]>([]);
   const IdUserFormStore = user.id;
 
   const { isLoading, error, data } = useQuery<IComments[], AxiosError>(
@@ -31,6 +32,8 @@ function Comments(): JSX.Element {
         } else {
           setIsComment(false);
         }
+
+        setCommentsList(commentRes.reverse());
       },
     }
   );
@@ -65,7 +68,7 @@ function Comments(): JSX.Element {
               No comments for now...
             </p>
           )}
-          {data.map((item) => {
+          {commentsList.map((item) => {
             return (
               <div key={item.id}>
                 <Comment item={item} />

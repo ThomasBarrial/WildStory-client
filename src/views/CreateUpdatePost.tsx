@@ -125,7 +125,7 @@ function CreateUpdatePost(): JSX.Element {
         />
         <button
           type="submit"
-          className="mt-5 border rounded-sm border-pink bg-pink bg-opacity-0 text-pink py-2 w-6/12 transform hover:scale-105 hover:bg-opacity-100 hover:text-black duration-500"
+          className="mt-5 border rounded-md border-pink bg-pink bg-opacity-0 text-pink py-2 w-6/12 transform hover:scale-105 hover:bg-opacity-100 hover:text-black duration-500"
         >
           {postId ? 'Edit your post' : 'Create post'}
         </button>

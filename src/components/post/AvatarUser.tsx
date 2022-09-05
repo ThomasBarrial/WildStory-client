@@ -3,7 +3,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { user } from '../../API/request';
+import { user, formation } from '../../API/request';
 import defaultAvatar from '../../assets/defaultAvatar.png';
 import ErrorPageToast from '../errors/ErrorToast';
 
@@ -17,6 +17,11 @@ function AvatarUser({ userId }: IProps): JSX.Element {
     () => user.getOne(userId)
   );
 
+  const { data: formationUser } = useQuery<IFormation, AxiosError>(
+    ['oneFormation', data?.idFormation],
+    () => formation.getOne(data?.idFormation as string)
+  );
+
   if (isLoading) {
     return <p className="text-pink animate-pulse pt-10">...Loading</p>;
   }
@@ -25,7 +30,7 @@ function AvatarUser({ userId }: IProps): JSX.Element {
   }
   return (
     <Link to={`/profil/${data?.id}`}>
-      <div className="flex items-center mx-3 lg:mx-0 pb-3">
+      <div className="flex w-96  items-center mx-3 lg:mx-0 pb-3">
         <div
           className="h-12 w-12 rounded-full border border-pink"
           style={{
@@ -39,8 +44,11 @@ function AvatarUser({ userId }: IProps): JSX.Element {
             backgroundPosition: 'center',
           }}
         />
-        <div className="flex ml-3 w-5/12 flex-col items-start">
+        <div className="flex ml-3  flex-col items-start">
           <p className="">{data?.username}</p>
+          <p className="text-xs text-gray-400 font-light">
+            {formationUser?.formationName}
+          </p>
         </div>
       </div>
     </Link>

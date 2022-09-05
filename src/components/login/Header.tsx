@@ -9,7 +9,7 @@ function Header(): JSX.Element {
         src={logo}
         alt="WildStory"
       />
-      <p className="mt-5 text-sm text-left lg:text-sm">
+      <p className=" text-sm text-left lg:text-sm">
         Take part in a network of digital players all over Europe
       </p>
     </div>

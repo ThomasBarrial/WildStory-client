@@ -228,7 +228,7 @@ function CreateUpdateUser(): JSX.Element {
           </>
         )}
         <button
-          className="w-full p-2 rounded-sm mt-5 lg:mt-5  text-pink border border-pink"
+          className="w-full p-2 rounded-md mt-5 lg:mt-5  text-pink border border-pink"
           type="submit"
         >
           {!id ? 'Create my profil' : 'Edit profil'}
