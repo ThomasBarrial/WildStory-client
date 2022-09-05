@@ -10,7 +10,7 @@ interface IProps {
 function ImageSlider({ item }: IProps): JSX.Element {
   return (
     <div className="mb-5">
-      <Carousel showThumbs={false} showIndicators autoPlay>
+      <Carousel showThumbs={false} showIndicators>
         {item.imageUrl.map((image) => {
           return (
             <div

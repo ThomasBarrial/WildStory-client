@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router';
 import { formation } from '../../../API/request';
 import ErrorPageToast from '../../errors/ErrorToast';
+import SidebarLoader from '../../skelotonLoaders/SideBarLoader';
 
 function Formations(): JSX.Element {
   const { data, isLoading, error } = useQuery<IFormation[]>(
@@ -15,7 +16,7 @@ function Formations(): JSX.Element {
   const router = useHistory();
 
   if (isLoading) {
-    return <p className="text-pink animate-pulse">...Loading</p>;
+    return <SidebarLoader />;
   }
   if (error || !data) {
     return <ErrorPageToast />;

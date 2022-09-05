@@ -6,7 +6,8 @@ import search from '../assets/icons/search.svg';
 import AvatarUser from '../components/post/AvatarUser';
 
 function Search(): JSX.Element {
-  const [searchValue, setSearchValue] = useState('');
+  const [filteredData, setFilteredData] = useState<IUser[] | undefined>([]);
+  const [inputValue, setInputValue] = useState('');
   const { data, isLoading, error } = useQuery<IUser[], AxiosError>(
     ['getAllUsers'],
     () => user.getAll()
@@ -17,6 +18,19 @@ function Search(): JSX.Element {
   if (error || !data) {
     return <p>Error..</p>;
   }
+
+  const handleFilter = (searchName: string) => {
+    setInputValue(searchName);
+    const newFilter = data?.filter((value) => {
+      return value.username.toLowerCase().includes(searchName.toLowerCase());
+    });
+
+    if (searchName === '') {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
 
   return (
     <div className="p-4 mt-5 lg:bg-dark rounded-md">
@@ -29,10 +43,10 @@ function Search(): JSX.Element {
       <input
         type="text"
         className="bg-black w-full mt-5 border rounded-md focus:outline-none p-2 border-white"
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={(e) => handleFilter(e.target.value)}
       />
       <div className=" lg:p-4 lg:rounded-md mt-5">
-        {searchValue === '' ? (
+        {inputValue === '' ? (
           <div>
             {data.map((item) => {
               return (
@@ -44,23 +58,14 @@ function Search(): JSX.Element {
           </div>
         ) : (
           <div>
-            {data
-              .filter(
-                (item) =>
-                  item.username.toLocaleLowerCase() ===
-                  searchValue.toLocaleLowerCase()
-              )
-              .map((item) => {
-                return (
-                  <div key={item.id} className="border-b border-lowBorder my-4">
-                    <AvatarUser userId={item.id} />
-                  </div>
-                );
-              })}
-            {data.filter(
-              (item) =>
-                item.username.toLowerCase() === searchValue.toLowerCase()
-            ).length === 0 && (
+            {filteredData?.map((item) => {
+              return (
+                <div key={item.id} className="border-b border-lowBorder my-4">
+                  <AvatarUser userId={item.id} />
+                </div>
+              );
+            })}
+            {filteredData?.length === 0 && (
               <p className="text-pink text-sm">
                 Wilder not found.. try with a other username
               </p>

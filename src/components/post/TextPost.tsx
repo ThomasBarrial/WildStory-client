@@ -13,7 +13,7 @@ function TextPost({ item }: IProps): JSX.Element {
         posted : {new Date(item.createdAt).toLocaleDateString('fr-FR')}
       </p>
       <p
-        className={`text-sm mt-1 font-thin leading-7 lg:leading-loose ${
+        className={`text-sm mt-1 font-thin leading-7 lg:leading-relaxed ${
           istext && 'max-h-28 overflow-hidden'
         }
      `}

@@ -3,7 +3,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { user } from '../../API/request';
+import { user, formation } from '../../API/request';
 import defaultAvatar from '../../assets/defaultAvatar.png';
 import ErrorPageToast from '../errors/ErrorToast';
 
@@ -15,6 +15,11 @@ function AvatarUser({ userId }: IProps): JSX.Element {
   const { data, isLoading, error } = useQuery<IUser, AxiosError>(
     ['oneUser', userId],
     () => user.getOne(userId)
+  );
+
+  const { data: formationUser } = useQuery<IFormation, AxiosError>(
+    ['oneFormation', data?.idFormation],
+    () => formation.getOne(data?.idFormation as string)
   );
 
   if (isLoading) {
@@ -41,6 +46,9 @@ function AvatarUser({ userId }: IProps): JSX.Element {
         />
         <div className="flex ml-3  flex-col items-start">
           <p className="">{data?.username}</p>
+          <p className="text-xs text-gray-400 font-light">
+            {formationUser?.formationName}
+          </p>
         </div>
       </div>
     </Link>
